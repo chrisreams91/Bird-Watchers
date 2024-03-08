@@ -1,6 +1,6 @@
 # Bird-Watchers
-<<<<marie
-#marie
+# Logan Theiss
+# Amanda Dyson
+# marie
+# Quincy Nguyen
 
-#Amanda Dyson
->>>>main
