@@ -1,3 +1,6 @@
 # Bird-Watchers
 # Logan Theiss
-#Amanda Dyson
+# Amanda Dyson
+# marie
+# Quincy Nguyen
+
