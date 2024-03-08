@@ -1,2 +1,1 @@
 # Bird-Watchers
-# Quincy Nguyen
