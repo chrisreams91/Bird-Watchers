@@ -23,8 +23,7 @@ public class MyBirdsController {
 
     @GetMapping("/getAll")
     public String displayLifeList(Model model) {
-        model.addAttribute("title", "My Life List");
-        model.addAttribute("birds", birdRepository.findAll());
+        birdRepository.findAll();
         return "mybirds/index";
 
     }
