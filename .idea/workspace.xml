@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/BirdTrackerApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/HomeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/MyBirdsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/SearchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/Bird.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/repository/BirdRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/test/java/com/birdwatchers/BirdTracker/BirdTrackerApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Bird-Watchers.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/HotspotController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/OtherBirdersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/MyBirdsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/MyBirdsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
