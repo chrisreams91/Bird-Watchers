@@ -1,7 +1,8 @@
 package com.birdwatchers.BirdTracker.controller;
 
 import com.birdwatchers.BirdTracker.model.Bird;
-import com.birdwatchers.BirdTracker.repository.BirdRepository;
+
+import com.birdwatchers.BirdTracker.model.data.BirdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
