@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/birdfrontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/reportWebVitals.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/setupTests.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,10 +83,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "marieFE",
+    "git-widget-placeholder": "marie",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/marie/Bird-Watchers/birdfrontend",
+    "last_opened_file_path": "C:/Users/marie/Bird-Watchers",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2"
@@ -153,6 +133,21 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Bird-Watchers" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Bird-Watchers" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="com.soywiz.korge.intellij.UpdateResourceBeforeRunTask" enabled="false" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
