@@ -1,4 +1,4 @@
 package com.birdwatchers.BirdTracker.controller;
 
-public class HotspotController {
+public class AudioController {
 }
