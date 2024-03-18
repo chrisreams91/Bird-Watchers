@@ -2,6 +2,7 @@ package com.birdwatchers.BirdTracker.model;
 
 import jakarta.persistence.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 @Table(name="bird")
@@ -15,12 +16,21 @@ public class Bird {
     @Column(name="bird_species")
     public String bird_species;
 
+    @Column(name="location")
+    public String location;
+
+    @Column(name="date")
+    public SimpleDateFormat date;
+
     public Bird() {
     }
 
-    public Bird(int id, String bird_species) {
+    public Bird(int id, String bird_species, String location, SimpleDateFormat date) {
         this.id = id;
         this.bird_species = bird_species;
+        this.location = location;
+        this.date = date;
+
     }
 
     public int getId() {
@@ -39,9 +49,21 @@ public class Bird {
     public void setBird_species(String bird_species) {
         this.bird_species = bird_species;
     }
-    @Override
-    public String toString() {
-        return bird_species;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public SimpleDateFormat getDate() {
+        return date;
+    }
+
+    public void setDate(SimpleDateFormat date) {
+        this.date = date;
     }
 
     @Override
