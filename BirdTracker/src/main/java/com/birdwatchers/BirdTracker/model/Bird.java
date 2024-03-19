@@ -25,14 +25,6 @@ public class Bird {
     public Bird() {
     }
 
-    public Bird(int id, String bird_species, String location, SimpleDateFormat date) {
-        this.id = id;
-        this.bird_species = bird_species;
-        this.location = location;
-        this.date = date;
-
-    }
-
     public int getId() {
         return id;
     }
