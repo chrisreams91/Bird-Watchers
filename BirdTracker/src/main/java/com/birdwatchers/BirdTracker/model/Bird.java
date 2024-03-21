@@ -25,8 +25,12 @@ public class Bird {
     @Column(name="description")
     public String description;
 
+    @Column(name="description")
+    public String description;
+
     public Bird() {
     }
+
 
     public int getId() {
         return id;
