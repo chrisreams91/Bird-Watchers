@@ -22,8 +22,12 @@ public class Bird {
     @Column(name="date")
     public SimpleDateFormat date;
 
+    @Column(name="description")
+    public String description;
+
     public Bird() {
     }
+
 
     public int getId() {
         return id;
@@ -56,6 +60,14 @@ public class Bird {
 
     public void setDate(SimpleDateFormat date) {
         this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
