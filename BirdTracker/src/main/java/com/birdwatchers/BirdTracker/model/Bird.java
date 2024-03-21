@@ -22,6 +22,9 @@ public class Bird {
     @Column(name="date")
     public SimpleDateFormat date;
 
+    @Column(name="description")
+    public String description;
+
     public Bird() {
     }
 
@@ -30,6 +33,7 @@ public class Bird {
         this.bird_species = bird_species;
         this.location = location;
         this.date = date;
+        this.description = description;
 
     }
 
@@ -64,6 +68,14 @@ public class Bird {
 
     public void setDate(SimpleDateFormat date) {
         this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
