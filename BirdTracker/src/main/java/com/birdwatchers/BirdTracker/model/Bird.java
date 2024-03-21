@@ -1,9 +1,8 @@
 package com.birdwatchers.BirdTracker.model;
-
 import jakarta.persistence.*;
-
+import org.antlr.v4.runtime.misc.NotNull;
 import java.text.SimpleDateFormat;
-import java.util.Objects;
+
 
 @Table(name="bird")
 @Entity
@@ -13,14 +12,17 @@ public class Bird {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     @Column(name="bird_species")
     public String bird_species;
 
+    @NotNull
     @Column(name="location")
     public String location;
 
+    @NotNull
     @Column(name="date")
-    public SimpleDateFormat date;
+    public String date;
 
     public Bird() {
     }
@@ -50,11 +52,11 @@ public class Bird {
         this.location = location;
     }
 
-    public SimpleDateFormat getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(SimpleDateFormat date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -65,6 +67,5 @@ public class Bird {
         Bird that = (Bird) o;
         return id == that.id;
     }
-
 
 }

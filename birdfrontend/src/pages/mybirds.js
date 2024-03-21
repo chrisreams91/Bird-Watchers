@@ -5,6 +5,7 @@ import EnterMyBirdData from '../components/EnterMyBirdData'
 function MyBirds() {
   return (
    <EnterMyBirdData/>
+   //call CallMyBirdData here when component is ready
   );
 }
 
