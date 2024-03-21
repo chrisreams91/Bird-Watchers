@@ -1,8 +1,6 @@
 package com.birdwatchers.BirdTracker.model;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
-import java.text.SimpleDateFormat;
-
 
 @Table(name="bird")
 @Entity
@@ -23,6 +21,9 @@ public class Bird {
     @NotNull
     @Column(name="date")
     public String date;
+
+    @Column(name="description")
+    public String description;
 
     public Bird() {
     }
@@ -58,6 +59,15 @@ public class Bird {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

@@ -8,6 +8,7 @@ function EnterMyBirdData() {
   const[bird_species,setName]=useState('')
   const[location,setLocation]=useState('')
   const[date,setDate]=useState('')
+  const[description, setDescription]=useState('')
 
 
 
@@ -18,7 +19,7 @@ function EnterMyBirdData() {
 
   const handleClick=(event)=>{
     event.preventDefault()
-    const newBirdEntry = {bird_species,location,date}
+    const newBirdEntry = {bird_species,location,date,description}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
         method:"POST",
@@ -47,6 +48,10 @@ function EnterMyBirdData() {
       <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
       <br />
       <br />
+       <label htmlFor="description">Field Notes:</label>
+       <input type="text" id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)} />
+       <br />
+       <br />
       <button type="submit" onClick={handleClick}>Submit Findings</button>
     </form>
   )
