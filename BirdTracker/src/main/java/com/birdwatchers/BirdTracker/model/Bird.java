@@ -2,6 +2,8 @@ package com.birdwatchers.BirdTracker.model;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.awt.image.BufferedImage;
+
 @Table(name="bird")
 @Entity
 public class Bird {
@@ -25,8 +27,9 @@ public class Bird {
     @Column(name="description")
     public String description;
 
-    @Column(name="description")
-    public String description;
+    @Column(name="photo")
+    public String photo;
+    //edit this and the getters/setters to correctly work with photo (use path???)
 
     public Bird() {
     }
@@ -72,6 +75,14 @@ public class Bird {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     @Override
