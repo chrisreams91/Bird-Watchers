@@ -32,7 +32,7 @@ function MP3Player() {
 
     return (
          <div>
-           <h3>Moby porcelain</h3>
+           <h3>Sound Player</h3>
            <input
            type='button'
            className='btn btn-primary mr-2'
