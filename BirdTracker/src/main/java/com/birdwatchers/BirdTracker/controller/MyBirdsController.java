@@ -5,9 +5,6 @@ import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.data.BirdRepository;
 import com.birdwatchers.BirdTracker.model.data.BirdService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +26,7 @@ public class MyBirdsController {
     }
 
     @GetMapping("/getAll")
-    public List<Bird> list(){
+    public List<Bird> getAllBirds(){
         return birdService.getAllBirds();
     }
 
