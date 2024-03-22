@@ -5,6 +5,7 @@ import MyBirds from "./pages/mybirds";
 import OtherBirders from "./pages/otherbirders";
 import SearchDatabase from "./pages/search";
 import Home from "./pages/home";
+import app from "./App";
 
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
     case "/search":
         component = <SearchDatabase />
         break
+    app.get('/cors', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send({ "msg": "This has CORS enabled 🎈" })
+    })
     }
     return (
     <>
