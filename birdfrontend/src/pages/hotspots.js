@@ -15,7 +15,7 @@ function Hotspots() {
       redirect: 'follow'
     };
 
-    fetch("https://api.ebird.org/v2/data/obs/KZ/recent", requestOptions)
+    fetch('https://api.ebird.org/v2/ref/hotspot/US-MO-189', requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
