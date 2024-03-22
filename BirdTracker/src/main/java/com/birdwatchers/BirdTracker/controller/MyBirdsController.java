@@ -11,17 +11,16 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("mybirds")
+@RequestMapping("/mybirds")
 @CrossOrigin
 public class MyBirdsController {
 
     @Autowired
-    private BirdRepository birdRepository;
     private BirdService birdService;
 
     @PostMapping("/add")
     public String addBirdSighting(@RequestBody Bird bird) {
-        birdRepository.save(bird);
+        birdService.saveBird(bird);
         return "New bird sighting has been added!";
     }
 
