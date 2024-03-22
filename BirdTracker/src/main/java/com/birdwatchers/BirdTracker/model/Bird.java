@@ -1,9 +1,8 @@
 package com.birdwatchers.BirdTracker.model;
-
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
-import java.text.SimpleDateFormat;
-import java.util.Objects;
+import java.awt.image.BufferedImage;
 
 @Table(name="bird")
 @Entity
@@ -13,17 +12,24 @@ public class Bird {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull
     @Column(name="bird_species")
     public String bird_species;
 
+    @NotNull
     @Column(name="location")
     public String location;
 
+    @NotNull
     @Column(name="date")
-    public SimpleDateFormat date;
+    public String date;
 
     @Column(name="description")
     public String description;
+
+    @Column(name="photo")
+    public String photo;
+    //edit this and the getters/setters to correctly work with photo (use path???)
 
     public Bird() {
     }
@@ -54,13 +60,14 @@ public class Bird {
         this.location = location;
     }
 
-    public SimpleDateFormat getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(SimpleDateFormat date) {
+    public void setDate(String date) {
         this.date = date;
     }
+
 
     public String getDescription() {
         return description;
@@ -70,6 +77,14 @@ public class Bird {
         this.description = description;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,6 +92,5 @@ public class Bird {
         Bird that = (Bird) o;
         return id == that.id;
     }
-
 
 }
