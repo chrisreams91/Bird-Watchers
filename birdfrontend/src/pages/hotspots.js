@@ -1,22 +1,23 @@
 import React from "react";
-import ebird from "../components/eBird"
+import ebird from "../components/eBird";
 import { useState, useEffect } from 'react';
-import app from '../App'
+import app from '../App';
 
 function Hotspots() {
-    fetch('/v2/ref/hotspot/geo?lat={{lat}}&lng={{lng}}', {
-        headers: {
-            'api-key': 'fg0i8qiujsqk'
-        }
-    })
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Network response was not OK');
-        }
-        return response.json();
-    })
 
+    const [data, setData] = useState(null);
+    var myHeaders = new Headers();
+    myHeaders.append("X-ebirdapitoken", "fg0i8qiujsqk");
 
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("https://api.ebird.org/v2/data/obs/KZ/recent", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
 }
-
 export default Hotspots;
