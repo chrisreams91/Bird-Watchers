@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
+import PhotoEntry from '../components/PhotoEntry'
 
 
 
@@ -9,6 +10,11 @@ function EnterMyBirdData() {
   const[location,setLocation]=useState('')
   const[date,setDate]=useState('')
   const[description, setDescription]=useState('')
+  const [file, setFile] = useState();
+          function handleChange(e) {
+              console.log(e.target.files);
+              setFile(URL.createObjectURL(e.target.files[0]));
+          }
 
 
 
@@ -19,7 +25,7 @@ function EnterMyBirdData() {
 
   const handleClick=(event)=>{
     event.preventDefault()
-    const newBirdEntry = {bird_species,location,date,description}
+    const newBirdEntry = {bird_species,location,date,description,file}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
         method:"POST",
@@ -50,6 +56,13 @@ function EnterMyBirdData() {
       <br />
        <label htmlFor="description">Field Notes:</label>
        <input type="text" id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)} />
+       <br />
+       <br />
+            <div className="App">
+                <h2>Add Image:</h2>
+                <input type="file" onChange={handleChange} />
+                <img src={file} />
+            </div>
        <br />
        <br />
       <button type="submit" onClick={handleClick}>Submit Findings</button>
