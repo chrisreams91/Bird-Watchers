@@ -55,7 +55,7 @@ function EnterMyBirdData() {
       <br />
       <br />
        <label htmlFor="description">Field Notes:</label>
-       <input type="text" id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)} />
+       <textarea id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
        <br />
        <br />
             <div className="App">
