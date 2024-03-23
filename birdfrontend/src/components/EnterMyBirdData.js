@@ -10,6 +10,8 @@ function EnterMyBirdData() {
   const[location,setLocation]=useState('')
   const[date,setDate]=useState('')
   const[description, setDescription]=useState('')
+  const[birds, setBirds]=useState([])
+
   const [file, setFile] = useState();
           function handleChange(e) {
               console.log(e.target.files);
@@ -36,37 +38,61 @@ function EnterMyBirdData() {
     })
   }
 
+    useEffect(() =>{
+        fetch("http://localhost:8080/mybirds/getAll")
+        .then(res=>res.json())
+        .then((result)=>{
+            setBirds(result);
+        }
+    )
+    },[])
 
 
   return (
+   <div>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <br />
+          <label htmlFor="bird_species">Bird Name:</label>
+          <input type="text" id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
+          <br />
+          <br />
+          <label htmlFor="location">Location:</label>
+          <input type="text" id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
+          <br />
+          <br />
+          <label htmlFor="date">Date Seen:</label>
+          <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <br />
+          <br />
+           <label htmlFor="description">Field Notes:</label>
+           <textarea id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
+           <br />
+           <br />
+                <div className="App">
+                    <h2>Add Image:</h2>
+                    <input type="file" onChange={handleChange} />
+                    <img src={file} />
+                </div>
+           <br />
+           <br />
+          <button type="submit" onClick={handleClick}>Submit Findings</button>
+     </form>
+   </div>
 
-    <form onSubmit={handleSubmit}>
-    <br />
-      <label htmlFor="bird_species">Bird Name:</label>
-      <input type="text" id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
-      <br />
-      <br />
-      <label htmlFor="location">Location:</label>
-      <input type="text" id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
-      <br />
-      <br />
-      <label htmlFor="date">Date Seen:</label>
-      <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
-      <br />
-      <br />
-       <label htmlFor="description">Field Notes:</label>
-       <input type="text" id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)} />
-       <br />
-       <br />
-            <div className="App">
-                <h2>Add Image:</h2>
-                <input type="file" onChange={handleChange} />
-                <img src={file} />
-            </div>
-       <br />
-       <br />
-      <button type="submit" onClick={handleClick}>Submit Findings</button>
-    </form>
+    <div>
+          {birds.map((bird) => (
+            <li key={bird.id}>
+              Id: {bird.id}
+              Name: {bird.bird_species}
+              Location: {bird.location}
+              Date: {bird.date}
+              Field Notes: {bird.description}
+              Photo: {bird.photo}
+            </li>
+          ))}
+        </div>
+      </div>
   )
 }
 

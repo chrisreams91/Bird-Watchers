@@ -1,11 +1,23 @@
 import React from "react";
+import ebird from "../components/eBird";
+import { useState, useEffect } from 'react';
+import app from '../App';
 
-const Hotspots = () => {
-	return (
-		<div>
-			<h1>Hotspots</h1>
-		</div>
-	);
-};
+function Hotspots() {
 
+    const [data, setData] = useState(null);
+    var myHeaders = new Headers();
+    myHeaders.append("X-ebirdapitoken", "fg0i8qiujsqk");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch('https://api.ebird.org/v2/ref/hotspot/US-MO-189', requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+}
 export default Hotspots;

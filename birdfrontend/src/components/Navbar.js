@@ -1,6 +1,6 @@
 export default function Navbar() {
     return ( <nav className="nav">
-        <a href="/" className="site-title">Site Name</a>
+        <a href="/" className="site-title">Bird Tracker</a>
         <ul>
             <li>
                 <a href="/hotspots">Hotspots</a>
