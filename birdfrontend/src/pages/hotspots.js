@@ -5,7 +5,9 @@ import app from '../App';
 
 function Hotspots() {
 
-    const [data, setData] = useState(null);
+    const [bird, setBird] = useState();
+
+
     var myHeaders = new Headers();
     myHeaders.append("X-ebirdapitoken", "fg0i8qiujsqk");
 
@@ -14,10 +16,22 @@ function Hotspots() {
       headers: myHeaders,
       redirect: 'follow'
     };
-
+    useEffect(() => {
     fetch('https://api.ebird.org/v2/ref/hotspot/US-MO-189', requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+      .then(result => {
+              setBird(result);
+              console.log(result);
+            });
+    }, []);
+
+//    return (
+//        <>
+//            <h1>Hotspots in STL</h1>
+//            {bird.map((name) => {
+//                return <p>{name}</p>
+//            })}
+//        </>
+//    );
 }
 export default Hotspots;
