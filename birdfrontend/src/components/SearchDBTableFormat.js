@@ -6,24 +6,43 @@ import { useState, useEffect } from 'react';
 function SearchDBTableFormat() {
 
     const[birds, setBirds]=useState([])
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
 
-    /*const search = (bird) => { return bird.filter((item)=>item.species.toLowerCase().includes(query) || item.date.toLowerCase().includes(query) || item.location.toLowerCase().includes(query) )} */
+     const handleClick=(event)=>{
+        event.preventDefault()
+        }
 
-        useEffect(() =>{
-            fetch("http://localhost:8080/mybirds/getAll")
-            .then(res=>res.json())
-            .then((result)=>{
-                setBirds(result);
-            }
-        )
-        },[])
+    useEffect(() =>{
+        fetch("http://localhost:8080/mybirds/getAll")
+        .then(res=>res.json())
+        .then((result)=>{
+            setBirds(result);
+        }
+    )
+    },[])
 
+    const filterResults = () => {
+      const filtered = birds.filter((birds) => {
+        return birds.bird_species.toLowerCase().includes(query.toLowerCase());
+      });
+      setResults(filtered);
+    };
 
     return (
 		<>
             <br />
-            Search Community Bird Database pending:
-            <input type="text" placeholder="search for birds here..." className="search" />
+            Search Community Bird Database:
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => {
+              setQuery(e.target.value);
+              filterResults();
+              }}
+              placeholder="Search for birds..."
+            />
+            <button type="submit" onClick={handleClick}>Search</button>
             <br />
             <h3>Results:</h3>
                 <div>
@@ -32,8 +51,6 @@ function SearchDBTableFormat() {
                     <th>Location Seen</th>
                     <th>Date Seen</th>
                     <th>Field Notes</th>
-                    <th>Photo</th>
-                    <th>Sound File</th>
                   {birds.map((bird) => (
                     <tr key={bird.id}>
                       <td>Id: {bird.id}</td>
@@ -41,8 +58,6 @@ function SearchDBTableFormat() {
                       <td>Location: {bird.location}</td>
                       <td>Date: {bird.date}</td>
                       <td>Field Notes: {bird.description}</td>
-                      <td>Photo: {bird.photo}</td>
-
                     </tr>
                   ))}
                 </div>
