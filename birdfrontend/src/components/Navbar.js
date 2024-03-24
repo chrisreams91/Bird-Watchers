@@ -14,6 +14,9 @@ export default function Navbar() {
             <li>
                 <a href="/search">Search Database</a>
             </li>
+            <li>
+                <a href="/blog">Blog Postings</a>
+            </li>
         </ul>
     </nav>
     )
