@@ -49,7 +49,7 @@ function SearchDBTableFormat() {
         </thead>
         <tbody>
           {birds.filter((bird) => {
-            return search.toLowerCase() === '' ? bird : bird.bird_species.toLowerCase().includes(search)
+            return search.toLowerCase().trim() === '' ? bird : bird.bird_species.toLowerCase().includes(search.toLowerCase().trim())
           }).map((bird) => (
             <tr key={bird.id}>
               <td>{bird.bird_species}</td>
