@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import PhotoEntry from '../components/PhotoEntry'
+
 
 
 
@@ -79,17 +79,24 @@ function EnterMyBirdData() {
           <button type="submit" onClick={handleClick}>Submit Findings</button>
      </form>
    </div>
-
+       <h2>My Entries</h2>
     <div>
+            <th>IDs</th>
+            <th>Bird Species</th>
+            <th>Location Seen</th>
+            <th>Date Seen</th>
+            <th>Field Notes</th>
+            <th>Photo</th>
+            <th>Sound File</th>
           {birds.map((bird) => (
-            <li key={bird.id}>
-              Id: {bird.id}
-              Name: {bird.bird_species}
-              Location: {bird.location}
-              Date: {bird.date}
-              Field Notes: {bird.description}
-              Photo: {bird.photo}
-            </li>
+            <tr key={bird.id}>
+              <td>Id: {bird.id}</td>
+              <td>Name: {bird.bird_species}</td>
+              <td>Location: {bird.location}</td>
+              <td>Date: {bird.date}</td>
+              <td>Field Notes: {bird.description}</td>
+              <td>Photo: {bird.photo}</td>
+            </tr>
           ))}
         </div>
       </div>
