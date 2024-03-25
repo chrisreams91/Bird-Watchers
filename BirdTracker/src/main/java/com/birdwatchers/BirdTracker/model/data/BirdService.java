@@ -10,5 +10,13 @@ public interface BirdService {
 
     public List<Bird> getAllBirds();
 
+    boolean deleteBird(int id);
+
+//    Bird getBirdById();
+//
+//    Bird getBirdById(int id);
+//
+//    Bird updateBird(int id, Bird bird);
+
 
 }

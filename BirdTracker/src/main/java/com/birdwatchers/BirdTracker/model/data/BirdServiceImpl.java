@@ -21,4 +21,11 @@ public class BirdServiceImpl implements BirdService {
     public List<Bird> getAllBirds() {
         return birdRepository.findAll();
     }
+
+    @Override
+    public boolean deleteBird(int id) {
+        Bird bird = birdRepository.findById(id).get();
+        birdRepository.delete(bird);
+        return true;
+    }
 }

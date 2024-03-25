@@ -15,6 +15,8 @@ function Hotspots() {
       redirect: 'follow'
     };
 
+
+
     fetch('https://api.ebird.org/v2/ref/hotspot/US-MO-189', requestOptions)
       .then(response => response.text())
       .then(data => console.log(data))
@@ -29,14 +31,16 @@ function Hotspots() {
                 <th>Description</th>
                 <th>Location</th>
             </tr>
+            </thead>
+            <tbody>
             {bird.map((list, index) => {
             return(
             <tr>
-                <li key={index}>{list}</li>
+                <td key={index}>{list}</td>
             </tr>
             );
             })}
-            </thead>
+           </tbody>
         </table>
     )
 }
