@@ -17,8 +17,8 @@ public class Blog {
     @Column(name="date")
     public String date;
 
-    @Column(name="blogtext")
-    public String blogtext;
+    @Column(name="BlogText")
+    public String blogText;
 
 
     public Blog() {
@@ -49,11 +49,11 @@ public class Blog {
         this.date = date;
     }
 
-    public String getBlogtext() {
-        return blogtext;
+    public String getBlogText() {
+        return blogText;
     }
 
-    public void setBlogtext(String blogtext) {
-        this.blogtext = blogtext;
+    public void setBlogText(String blogText) {
+        this.blogText = blogText;
     }
 }
