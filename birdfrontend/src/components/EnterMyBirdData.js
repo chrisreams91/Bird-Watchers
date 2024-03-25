@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import PhotoEntry from '../components/PhotoEntry'
+
 
 
 
@@ -10,6 +10,8 @@ function EnterMyBirdData() {
   const[location,setLocation]=useState('')
   const[date,setDate]=useState('')
   const[description, setDescription]=useState('')
+  const[birds, setBirds]=useState([])
+
   const [file, setFile] = useState();
           function handleChange(e) {
               console.log(e.target.files);
@@ -36,37 +38,68 @@ function EnterMyBirdData() {
     })
   }
 
+    useEffect(() =>{
+        fetch("http://localhost:8080/mybirds/getAll")
+        .then(res=>res.json())
+        .then((result)=>{
+            setBirds(result);
+        }
+    )
+    },[])
 
 
   return (
-
-    <form onSubmit={handleSubmit}>
-    <br />
-      <label htmlFor="bird_species">Bird Name:</label>
-      <input type="text" id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
-      <br />
-      <br />
-      <label htmlFor="location">Location:</label>
-      <input type="text" id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
-      <br />
-      <br />
-      <label htmlFor="date">Date Seen:</label>
-      <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
-      <br />
-      <br />
-       <label htmlFor="description">Field Notes:</label>
-       <input type="text" id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)} />
-       <br />
-       <br />
-            <div className="App">
-                <h2>Add Image:</h2>
-                <input type="file" onChange={handleChange} />
-                <img src={file} />
-            </div>
-       <br />
-       <br />
-      <button type="submit" onClick={handleClick}>Submit Findings</button>
-    </form>
+   <div>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <br />
+          <label htmlFor="bird_species">Bird Name:</label>
+          <input type="text" id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
+          <br />
+          <br />
+          <label htmlFor="location">Location:</label>
+          <input type="text" id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
+          <br />
+          <br />
+          <label htmlFor="date">Date Seen:</label>
+          <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <br />
+          <br />
+           <label htmlFor="description">Field Notes:</label>
+           <textarea id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
+           <br />
+           <br />
+                <div className="App">
+                    <h2>Add Image:</h2>
+                    <input type="file" onChange={handleChange} />
+                    <img src={file} />
+                </div>
+           <br />
+           <br />
+          <button type="submit" onClick={handleClick}>Submit Findings</button>
+     </form>
+   </div>
+       <h2>My Entries</h2>
+    <div>
+            <th>IDs</th>
+            <th>Bird Species</th>
+            <th>Location Seen</th>
+            <th>Date Seen</th>
+            <th>Field Notes</th>
+            <th>Photo</th>
+            <th>Sound File</th>
+          {birds.map((bird) => (
+            <tr key={bird.id}>
+              <td>Id: {bird.id}</td>
+              <td>Name: {bird.bird_species}</td>
+              <td>Location: {bird.location}</td>
+              <td>Date: {bird.date}</td>
+              <td>Field Notes: {bird.description}</td>
+              <td>Photo: {bird.photo}</td>
+            </tr>
+          ))}
+        </div>
+      </div>
   )
 }
 

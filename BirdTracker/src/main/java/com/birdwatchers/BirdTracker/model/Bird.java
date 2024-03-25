@@ -1,96 +1,90 @@
 package com.birdwatchers.BirdTracker.model;
+
+
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
-import java.awt.image.BufferedImage;
+    @Table(name="bird")
+    @Entity
+    public class Bird {
 
-@Table(name="bird")
-@Entity
-public class Bird {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+        @NotNull
+        @Column(name="bird_species")
+        public String bird_species;
 
-    @NotNull
-    @Column(name="bird_species")
-    public String bird_species;
+        @NotNull
+        @Column(name="location")
+        public String location;
 
-    @NotNull
-    @Column(name="location")
-    public String location;
+        @NotNull
+        @Column(name="date")
+        public String date;
 
-    @NotNull
-    @Column(name="date")
-    public String date;
+        @Column(name="description")
+        public String description;
 
-    @Column(name="description")
-    public String description;
+        @Column(name="photo")
+        public String photo;
+        //edit this and the getters/setters to correctly work with photo (use path???)
 
-    @Column(name="photo")
-    public String photo;
-    //edit this and the getters/setters to correctly work with photo (use path???)
-
-    public Bird() {
-    }
+        public Bird() {
+        }
 
 
-    public int getId() {
-        return id;
-    }
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getBird_species() {
+            return bird_species;
+        }
+
+        public void setBird_species(String bird_species) {
+            this.bird_species = bird_species;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
 
 
-    public void setId(int id) {
-        this.id = id;
-    }
+        public String getDescription() {
+            return description;
+        }
 
-    public String getBird_species() {
-        return bird_species;
-    }
+        public void setDescription(String description) {
+            this.description = description;
+        }
 
-    public void setBird_species(String bird_species) {
-        this.bird_species = bird_species;
-    }
+        public String getPhoto() {
+            return photo;
+        }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
+        public void setPhoto(String photo) {
+            this.photo = photo;
+        }
 
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Bird that = (Bird) o;
-        return id == that.id;
-    }
 
 }

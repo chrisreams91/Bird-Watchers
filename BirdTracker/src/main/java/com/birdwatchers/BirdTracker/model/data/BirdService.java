@@ -9,4 +9,14 @@ public interface BirdService {
     public Bird saveBird(Bird bird);
 
     public List<Bird> getAllBirds();
+
+    boolean deleteBird(int id);
+
+//    Bird getBirdById();
+//
+//    Bird getBirdById(int id);
+//
+//    Bird updateBird(int id, Bird bird);
+
+
 }

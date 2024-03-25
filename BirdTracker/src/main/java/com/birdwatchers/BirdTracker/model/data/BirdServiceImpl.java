@@ -1,10 +1,10 @@
 package com.birdwatchers.BirdTracker.model.data;
-
 import com.birdwatchers.BirdTracker.model.Bird;
+import com.birdwatchers.BirdTracker.model.data.BirdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class BirdServiceImpl implements BirdService {
@@ -20,5 +20,12 @@ public class BirdServiceImpl implements BirdService {
     @Override
     public List<Bird> getAllBirds() {
         return birdRepository.findAll();
+    }
+
+    @Override
+    public boolean deleteBird(int id) {
+        Bird bird = birdRepository.findById(id).get();
+        birdRepository.delete(bird);
+        return true;
     }
 }
