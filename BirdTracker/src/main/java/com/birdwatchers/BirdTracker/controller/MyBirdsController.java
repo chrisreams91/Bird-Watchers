@@ -1,13 +1,10 @@
 package com.birdwatchers.BirdTracker.controller;
 
 import com.birdwatchers.BirdTracker.model.Bird;
-
-import com.birdwatchers.BirdTracker.model.data.BirdRepository;
 import com.birdwatchers.BirdTracker.model.data.BirdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/mybirds")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class MyBirdsController {
 
     @Autowired
@@ -32,13 +29,20 @@ public class MyBirdsController {
         return birdService.getAllBirds();
     }
 
-//    @DeleteMapping("/{id}")
-//    public String deleteBird(@PathVariable int id){
-//        if(!BirdRepository.existsById(id)){
-//            return "User Not Found";
-//        }
-//        BirdRepository.deleteById(id);
-//        return  "User with id "+id+" has been deleted success.";
-//    }
+    @GetMapping("/add/{id}")
+    public ResponseEntity<Bird> getBirdById(@PathVariable int id){
+        Bird bird = null;
+        bird = birdService.getBirdById(id);
+        return ResponseEntity.ok(bird);
+    }
+
+    @DeleteMapping("/add/{id}")
+    public ResponseEntity<Object> deleteBird(@PathVariable int id){
+        boolean deleted = false;
+        deleted = birdService.deleteBird(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", deleted);
+        return ResponseEntity.ok(response);
+    }
 
 }

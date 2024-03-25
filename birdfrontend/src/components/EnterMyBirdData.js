@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-
+import MP3Player from "./MP3Player";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 
 
@@ -11,15 +13,14 @@ function EnterMyBirdData() {
   const[date,setDate]=useState('')
   const[description, setDescription]=useState('')
   const[birds, setBirds]=useState([])
+  const { id } = useParams();
+
 
   const [file, setFile] = useState();
           function handleChange(e) {
               console.log(e.target.files);
               setFile(URL.createObjectURL(e.target.files[0]));
           }
-
-
-
 
   const handleSubmit = (event) => {
       event.preventDefault();
@@ -46,6 +47,20 @@ function EnterMyBirdData() {
         }
     )
     },[])
+
+
+
+    const loadBirds = async () => {
+      const result = await axios.get("http://localhost:8080/mybirds/add/{id}");
+      setBirds(result.data);
+    };
+
+    const deleteBirds = async (id) => {
+      await axios.delete("http://localhost:8080/mybirds/add/{id}");
+      loadBirds();
+    };
+
+
 
 
   return (
@@ -88,6 +103,8 @@ function EnterMyBirdData() {
             <th>Field Notes</th>
             <th>Photo</th>
             <th>Sound File</th>
+            <th>Edit Bird</th>
+            <th>Delete Bird</th>
           {birds.map((bird) => (
             <tr key={bird.id}>
               <td>Id: {bird.id}</td>
@@ -96,6 +113,9 @@ function EnterMyBirdData() {
               <td>Date: {bird.date}</td>
               <td>Field Notes: {bird.description}</td>
               <td>Photo: {bird.photo}</td>
+              <td> <MP3Player/> </td>
+              <td> Edit Button Goes here</td>
+              <td> Delete button goes here</td>
             </tr>
           ))}
         </div>
