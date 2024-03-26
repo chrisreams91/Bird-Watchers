@@ -4,23 +4,17 @@ import { useState, useEffect } from 'react';
 import app from '../App';
 
 function Hotspots() {
-
     const [bird, setBird] = useState([]);
-    var myHeaders = new Headers();
-    myHeaders.append("X-ebirdapitoken", "fg0i8qiujsqk");
 
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-
-
-
-    fetch('https://api.ebird.org/v2/ref/hotspot/US-MO-189', requestOptions)
-      .then(response => response.text())
-      .then(data => console.log(data))
-      .catch(error => console.log('error', error));
+    useEffect(() => {
+        fetch('https://freetestapi.com/api/v1/birds')
+        .then((response) => response.json())
+        .then((data) => {
+            setBird(data);
+            console.log(data);
+        }
+        );
+    }, []);
 
     return (
         <table>
@@ -30,13 +24,18 @@ function Hotspots() {
                 <th>Name</th>
                 <th>Description</th>
                 <th>Location</th>
+                <th>Habitat</th>
             </tr>
             </thead>
             <tbody>
-            {bird.map((list, index) => {
+            {bird.map((data) => {
             return(
             <tr>
-                <td key={index}>{list}</td>
+                <td>{data.id}</td>
+                <td>{data.name}</td>
+                <td>{data.description}</td>
+                <td>{data.place_of_found}</td>
+                <td>{data.habitat}</td>
             </tr>
             );
             })}
