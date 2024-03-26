@@ -7,11 +7,15 @@ function Hotspots() {
     const [bird, setBird] = useState([]);
 
     useEffect(() => {
-        fetch('https://freetestapi.com/api/v1/birds')
+        fetch('https://nuthatch.lastelm.software/v2/birds', {
+            headers: {
+                'api-key': '65930e9d-a183-455c-9fda-a2dc40a61935'
+            }
+        })
         .then((response) => response.json())
         .then((data) => {
-            setBird(data);
-            console.log(data);
+            setBird(data.entities);
+            console.log(data.entities);
         }
         );
     }, []);
@@ -22,20 +26,20 @@ function Hotspots() {
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Description</th>
+                <th>Status</th>
                 <th>Location</th>
-                <th>Habitat</th>
+                <th>Visual</th>
             </tr>
             </thead>
             <tbody>
-            {bird.map((data) => {
+            {bird.map((entities) => {
             return(
             <tr>
-                <td>{data.id}</td>
-                <td>{data.name}</td>
-                <td>{data.description}</td>
-                <td>{data.place_of_found}</td>
-                <td>{data.habitat}</td>
+                <td>{entities.id}</td>
+                <td>{entities.name}</td>
+                <td>{entities.status}</td>
+                <td>{entities.region}</td>
+                <img src={entities.images} width={500}></img>
             </tr>
             );
             })}
