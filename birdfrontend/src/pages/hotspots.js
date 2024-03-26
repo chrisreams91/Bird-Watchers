@@ -2,12 +2,13 @@ import React from "react";
 import ebird from "../components/eBird";
 import { useState, useEffect } from 'react';
 import app from '../App';
+import styles from '../hotspot.css'
 
 function Hotspots() {
     const [bird, setBird] = useState([]);
 
     useEffect(() => {
-        fetch('https://nuthatch.lastelm.software/v2/birds', {
+        fetch('https://nuthatch.lastelm.software//v2/birds?&hasImg=true', {
             headers: {
                 'api-key': '65930e9d-a183-455c-9fda-a2dc40a61935'
             }
@@ -24,23 +25,29 @@ function Hotspots() {
         <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Location</th>
-                <th>Visual</th>
+            <div className="header">
+                <th>Bird Gallery</th>
+            </div>
             </tr>
             </thead>
             <tbody>
             {bird.map((entities) => {
             return(
+            <div className="container">
+                            <div className="image">
+                            <img src={entities.images[0]} width={400} height={400}></img>
+                            </div>
             <tr>
-                <td>{entities.id}</td>
-                <td>{entities.name}</td>
-                <td>{entities.status}</td>
-                <td>{entities.region}</td>
-                <img src={entities.images} width={500}></img>
+                <div className="text">
+                <p>
+                                <li>ID: {entities.id}</li>
+                                <li>Name: {entities.name}</li>
+                                <li>Status: {entities.status}</li>
+                                <li>Region: {entities.region}</li>
+                            </p>
+                            </div>
             </tr>
+            </div>
             );
             })}
            </tbody>
