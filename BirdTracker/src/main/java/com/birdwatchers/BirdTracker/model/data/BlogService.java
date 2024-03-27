@@ -11,5 +11,11 @@ public interface BlogService {
 
     public List<Blog> getAllBlogs();
 
+    boolean deleteBlog(int id);
+
+    Blog getBlogById();
+
+    Blog getBlogById(int id);
+
 
 }
