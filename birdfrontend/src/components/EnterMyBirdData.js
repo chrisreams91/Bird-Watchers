@@ -112,7 +112,13 @@ function EnterMyBirdData() {
               <td>Location: {bird.location}</td>
               <td>Date: {bird.date}</td>
               <td>Field Notes: {bird.description}</td>
-              <td>Photo: {bird.photo}</td>
+              <td>Photo:
+                    <div>
+                              <div>
+                              <img src={file} width={400} height={400}></img>
+                    </div>
+                    </div>
+              </td>
               <td> <MP3Player/> </td>
               <td> Edit Button Goes here</td>
               <td> Delete button goes here</td>
