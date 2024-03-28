@@ -31,7 +31,7 @@ function SearchDBTableFormat() {
   return (
    <div>
     <Container>
-     <h2>Search Database For Birds</h2>
+     <h2>Search Community Database For Birds</h2>
       <form>
         <InputGroup>
             <Form.Control onChange={(e) => setSearch(e.target.value)} placeholder='Search...' />

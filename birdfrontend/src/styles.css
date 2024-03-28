@@ -35,4 +35,11 @@ body {
     font-size: 2rem;
 }
 
+h1 {
+  text-align: center;
+}
 
+
+.donate-btn {
+    text-align: center;
+}

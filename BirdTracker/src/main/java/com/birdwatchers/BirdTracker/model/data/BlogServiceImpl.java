@@ -1,7 +1,7 @@
 package com.birdwatchers.BirdTracker.model.data;
 
 
-import com.birdwatchers.BirdTracker.model.Bird;
+
 import com.birdwatchers.BirdTracker.model.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +42,19 @@ public class BlogServiceImpl implements BlogService {
         return blog;
     }
 
+    @Override
+    public Blog updateBlog() {
+        return null;
+    }
+
+    @Override
+    public Blog updateBlog(int id, Blog blog) {
+        blogRepository.findById(id).get();
+        blog.setId(blog.getId());
+        blog.setTitle(blog.getTitle());
+        blog.setDate(blog.getDate());
+        blog.setBlogText(blog.getBlogText());
+        return blogRepository.save(blog);
+    }
 
 }
