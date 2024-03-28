@@ -40,6 +40,21 @@ public class BirdServiceImpl implements BirdService {
         return bird;
     }
 
+    @Override
+    public Bird updateBird() {
+        return null;
+    }
 
+    @Override
+    public Bird updateBird(int id, Bird bird) {
+        birdRepository.findById(id).get();
+        bird.setId(bird.getId());
+        bird.setBird_species(bird.getBird_species());
+        bird.setDate(bird.getDate());
+        bird.setLocation(bird.getLocation());
+        bird.setDescription(bird.getDescription());
+        bird.setPhoto(bird.getPhoto());
+        return birdRepository.save(bird);
+    }
 
 }

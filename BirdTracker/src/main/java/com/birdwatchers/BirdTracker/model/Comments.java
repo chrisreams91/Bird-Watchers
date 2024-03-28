@@ -3,27 +3,20 @@ package com.birdwatchers.BirdTracker.model;
 
 import jakarta.persistence.*;
 
-@Table(name="blog")
+@Table(name="comments")
 @Entity
-public class Blog {
+public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="Title")
-    public String title;
-
     @Column(name="date")
     public String date;
+    //have this be the automatic current date/time
 
-    @Column(name="blog_text")
-    public String blogText;
-
-
-    public Blog() {
-
-    }
+    @Column(name="CommentText")
+    public String commentText;
 
     public int getId() {
         return id;
@@ -31,14 +24,6 @@ public class Blog {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDate() {
@@ -49,11 +34,11 @@ public class Blog {
         this.date = date;
     }
 
-    public String getBlogText() {
-        return blogText;
+    public String getCommentText() {
+        return commentText;
     }
 
-    public void setBlogText(String blogText) {
-        this.blogText = blogText;
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 }

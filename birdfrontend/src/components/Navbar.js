@@ -12,7 +12,7 @@ export default function Navbar() {
                 <a href="/otherbirders">Other Birders</a>
             </li>
             <li>
-                <a href="/search">Search Database</a>
+                <a href="/search">Search Community Database</a>
             </li>
             <li>
                 <a href="/blog">Blog Postings</a>

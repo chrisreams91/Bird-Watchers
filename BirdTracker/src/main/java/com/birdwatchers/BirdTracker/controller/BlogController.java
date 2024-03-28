@@ -1,5 +1,6 @@
 package com.birdwatchers.BirdTracker.controller;
 
+import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.data.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,12 @@ public class BlogController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/add/{id}")
+    public ResponseEntity<Blog> updateBlog(@PathVariable int id, @RequestBody Blog blog){
+        blog = blogService.updateBlog(id, blog);
+        return ResponseEntity.ok(blog);
     }
 
 

@@ -1,21 +1,27 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 function BlogData() {
 
-  const[title,setTitle]=useState('')
-  const[date,setDate]=useState('')
-  const[blogText, setBlogText]=useState('')
-  const[blogs, setBlogs]=useState([])
-
+  const[title,setTitle]=useState('');
+  const[date,setDate]=useState('');
+  const[blogText, setBlogText]=useState('');
+  const[blogs, setBlogs]=useState([]);
+  const titleName = useRef("");
+  const dateName = useRef("");
+  const textName = useRef("");
 
   const handleSubmit = (event) => {
       event.preventDefault();
+
   };
 
   const handleClick=(event)=>{
     event.preventDefault()
+    titleName.current.value = "";
+    dateName.current.value = "";
+    textName.current.value = "";
     const newBlogEntry = {title, date, blogText}
     console.log(newBlogEntry)
     fetch("http://localhost:8080/blogposts/add",{
@@ -43,15 +49,15 @@ function BlogData() {
       <form onSubmit={handleSubmit}>
         <br />
           <label htmlFor="Title">Title:</label>
-          <input type="text" id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} />
+          <input type="text" ref={titleName} id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} />
           <br />
           <br />
           <label htmlFor="date">Date:</label>
-          <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <input type="date" ref={dateName} id="date" name="Date" value={date} onChange={(event)=>setDate(event.target.value)} />
           <br />
           <br />
            <label htmlFor="BlogText">Text:</label>
-           <textarea id="blogText" name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)}></textarea>
+           <textarea id="blogText" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)}></textarea>
            <br />
            <br />
           <button type="submit" onClick={handleClick}>Submit Blog</button>
@@ -77,18 +83,5 @@ function BlogData() {
 }
 
 export default BlogData;
-/*
-function BlogData() {
 
-    return (
 
-        <div>
-            <h1>Blogs sort list by date</h1>
-        </div>
-
-    )
-
-}
-
-export default BlogData;
-*/

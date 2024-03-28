@@ -2,9 +2,13 @@ package com.birdwatchers.BirdTracker.controller;
 
 import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.data.BirdService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +47,13 @@ public class MyBirdsController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
         return ResponseEntity.ok(response);
+    }
+
+
+    @PutMapping("/add/{id}")
+    public ResponseEntity<Bird> updateBird(@PathVariable int id, @RequestBody Bird bird){
+        bird = birdService.updateBird(id, bird);
+        return ResponseEntity.ok(bird);
     }
 
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import MP3Player from "./MP3Player";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
@@ -14,9 +14,21 @@ function EnterMyBirdData() {
   const[description, setDescription]=useState('')
   const[birds, setBirds]=useState([])
   const { id } = useParams();
+  const birdName = useRef("");
+  const locName = useRef("");
+  const dateName = useRef("");
+  const descName = useRef("");
+  const picName = useRef("");
+  const soundName = useRef("");
 
 
   const [file, setFile] = useState();
+          function handleChange(e) {
+              console.log(e.target.files);
+              setFile(URL.createObjectURL(e.target.files[0]));
+          }
+
+  const [sound, setSound] = useState();
           function handleChange(e) {
               console.log(e.target.files);
               setFile(URL.createObjectURL(e.target.files[0]));
@@ -26,8 +38,15 @@ function EnterMyBirdData() {
       event.preventDefault();
   };
 
+
   const handleClick=(event)=>{
     event.preventDefault()
+    birdName.current.value = "";
+    locName.current.value = "";
+    dateName.current.value = "";
+    descName.current.value = "";
+    picName.current.value = "";
+    soundName.current.value = "";
     const newBirdEntry = {bird_species,location,date,description,file}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
@@ -62,41 +81,43 @@ function EnterMyBirdData() {
 
 
 
-
   return (
    <div>
     <div>
-      <form onSubmit={handleSubmit}>
+      <form id="new-bird-sighting" onSubmit={handleSubmit}>
         <br />
           <label htmlFor="bird_species">Bird Name:</label>
-          <input type="text" id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
+          <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
           <br />
           <br />
           <label htmlFor="location">Location:</label>
-          <input type="text" id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
+          <input type="text" ref={locName} id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
           <br />
           <br />
           <label htmlFor="date">Date Seen:</label>
-          <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
           <br />
           <br />
            <label htmlFor="description">Field Notes:</label>
-           <textarea id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
+           <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
            <br />
            <br />
                 <div className="App">
                     <h2>Add Image:</h2>
-                    <input type="file" onChange={handleChange} />
+                    <input type="file" ref={picName} onChange={handleChange} />
                     <img src={file} />
                 </div>
            <br />
            <br />
                 <div className="App">
                     <h2>Add Sound:</h2>
+                    <input type="file" ref={soundName} onChange={handleChange} />
+                    <img src={sound} />
                 </div>
            <br />
            <br />
           <button type="submit" onClick={handleClick}>Submit Findings</button>
+
      </form>
    </div>
        <h2>My Entries</h2>
