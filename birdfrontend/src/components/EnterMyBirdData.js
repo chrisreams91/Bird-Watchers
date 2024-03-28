@@ -91,6 +91,11 @@ function EnterMyBirdData() {
                 </div>
            <br />
            <br />
+                <div className="App">
+                    <h2>Add Sound:</h2>
+                </div>
+           <br />
+           <br />
           <button type="submit" onClick={handleClick}>Submit Findings</button>
      </form>
    </div>

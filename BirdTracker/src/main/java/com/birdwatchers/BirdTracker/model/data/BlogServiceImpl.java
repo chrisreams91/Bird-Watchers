@@ -24,6 +24,23 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findAll();
     }
 
+    @Override
+    public boolean deleteBlog(int id) {
+        Blog blog = blogRepository.findById(id).get();
+        blogRepository.delete(blog);
+        return true;
+    }
+
+    @Override
+    public Blog getBlogById() {
+        return null;
+    }
+
+    @Override
+    public Blog getBlogById(int id) {
+        Blog blog = blogRepository.findById(id).get();
+        return blog;
+    }
 
 
 }

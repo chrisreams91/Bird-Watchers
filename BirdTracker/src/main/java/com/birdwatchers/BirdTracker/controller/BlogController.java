@@ -1,16 +1,18 @@
 package com.birdwatchers.BirdTracker.controller;
 
-import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.data.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/blogposts")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class BlogController {
 
     @Autowired
@@ -27,5 +29,22 @@ public class BlogController {
     public List<Blog> getAllBirds(){
         return blogService.getAllBlogs();
     }
+
+    @GetMapping("/add/{id}")
+    public ResponseEntity<Blog> getBirdById(@PathVariable int id){
+        Blog blog = null;
+        blog = blogService.getBlogById(id);
+        return ResponseEntity.ok(blog);
+    }
+
+    @DeleteMapping("/add/{id}")
+    public ResponseEntity<Object> deleteBlog(@PathVariable int id){
+        boolean deleted = false;
+        deleted = blogService.deleteBlog(id);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", deleted);
+        return ResponseEntity.ok(response);
+    }
+
 
 }
