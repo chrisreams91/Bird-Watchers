@@ -85,6 +85,9 @@ import org.antlr.v4.runtime.misc.NotNull;
         }
 
 
+        public void set(int i, Bird newBird) {
+        }
 
-
-}
+        public void addAttribute(String newBird, Bird newBird1) {
+        }
+    }

@@ -119,7 +119,7 @@ function EnterMyBirdData() {
               <td>Field Notes: {bird.description}</td>
               <td>Photo: {bird.photo}</td>
               <td> <MP3Player/> </td>
-              <td> Edit Button Goes here</td>
+              <button onClick="updateBird()">Update</button>
               <td> Delete button goes here</td>
             </tr>
           ))}
