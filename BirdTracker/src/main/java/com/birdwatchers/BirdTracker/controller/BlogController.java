@@ -1,6 +1,4 @@
 package com.birdwatchers.BirdTracker.controller;
-
-import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.data.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
