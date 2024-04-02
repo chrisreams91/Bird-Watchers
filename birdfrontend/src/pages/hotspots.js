@@ -6,6 +6,7 @@ import styles from '../hotspot.css'
 
 function Hotspots() {
     const [bird, setBird] = useState([]);
+    const [birds, setBirds] = useState([]);
 
     useEffect(() => {
         fetch('https://nuthatch.lastelm.software/v2/birds?&page=1&pageSize=100&hasImg=true&operator=AND', {
@@ -21,6 +22,20 @@ function Hotspots() {
         );
     }, []);
 
+    useEffect(() => {
+            fetch('https://nuthatch.lastelm.software/checklists', {
+                headers: {
+                    'api-key': '65930e9d-a183-455c-9fda-a2dc40a61935'
+                }
+            })
+            .then((response) => response.json())
+            .then((data1) => {
+                setBirds(data1);
+                console.log(data1);
+            }
+            );
+        }, []);
+
     return (
         <table>
         <thead>
@@ -33,20 +48,29 @@ function Hotspots() {
             <tbody>
             {bird.map((entities) => {
             return(
+            <div className="text">
             <div className="container">
                             <div className="image">
-                            <img src={entities.images[0]} width={400} height={400}></img>
+                            <img src={entities.images[0]} width={250} height={250}></img>
                             </div>
             <tr>
-                <div className="text">
                 <p>
+                    <h2>{entities.name}</h2>
+                            <div className="column">
                                 <li>ID: {entities.id}</li>
-                                <li>Name: {entities.name}</li>
+                                <li>Sci-Name: {entities.sciName}</li>
                                 <li>Status: {entities.status}</li>
-                                <li>Region: {entities.region}</li>
-                            </p>
+                                <li>Region: {entities.region[0]} {entities.region[1]}</li>
                             </div>
+                            <div className="column">
+                                <li>Order: {entities.order}</li>
+                                <li>Species: {entities.family}</li>
+                                <li>Size: {entities.lengthMax} in.</li>
+                                <li>Wingspan: {entities.wingspanMax}</li>
+                            </div>
+                            </p>
             </tr>
+            </div>
             </div>
             );
             })}
