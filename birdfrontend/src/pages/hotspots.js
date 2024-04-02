@@ -8,7 +8,7 @@ function Hotspots() {
     const [bird, setBird] = useState([]);
 
     useEffect(() => {
-        fetch('https://nuthatch.lastelm.software//v2/birds?&hasImg=true', {
+        fetch('https://nuthatch.lastelm.software/v2/birds?&page=1&pageSize=100&hasImg=true&operator=AND', {
             headers: {
                 'api-key': '65930e9d-a183-455c-9fda-a2dc40a61935'
             }
