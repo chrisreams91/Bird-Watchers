@@ -2,6 +2,7 @@ img {
   max-width: 100%;
   max-height:100%;
   border-radius:50%;
+  border: 8px solid #e6ffff;
 }
 .container {
  display: grid;
@@ -10,11 +11,27 @@ img {
  column-gap: 5px;
 }
 
+.column {
+    float: left;
+    width: 50%;
+    }
+
 .text {
-  font-size: 30px;
+  font-size: 18px;
+    border-radius: 25px;
+    border: 6px solid #004d4d;
+    background: #009999;
+    padding: 25px;
+    width: 1490px;
+    height: 260px;
+    color: #ffffff;
+    margin-left: 14px;
 }
 
 .header {
     font-size:50px;
     text-align: center;
+    align-items: center;
+    margin-left: 600px;
+    border: 25px solid #ffffff;
 }
