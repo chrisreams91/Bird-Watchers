@@ -22,26 +22,16 @@ function Hotspots() {
         );
     }, []);
 
-    useEffect(() => {
-            fetch('https://nuthatch.lastelm.software/checklists', {
-                headers: {
-                    'api-key': '65930e9d-a183-455c-9fda-a2dc40a61935'
-                }
-            })
-            .then((response) => response.json())
-            .then((data1) => {
-                setBirds(data1);
-                console.log(data1);
-            }
-            );
-        }, []);
+
 
     return (
+        <button>
+        <img src='https://cdn-icons-png.freepik.com/512/6195/6195523.png'></img>
         <table>
         <thead>
             <tr>
             <div className="header">
-                <th>Bird Gallery</th>
+                <h2>Bird Gallery</h2>
             </div>
             </tr>
             </thead>
@@ -60,7 +50,7 @@ function Hotspots() {
                                 <li>ID: {entities.id}</li>
                                 <li>Sci-Name: {entities.sciName}</li>
                                 <li>Status: {entities.status}</li>
-                                <li>Region: {entities.region[0]} {entities.region[1]}</li>
+                                <li>Region: {entities.region[0]}</li>
                             </div>
                             <div className="column">
                                 <li>Order: {entities.order}</li>
@@ -76,6 +66,7 @@ function Hotspots() {
             })}
            </tbody>
         </table>
+        </button>
     )
 }
 export default Hotspots;
