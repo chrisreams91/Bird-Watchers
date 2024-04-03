@@ -7,6 +7,8 @@ import SearchDatabase from "./pages/search";
 import BlogPosting from "./pages/blog";
 import Home from "./pages/home";
 import app from "./App";
+import Europe from "./pages/Europe";
+import NorthAmerica from "./pages/NorthAmerica"
 
 
 function App() {
@@ -29,6 +31,12 @@ function App() {
         break
     case "/blog":
         component = <BlogPosting />
+        break
+    case "/hotspots/Europe":
+        component = <Europe />
+        break
+    case "/hotspots/NorthAmerica":
+        component = <NorthAmerica />
         break
     app.get('/cors', (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
