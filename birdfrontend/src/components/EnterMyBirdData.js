@@ -22,18 +22,19 @@ function EnterMyBirdData() {
   const soundName = useRef("");
 
 
-  const [file, setFile] = useState();
-          function handleChange(e) {
-              console.log(e.target.files);
-              setFile(URL.createObjectURL(e.target.files[0]));
-          }
+  const [imageFile, setImageFile] = useState({});
+  const handleChangeImage = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setImageFile(file);
+  }
 
-  const [sound, setSound] = useState();
-          function handleChange(e) {
-              console.log(e.target.files);
-              setFile(URL.createObjectURL(e.target.files[0]));
-          }
-
+  const [soundFile, setSoundFile] = useState({});
+  const handleChangeSound = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setSoundFile(file);
+  }
 
 
   const handleSubmit = (event) => {
@@ -49,7 +50,7 @@ function EnterMyBirdData() {
     descName.current.value = "";
     picName.current.value = "";
     soundName.current.value = "";
-    const newBirdEntry = {bird_species,location,date,description,file}
+    const newBirdEntry = {bird_species,location,date,description,imageFile,soundFile}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
         method:"POST",
@@ -107,15 +108,15 @@ function EnterMyBirdData() {
            <br />
                 <div className="App">
                     <h2>Add Image:</h2>
-                    <input type="file" ref={picName} onChange={handleChange} />
-                    <img src={file} />
+                    <input type="file" ref={picName} id="image" accept="image/*" onChange={handleChangeImage} />
+                    <img src={imageFile} />
                 </div>
            <br />
            <br />
                 <div className="App">
                     <h2>Add Sound:</h2>
-                    <input type="file" ref={soundName} onChange={handleChange} />
-                    <img src={sound} />
+                    <input type="file" ref={soundName} id="sound" accept="sound/*" onChange={handleChangeSound} />
+                    <img src={soundFile} />
                 </div>
            <br />
            <br />
@@ -151,7 +152,7 @@ function EnterMyBirdData() {
                        <div>
                           <br/>
                           <br/>
-                          <img src={file} width={200} height={200}></img>
+                          <img src={imageFile} width={200} height={200}></img>
                        </div>
                     </div>
               </td>
