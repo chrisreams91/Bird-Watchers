@@ -8,6 +8,7 @@ function Hotspots() {
 
 
     return (
+    <div className="color">
         <div className="header">
             <h2>BirdMap</h2>
             <div className="display">
@@ -25,6 +26,7 @@ function Hotspots() {
             </div>
             </div>
         </div>
+    </div>
     )
 }
 export default Hotspots;
