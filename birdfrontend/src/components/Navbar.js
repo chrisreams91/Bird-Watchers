@@ -3,7 +3,7 @@ export default function Navbar() {
         <a href="/" className="site-title">Bird Tracker</a>
         <ul>
             <li>
-                <a href="/hotspots">Hotspots</a>
+                <a href="/hotspots">Bird Map</a>
             </li>
             <li>
                 <a href="/mybirds">My Birds</a>
@@ -12,7 +12,7 @@ export default function Navbar() {
                 <a href="/otherbirders">Other Birders</a>
             </li>
             <li>
-                <a href="/search">Search Community Database</a>
+                <a href="/search">Search Community Birds</a>
             </li>
             <li>
                 <a href="/blog">Blog Postings</a>
