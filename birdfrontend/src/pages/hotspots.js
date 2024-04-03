@@ -13,12 +13,12 @@ function Hotspots() {
             <h2>BirdMap</h2>
             <div className="display">
             <div className="btn">
-                <button className="btn">
+                <button className="coolbtn">
                     <a href='hotspots/NorthAmerica'>
                         <img className= 'imgbtn' src='https://cdn-icons-png.freepik.com/512/6195/6195523.png'></img>
                     </a>
                 </button>
-                <button className ="btn">
+                <button className ="coolbtn">
                     <a href='/hotspots/Europe'>
                         <img className= 'imgbtn' src='https://cdn-icons-png.flaticon.com/512/6195/6195392.png'></img>
                     </a>
