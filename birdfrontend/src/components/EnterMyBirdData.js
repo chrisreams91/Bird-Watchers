@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import MP3Player from "./MP3Player";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-
+import styles from '../mybirds.css'
 
 
 function EnterMyBirdData() {
@@ -84,10 +84,11 @@ function EnterMyBirdData() {
 
 
   return (
-   <div>
-    <div>
+   <div className="bird-data-container">
+    <div className="bird-sighting-form">
       <form id="new-bird-sighting" onSubmit={handleSubmit}>
-        <br />
+          <h2>Add A New Bird Sighting!</h2>
+          <br />
           <label htmlFor="bird_species">Bird Name:</label>
           <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
           <br />
@@ -119,11 +120,13 @@ function EnterMyBirdData() {
            <br />
            <br />
           <button type="submit" onClick={handleClick}>Submit Findings</button>
-
      </form>
    </div>
+   <div className="bird-entries">
        <h2>My Entries</h2>
-    <div>
+    <table>
+      <thead>
+        <tr>
             <th>IDs</th>
             <th>Bird Species</th>
             <th>Location Seen</th>
@@ -133,6 +136,9 @@ function EnterMyBirdData() {
             <th>Sound File</th>
             <th>Edit Bird</th>
             <th>Delete Bird</th>
+        </tr>
+      </thead>
+      <tbody>
           {birds.map((bird) => (
             <tr key={bird.id}>
               <td>Id: {bird.id}</td>
@@ -140,10 +146,12 @@ function EnterMyBirdData() {
               <td>Location: {bird.location}</td>
               <td>Date: {bird.date}</td>
               <td>Field Notes: {bird.description}</td>
-              <td>Photo:
+              <td>
                     <div>
                        <div>
-                          <img src={file} width={400} height={400}></img>
+                          <br/>
+                          <br/>
+                          <img src={file} width={200} height={200}></img>
                        </div>
                     </div>
               </td>
@@ -152,8 +160,10 @@ function EnterMyBirdData() {
               <td> Delete button goes here</td>
             </tr>
           ))}
-        </div>
-      </div>
+      </tbody>
+    </table>
+    </div>
+    </div>
   )
 }
 

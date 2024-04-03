@@ -1,0 +1,44 @@
+.bird-entries table {
+  width: 100%;
+  border-collapse: collapse;
+  background: linear-gradient(to bottom right, #ffffff 0%, #ffff66 100%);
+}
+
+.bird-entries th,
+.bird-entries td {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+}
+
+.bird-entries th {
+  text-align: center;
+}
+
+.bird-entries {
+  width: 100%;
+  text-align: center;
+}
+
+.bird-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400%;
+  max-width: 1850px;
+  margin-top: 10px;
+  margin: 0 auto;
+}
+
+.bird-sighting-form {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 40%;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.bird-sighting-form button[type="submit"] {
+  cursor: pointer;
+}
+
