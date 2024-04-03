@@ -34,6 +34,8 @@ function EnterMyBirdData() {
               setFile(URL.createObjectURL(e.target.files[0]));
           }
 
+
+
   const handleSubmit = (event) => {
       event.preventDefault();
   };
@@ -140,9 +142,9 @@ function EnterMyBirdData() {
               <td>Field Notes: {bird.description}</td>
               <td>Photo:
                     <div>
-                              <div>
-                              <img src={file} width={400} height={400}></img>
-                    </div>
+                       <div>
+                          <img src={file} width={400} height={400}></img>
+                       </div>
                     </div>
               </td>
               <td> <MP3Player/> </td>

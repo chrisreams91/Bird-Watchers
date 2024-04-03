@@ -54,6 +54,7 @@ public class BirdServiceImpl implements BirdService {
         bird.setLocation(bird.getLocation());
         bird.setDescription(bird.getDescription());
         bird.setPhoto(bird.getPhoto());
+        bird.setSound(bird.getSound());
         return birdRepository.save(bird);
     }
 

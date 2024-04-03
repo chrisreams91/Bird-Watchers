@@ -29,7 +29,9 @@ import org.antlr.v4.runtime.misc.NotNull;
 
         @Column(name="photo")
         public String photo;
-        //edit this and the getters/setters to correctly work with photo (use path???)
+
+        @Column(name="sound")
+        public String sound;
 
         public Bird() {
         }
@@ -84,7 +86,11 @@ import org.antlr.v4.runtime.misc.NotNull;
             this.photo = photo;
         }
 
+        public String getSound() {
+            return sound;
+        }
 
-
-
-}
+        public void setSound(String sound) {
+            this.sound = sound;
+        }
+    }
