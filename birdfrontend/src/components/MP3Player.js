@@ -32,7 +32,6 @@ function MP3Player() {
 
     return (
          <div>
-           <h3>Sound Player</h3>
            <div className="button">
            <input
            type='button'
@@ -49,7 +48,7 @@ function MP3Player() {
            className='mp3-player-button btn btn-danger mr-3'
            value='stop'
            onClick={stopSound}/>
-           <label><input type='checkbox' checked={playInLoop} onChange={e => setPlayInLoop(e.target.checked)}/></label>
+           <label>loop<input type='checkbox' checked={playInLoop} onChange={e => setPlayInLoop(e.target.checked)}/></label>
            </div>
          </div>
 

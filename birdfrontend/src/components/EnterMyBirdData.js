@@ -141,11 +141,11 @@ function EnterMyBirdData() {
       <tbody>
           {birds.map((bird) => (
             <tr key={bird.id}>
-              <td>Id: {bird.id}</td>
-              <td>Name: {bird.bird_species}</td>
-              <td>Location: {bird.location}</td>
-              <td>Date: {bird.date}</td>
-              <td>Field Notes: {bird.description}</td>
+              <td>{bird.id}</td>
+              <td>{bird.bird_species}</td>
+              <td>{bird.location}</td>
+              <td>{bird.date}</td>
+              <td>{bird.description}</td>
               <td>
                     <div>
                        <div>
