@@ -24,7 +24,7 @@ img {
   font-size: 18px;
     border-radius: 25px;
     border: 6px solid #004d4d;
-    background: #009999;
+    background: #25979c;
     padding-left: 25px;
     width: 1490px;
     text-align: left;
@@ -36,7 +36,7 @@ img {
 
 .list {
     margin-left: 300px;
-    margin-top: -250px;
+    margin-top: 40px;
     width: 800px;
 }
 
@@ -65,6 +65,7 @@ img {
     border-radius: 100%;
     border: #ffffff;
     column-gap: 60px;
+    background: #0e6a6e;
 }
 
 .display {
@@ -75,4 +76,8 @@ img {
 .imgbtn {
     margin-top: 10px;
     margin-left: -8px;
+}
+
+body {
+  background-color: #0e6a6e;
 }
