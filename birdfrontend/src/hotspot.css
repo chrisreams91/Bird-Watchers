@@ -9,6 +9,12 @@ img {
 .image {
   margin-top: 50px;
 }
+
+.image2 {
+  margin-top: 50px;
+  margin-left:-18px
+}
+
 .container {
  display: flex;
  align-items: center;
@@ -58,31 +64,46 @@ img {
 
 .coolbtn {
     display: flex;
-    margin-right: 40px;
-    width: 1100px;
+    margin-right: 20px;
+    width: 1200px;
     height: 500px;
     align-items: center;
     border-radius: 100%;
-    border: #ffffff;
+    border: #0e6a6e;
     column-gap: 60px;
-    background: #0e6a6e;
     flex-direction: row;
+    background-color: #0e6a6e;
 
 }
 
-.btn {
+.btn2 {
+    display: flex;
+    flex-direction: row;
+    width: 1060px;
+    height: 500px;
+    margin-left: -320px;
+    color: #0e6a6e;
+    border-radius: 50%;
+}
+
+.display {
+    margin-right: -500px;
+    margin-top: 120px;
+    background-color: #0e6a6e;
+    border-radius: 50%;
+}
+.nextbutton {
     display: flex;
     flex-direction: row;
 }
 
-.display {
-    margin-left: -340px;
-    margin-top: 120px;
-}
-
 .imgbtn {
     margin-top: 10px;
-    margin-left: -8px;
+    margin-right: px;
+    border-radius: 100%;
+    width: 500px;
+    height: 500px;
+    background-color: #0e6a6e;
 }
 
 body {
