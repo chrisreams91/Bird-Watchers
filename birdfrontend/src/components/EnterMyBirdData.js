@@ -156,7 +156,7 @@ function EnterMyBirdData() {
                        </div>
                     </div>
               </td>
-              <td> <MP3Player/> </td>
+              <td> <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio> </td>
               <td> Edit Button Goes here</td>
               <td> Delete button goes here</td>
             </tr>
