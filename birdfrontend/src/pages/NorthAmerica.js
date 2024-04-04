@@ -1,7 +1,5 @@
 import React from "react";
-import ebird from "../components/eBird";
 import { useState, useEffect } from 'react';
-import app from '../App';
 import styles from '../hotspot.css'
 
 function NorthAmerica() {
@@ -9,7 +7,7 @@ function NorthAmerica() {
     const [birds, setBirds] = useState([]);
 
     useEffect(() => {
-        fetch('https://nuthatch.lastelm.software/v2/birds?&page=1&pageSize=100&hasImg=true&operator=AND', {
+        fetch('https://nuthatch.lastelm.software/v2/birds?&page=1&pageSize=10&hasImg=true&operator=AND', {
             headers: {
                 'api-key': '65930e9d-a183-455c-9fda-a2dc40a61935'
             }
@@ -27,7 +25,7 @@ function NorthAmerica() {
     return (
         <table>
         <h1 className="image">
-        <img src='https://cdn-icons-png.flaticon.com/512/6195/6195392.png' width={250} height={250}></img>
+        <img src='https://cdn-icons-png.freepik.com/512/6195/6195523.png' width={250} height={250}></img>
         </h1>
         <thead>
             <tr>
@@ -68,6 +66,11 @@ function NorthAmerica() {
             </div>
             );
             })}
+            <button className ="header">
+            <a href="/hotspots/NorthAmerica2">
+            <h3>Next</h3>
+            </a>
+            </button>
            </body>
         </table>
     )
