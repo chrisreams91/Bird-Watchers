@@ -56,9 +56,9 @@ img {
     color: #ffffff;
 }
 
-.btn {
+.coolbtn {
     display: flex;
-    margin-right: 20px;
+    margin-right: 40px;
     width: 1100px;
     height: 500px;
     align-items: center;
@@ -66,6 +66,13 @@ img {
     border: #ffffff;
     column-gap: 60px;
     background: #0e6a6e;
+    flex-direction: row;
+
+}
+
+.btn {
+    display: flex;
+    flex-direction: row;
 }
 
 .display {

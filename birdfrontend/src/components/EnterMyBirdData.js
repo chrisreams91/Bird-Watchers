@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import MP3Player from "./MP3Player";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-
+import styles from '../mybirds.css'
 
 
 function EnterMyBirdData() {
@@ -22,18 +22,19 @@ function EnterMyBirdData() {
   const soundName = useRef("");
 
 
-  const [file, setFile] = useState();
-          function handleChange(e) {
-              console.log(e.target.files);
-              setFile(URL.createObjectURL(e.target.files[0]));
-          }
+  const [imageFile, setImageFile] = useState({});
+  const handleChangeImage = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setImageFile(file);
+  }
 
-  const [sound, setSound] = useState();
-          function handleChange(e) {
-              console.log(e.target.files);
-              setFile(URL.createObjectURL(e.target.files[0]));
-          }
-
+  const [soundFile, setSoundFile] = useState({});
+  const handleChangeSound = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setSoundFile(file);
+  }
 
 
   const handleSubmit = (event) => {
@@ -49,7 +50,7 @@ function EnterMyBirdData() {
     descName.current.value = "";
     picName.current.value = "";
     soundName.current.value = "";
-    const newBirdEntry = {bird_species,location,date,description,file}
+    const newBirdEntry = {bird_species,location,date,description,imageFile,soundFile}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
         method:"POST",
@@ -84,10 +85,11 @@ function EnterMyBirdData() {
 
 
   return (
-   <div>
-    <div>
+   <div className="bird-data-container">
+    <div className="bird-sighting-form">
       <form id="new-bird-sighting" onSubmit={handleSubmit}>
-        <br />
+          <h2>Add A New Bird Sighting!</h2>
+          <br />
           <label htmlFor="bird_species">Bird Name:</label>
           <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
           <br />
@@ -106,24 +108,26 @@ function EnterMyBirdData() {
            <br />
                 <div className="App">
                     <h2>Add Image:</h2>
-                    <input type="file" ref={picName} onChange={handleChange} />
-                    <img src={file} />
+                    <input type="file" ref={picName} id="image" accept="image/*" onChange={handleChangeImage} />
+                    <img src={imageFile} />
                 </div>
            <br />
            <br />
                 <div className="App">
                     <h2>Add Sound:</h2>
-                    <input type="file" ref={soundName} onChange={handleChange} />
-                    <img src={sound} />
+                    <input type="file" ref={soundName} id="sound" accept="sound/*" onChange={handleChangeSound} />
+                    <img src={soundFile} />
                 </div>
            <br />
            <br />
           <button type="submit" onClick={handleClick}>Submit Findings</button>
-
      </form>
    </div>
+   <div className="bird-entries">
        <h2>My Entries</h2>
-    <div>
+    <table>
+      <thead>
+        <tr>
             <th>IDs</th>
             <th>Bird Species</th>
             <th>Location Seen</th>
@@ -133,17 +137,22 @@ function EnterMyBirdData() {
             <th>Sound File</th>
             <th>Edit Bird</th>
             <th>Delete Bird</th>
+        </tr>
+      </thead>
+      <tbody>
           {birds.map((bird) => (
             <tr key={bird.id}>
-              <td>Id: {bird.id}</td>
-              <td>Name: {bird.bird_species}</td>
-              <td>Location: {bird.location}</td>
-              <td>Date: {bird.date}</td>
-              <td>Field Notes: {bird.description}</td>
-              <td>Photo:
+              <td>{bird.id}</td>
+              <td>{bird.bird_species}</td>
+              <td>{bird.location}</td>
+              <td>{bird.date}</td>
+              <td>{bird.description}</td>
+              <td>
                     <div>
                        <div>
-                          <img src={file} width={400} height={400}></img>
+                          <br/>
+                          <br/>
+                          <img src={imageFile} width={200} height={200}></img>
                        </div>
                     </div>
               </td>
@@ -152,8 +161,10 @@ function EnterMyBirdData() {
               <td> Delete button goes here</td>
             </tr>
           ))}
-        </div>
-      </div>
+      </tbody>
+    </table>
+    </div>
+    </div>
   )
 }
 
