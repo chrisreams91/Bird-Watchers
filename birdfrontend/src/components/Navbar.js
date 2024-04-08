@@ -3,13 +3,16 @@ export default function Navbar() {
         <a href="/" className="site-title">Bird Tracker</a>
         <ul>
             <li>
+                <a href="/register">Register Here!</a>
+            </li>
+            <li>
                 <a href="/hotspots">Bird Map</a>
             </li>
             <li>
                 <a href="/mybirds">My Birds</a>
             </li>
             <li>
-                <a href="/otherbirders">Other Birders</a>
+                <a href="/otherbirders">Birders</a>
             </li>
             <li>
                 <a href="/search">Search Community Birds</a>

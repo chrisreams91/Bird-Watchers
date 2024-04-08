@@ -1,9 +1,12 @@
 package com.birdwatchers.BirdTracker;
 
+import jakarta.persistence.Entity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+//@SpringBootApplication
 public class BirdTrackerApplication {
 
 	public static void main(String[] args) {
