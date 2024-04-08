@@ -3,7 +3,6 @@ import ImageSlider from "../components/ImageSlider";
 import "../styles.css";
 
 
-
 const Home = () => {
 
     const slides = [
@@ -20,7 +19,6 @@ const Home = () => {
     };
 
 	return (
-
 		<div>
 			<h1> Welcome, Birders! </h1>
             <div style={containerStyles}>

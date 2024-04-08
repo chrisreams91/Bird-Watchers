@@ -1,4 +1,6 @@
 import React from "react";
+import Login from "./components/login";
+import Register from "./components/register";
 import Navbar from "./components/Navbar";
 import Hotspots from "./pages/hotspots";
 import MyBirds from "./pages/mybirds";
@@ -27,11 +29,15 @@ import NorthAmerica7 from "./pages/NorthAmerica7";
 import NorthAmerica8 from "./pages/NorthAmerica8";
 import NorthAmerica9 from "./pages/NorthAmerica9";
 import NorthAmerica10 from "./pages/NorthAmerica10";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 
 function App() {
     let component
     switch (window.location.pathname) {
-    case "/":
+//    case "/":
+//        component = <Login />
+//        break
+    case "/home":
         component = <Home />
         break
     case "/hotspots":
@@ -115,10 +121,20 @@ function App() {
     })
     }
     return (
-    <>
+    <div>
         <Navbar/>
         {component}
-    </>
+    <div>
+     <BrowserRouter>
+          <Routes>
+              <Route path="/home" element= { <Home/>} />
+              <Route path="/register" element= { <Register/>} />
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+         </Routes>
+     </BrowserRouter>
+    </div>
+    </div>
     )
 }
 

@@ -18,6 +18,9 @@ public class Comments {
     @Column(name="CommentText")
     public String commentText;
 
+    public Comments() {
+    }
+
     public int getId() {
         return id;
     }
