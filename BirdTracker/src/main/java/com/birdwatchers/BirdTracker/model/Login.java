@@ -1,9 +1,17 @@
 package com.birdwatchers.BirdTracker.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class Login {
 
+
+    @NotNull
+    @NotBlank
     private String email;
 
+    @NotNull
+    @NotBlank
     private String password;
 
     public Login() {

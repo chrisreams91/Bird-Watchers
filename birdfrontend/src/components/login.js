@@ -20,21 +20,21 @@ function Login() {
             {
              console.log(res.data);
 
-             if (res.data.message == "Email Does Not Exist")
+             if (res.data.message === "Email Does Not Exist. Please Register For An Account.")
              {
-               alert("Email Does Not Exist");
+               alert("Email Does Not Exist. Please Register For An Account.");
              }
-             else if(res.data.message == "Login Success")
+             else if(res.data.message === "Login Success")
              {
 
                 navigate('/home');
              }
               else
              {
-                alert("Wrong Password");
+                alert("Please Enter Valid Credentials.");
              }
           }, fail => {
-           console.error(fail); // Error!
+           console.error(fail);
   });
         }
 

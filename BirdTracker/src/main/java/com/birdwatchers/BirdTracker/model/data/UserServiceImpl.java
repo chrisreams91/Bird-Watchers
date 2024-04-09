@@ -53,10 +53,10 @@ public class UserServiceImpl implements UserService {
                     return new LoginResponse("Login Failed", false);
                 }
             } else {
-                return new LoginResponse("Wrong Password", false);
+                return new LoginResponse("Please Enter Valid Credentials.", false);
             }
         }else {
-            return new LoginResponse("Email Does Not Exist", false);
+            return new LoginResponse("Email Does Not Exist. Please Register For An Account.", false);
         }
     }
 

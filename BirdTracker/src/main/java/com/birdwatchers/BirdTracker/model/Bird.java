@@ -2,6 +2,8 @@ package com.birdwatchers.BirdTracker.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.antlr.v4.runtime.misc.NotNull;
 
     @Table(name="bird")
@@ -12,19 +14,26 @@ import org.antlr.v4.runtime.misc.NotNull;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
-        @NotNull
+
         @Column(name="bird_species")
+        @NotBlank
+        @Size(min = 3, max = 40)
         public String bird_species;
 
-        @NotNull
+
         @Column(name="location")
+        @NotBlank
+        @Size(min = 3, max = 100)
         public String location;
 
-        @NotNull
+
         @Column(name="date")
+        @NotBlank
         public String date;
 
         @Column(name="description")
+        @NotBlank
+        @Size(min = 3, max = 200)
         public String description;
 
         @Column(name="photo")
