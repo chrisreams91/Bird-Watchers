@@ -2,6 +2,9 @@ package com.birdwatchers.BirdTracker.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Table(name="blog")
 @Entity
@@ -12,12 +15,17 @@ public class Blog {
     private int id;
 
     @Column(name="Title")
+    @NotBlank
+    @Size(min = 4, max = 50)
     public String title;
 
     @Column(name="date")
+    @NotNull
     public String date;
 
     @Column(name="blog_text")
+    @NotBlank
+    @Size(min = 5, max = 4000)
     public String blogText;
 
 

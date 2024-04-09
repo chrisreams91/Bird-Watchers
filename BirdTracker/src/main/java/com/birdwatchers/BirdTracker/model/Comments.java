@@ -2,6 +2,8 @@ package com.birdwatchers.BirdTracker.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Table(name="comments")
 @Entity
@@ -12,10 +14,11 @@ public class Comments {
     private int id;
 
     @Column(name="date")
+    @NotNull
     public String date;
-    //have this be the automatic current date/time
 
     @Column(name="CommentText")
+    @Size(min = 10, max = 1000)
     public String commentText;
 
     public Comments() {

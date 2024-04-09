@@ -72,7 +72,7 @@ function Register() {
 
         <div class="form-group">
           <label>Last Name</label>
-          <input type="text" ref={lastnamename} class="form-control" id="lastname" placeholder="Enter Last Name"
+          <input type="text" ref={lastnamename} class="form-control" id="lastname" placeholder="Enter Last Name Optional"
 
           value={lastname}
           onChange={(event) => {
@@ -108,7 +108,7 @@ function Register() {
           </div>
 
         <button type="submit" class="btn btn-primary mt-4" onClick={save} >Save</button>
-       
+
       </form>
     </div>
     </div>
