@@ -9,7 +9,7 @@ function EnterMyBirdData() {
 
   const[bird_species,setName]=useState('')
   const[location,setLocation]=useState('')
-  const[date,setDate]=useState('')
+  const[date,setDate]=useState(getCurrentDate())
   const[description, setDescription]=useState('')
   const[birds, setBirds]=useState([])
   const { id } = useParams();
@@ -20,6 +20,13 @@ function EnterMyBirdData() {
   const picName = useRef("");
   const soundName = useRef("");
 
+  function getCurrentDate() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
 
   const [imageFile, setImageFile] = useState({});
   const handleChangeImage = (e) => {

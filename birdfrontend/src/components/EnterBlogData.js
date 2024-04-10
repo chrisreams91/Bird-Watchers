@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 function BlogData() {
 
   const[title,setTitle]=useState('');
-  const[date,setDate]=useState('');
+  const[date,setDate]=useState(getCurrentDate());
   const[blogText, setBlogText]=useState('');
   const[blogs, setBlogs]=useState([]);
   const titleName = useRef("");
@@ -13,13 +13,21 @@ function BlogData() {
   const textName = useRef("");
   const [errors, setErrors] = useState({});
 
+  function getCurrentDate() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-
+        const currentDate = getCurrentDate();
         titleName.current.value = "";
         dateName.current.value = "";
         textName.current.value = "";
-        const newBlogEntry = {title, date, blogText}
+        const newBlogEntry = {title, date: currentDate, blogText}
         console.log(newBlogEntry)
         fetch("http://localhost:8080/blogposts/add",{
             method:"POST",
@@ -28,7 +36,6 @@ function BlogData() {
         }).then(()=>{
             console.log("New blog has been added!");
             setTitle('');
-            setDate('');
             setBlogText('');
         })
 
@@ -63,11 +70,7 @@ function BlogData() {
 
           <br />
           <br />
-          <label htmlFor="date">Date:</label>
-          <input type="date" ref={dateName} id="date" name="Date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
 
-          <br />
-          <br />
            <label htmlFor="BlogText">Text:</label>
            <textarea id="blogText" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)} required></textarea>
 
