@@ -11,30 +11,30 @@ function BlogData() {
   const titleName = useRef("");
   const dateName = useRef("");
   const textName = useRef("");
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-
-  };
-
-  const handleClick=(event)=>{
     event.preventDefault()
-    titleName.current.value = "";
-    dateName.current.value = "";
-    textName.current.value = "";
-    const newBlogEntry = {title, date, blogText}
-    console.log(newBlogEntry)
-    fetch("http://localhost:8080/blogposts/add",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(newBlogEntry)
-    }).then(()=>{
-        console.log("New blog has been added!");
-        setTitle('');
-        setDate('');
-        setBlogText('');
-    })
+
+        titleName.current.value = "";
+        dateName.current.value = "";
+        textName.current.value = "";
+        const newBlogEntry = {title, date, blogText}
+        console.log(newBlogEntry)
+        fetch("http://localhost:8080/blogposts/add",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(newBlogEntry)
+        }).then(()=>{
+            console.log("New blog has been added!");
+            setTitle('');
+            setDate('');
+            setBlogText('');
+        })
+
   }
+
+
 
    useEffect(() => {
      const fetchBlogs = async () => {
@@ -59,18 +59,21 @@ function BlogData() {
       <form onSubmit={handleSubmit}>
         <br />
           <label htmlFor="Title">Title:</label>
-          <input type="text" ref={titleName} id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} />
+          <input type="text" ref={titleName} id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} required/>
+
           <br />
           <br />
           <label htmlFor="date">Date:</label>
-          <input type="date" ref={dateName} id="date" name="Date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <input type="date" ref={dateName} id="date" name="Date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
+
           <br />
           <br />
            <label htmlFor="BlogText">Text:</label>
-           <textarea id="blogText" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)}></textarea>
+           <textarea id="blogText" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)} required></textarea>
+
            <br />
            <br />
-          <button type="submit" onClick={handleClick}>Submit Blog</button>
+          <button type="submit">Submit Blog</button>
      </form>
    </div>
        <h2>My Blogs</h2>

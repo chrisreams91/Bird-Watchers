@@ -38,11 +38,6 @@ function EnterMyBirdData() {
 
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-  };
-
-
-  const handleClick=(event)=>{
     event.preventDefault()
     birdName.current.value = "";
     locName.current.value = "";
@@ -107,19 +102,19 @@ function EnterMyBirdData() {
           <h2>Add A New Bird Sighting!</h2>
           <br />
           <label htmlFor="bird_species">Bird Name:</label>
-          <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
+          <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
           <br />
           <br />
           <label htmlFor="location">Location:</label>
-          <input type="text" ref={locName} id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
+          <input type="text" ref={locName} id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} required/>
           <br />
           <br />
           <label htmlFor="date">Date Seen:</label>
-          <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
           <br />
           <br />
            <label htmlFor="description">Field Notes:</label>
-           <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
+           <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)} required></textarea>
            <br />
            <br />
                 <div className="App">
@@ -136,7 +131,7 @@ function EnterMyBirdData() {
                 </div>
            <br />
            <br />
-          <button type="submit" onClick={handleClick}>Submit Findings</button>
+          <button type="submit">Submit Findings</button>
      </form>
    </div>
    <div className="bird-entries">
