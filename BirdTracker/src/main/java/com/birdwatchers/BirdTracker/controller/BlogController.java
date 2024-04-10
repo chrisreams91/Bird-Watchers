@@ -1,6 +1,7 @@
 package com.birdwatchers.BirdTracker.controller;
 import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.data.BlogService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class BlogController {
 
 
     @PostMapping("/add")
-    public String addNewPost(@RequestBody Blog blog) {
+    public String addNewPost(@RequestBody @Valid Blog blog) {
         blogService.saveBlog(blog);
         return "New post has been added!";
     }
