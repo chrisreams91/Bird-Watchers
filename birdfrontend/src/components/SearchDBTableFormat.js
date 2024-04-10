@@ -44,9 +44,13 @@ function SearchDBTableFormat() {
           </tr>
         </thead>
         <tbody>
-          {birds.filter((bird) => {
-            return search.toLowerCase().trim() === '' ? bird : bird.bird_species.toLowerCase().includes(search.toLowerCase().trim())
-          }).map((bird) => (
+         {birds.filter(bird =>
+             search.trim() === '' ||
+             bird.bird_species.toLowerCase().includes(search.toLowerCase().trim()) ||
+             bird.location.toLowerCase().includes(search.toLowerCase().trim()) ||
+             bird.date.toLowerCase().includes(search.toLowerCase().trim()) ||
+             bird.description.toLowerCase().includes(search.toLowerCase().trim())
+           ).map(bird => (
             <tr key={bird.id}>
               <td>{bird.bird_species}</td>
               <td>{bird.location}</td>
