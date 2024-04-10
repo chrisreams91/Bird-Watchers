@@ -29,18 +29,28 @@ function BlogData() {
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify(newBlogEntry)
     }).then(()=>{
-        console.log("New blog has been added!")
+        console.log("New blog has been added!");
+        setTitle('');
+        setDate('');
+        setBlogText('');
     })
   }
 
-    useEffect(() =>{
-        fetch("http://localhost:8080/blogposts/getAll")
-        .then(res=>res.json())
-        .then((result)=>{
-            setBlogs(result);
-        }
-    )
-    },[])
+   useEffect(() => {
+     const fetchBlogs = async () => {
+       try {
+         const response = await fetch('http://localhost:8080/blogposts/getAll');
+         const data = await response.json();
+         setBlogs(data);
+       } catch (error) {
+         console.error('Error fetching blogs:', error);
+       }
+     };
+     fetchBlogs();
+     const intervalId = setInterval(fetchBlogs, 2000);
+     return () => clearInterval(intervalId);
+   }, []);
+
 
 
   return (

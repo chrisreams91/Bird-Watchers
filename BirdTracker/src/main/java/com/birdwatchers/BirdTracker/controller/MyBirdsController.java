@@ -3,9 +3,11 @@ package com.birdwatchers.BirdTracker.controller;
 import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.data.BirdService;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -23,7 +25,8 @@ public class MyBirdsController {
     private BirdService birdService;
 
     @PostMapping("/add")
-    public String addBirdSighting(@RequestBody Bird bird) {
+    public String addBirdSighting(@RequestBody @Valid Bird bird) {
+
         birdService.saveBird(bird);
         return "New bird sighting has been added!";
     }

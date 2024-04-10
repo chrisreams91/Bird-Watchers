@@ -58,17 +58,33 @@ function EnterMyBirdData() {
         body:JSON.stringify(newBirdEntry)
     }).then(()=>{
         console.log("New bird sighting has been added!")
+        setName('');
+        setLocation('');
+        setDate('');
+        setDescription('');
+        setImageFile(null);
+        setSoundFile(null);
     })
+     .catch((error) => {
+        console.error("Error adding new bird sighting:", error);
+     });
   }
 
-    useEffect(() =>{
-        fetch("http://localhost:8080/mybirds/getAll")
-        .then(res=>res.json())
-        .then((result)=>{
-            setBirds(result);
+  useEffect(() => {
+      const fetchBirds = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/mybirds/getAll");
+          setBirds(response.data);
+        } catch (error) {
+          console.error('Error fetching bird sightings:', error);
         }
-    )
-    },[])
+      };
+
+      fetchBirds();
+      const intervalId = setInterval(fetchBirds, 2000);
+
+      return () => clearInterval(intervalId);
+    }, []);
 
 
 
