@@ -26,7 +26,7 @@ useEffect(() => {
     return (
 
         <div>
-            <th>Fellow Birders!</th>
+            <th>Check Out What Your Fellow Birders Have Seen!</th>
 
           {users.map((user) => (
             <tr key={user.id}>
