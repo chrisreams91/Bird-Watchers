@@ -81,13 +81,11 @@ function BlogData() {
    </div>
        <h2>My Blogs</h2>
     <div>
-            <th>IDs</th>
             <th>Title</th>
             <th>Date</th>
-            <th>Notes</th>
+            <th>Blog</th>
           {blogs.map((blog) => (
             <tr key={blog.id}>
-              <td>Id: {blog.id}</td>
               <td>Title: {blog.title}</td>
               <td>Date: {blog.date}</td>
               <td>Notes: {blog.blogText}</td>

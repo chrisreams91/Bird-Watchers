@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/user")
@@ -29,6 +31,12 @@ public class UserController {
        LoginResponse loginResponse = userService.loginUser(login);
        return ResponseEntity.ok(loginResponse);
    }
+
+    @GetMapping("/getAll")
+    public List<User> getAllUsers() {
+       return userService.getAllUsers();
+    }
+
 
 
 }
