@@ -1,6 +1,7 @@
 import React, { useState,useEffect, useCallback } from "react";
 import { Cloudinary } from 'cloudinary-core';
 import Axios from 'axios'
+import styles from "../mediagallery.css";
 
 
 

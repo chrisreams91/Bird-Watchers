@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import Axios from 'axios'
 import { Cloudinary } from 'cloudinary-core';
 import {Image} from 'cloudinary-react'
+import styles from "../mediagallery.css";
 
 
 function PictureUpload() {
