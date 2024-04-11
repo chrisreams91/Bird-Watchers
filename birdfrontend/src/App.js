@@ -30,6 +30,7 @@ import NorthAmerica8 from "./pages/NorthAmerica8";
 import NorthAmerica9 from "./pages/NorthAmerica9";
 import NorthAmerica10 from "./pages/NorthAmerica10";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
+import MediaGallery from "./pages/mediagallery";
 
 function App() {
     let component
@@ -37,6 +38,9 @@ function App() {
 //    case "/":
 //        component = <Login />
 //        break
+    case "/mediagallery":
+            component = <MediaGallery />
+            break
     case "/home":
         component = <Home />
         break
