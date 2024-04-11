@@ -17,8 +17,7 @@ function EnterMyBirdData() {
   const locName = useRef("");
   const dateName = useRef("");
   const descName = useRef("");
-  const picName = useRef("");
-  const soundName = useRef("");
+
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -28,19 +27,7 @@ function EnterMyBirdData() {
       return `${year}-${month}-${day}`;
     }
 
-  const [imageFile, setImageFile] = useState({});
-  const handleChangeImage = (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    setImageFile(file);
-  }
 
-  const [soundFile, setSoundFile] = useState({});
-  const handleChangeSound = (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    setSoundFile(file);
-  }
 
 
   const handleSubmit = (event) => {
@@ -49,9 +36,7 @@ function EnterMyBirdData() {
     locName.current.value = "";
     dateName.current.value = "";
     descName.current.value = "";
-    picName.current.value = "";
-    soundName.current.value = "";
-    const newBirdEntry = {bird_species,location,date,description,imageFile,soundFile}
+    const newBirdEntry = {bird_species,location,date,description}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
         method:"POST",
@@ -63,8 +48,7 @@ function EnterMyBirdData() {
         setLocation('');
         setDate('');
         setDescription('');
-        setImageFile(null);
-        setSoundFile(null);
+
     })
      .catch((error) => {
         console.error("Error adding new bird sighting:", error);
@@ -123,19 +107,6 @@ function EnterMyBirdData() {
            <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)} required></textarea>
            <br />
            <br />
-                <div className="App">
-                    <h2>Add Image:</h2>
-                    <input type="file" ref={picName} id="image" accept="image/*" onChange={handleChangeImage} />
-                    <img src={imageFile} />
-                </div>
-           <br />
-           <br />
-                <div className="App">
-                    <h2>Add Sound:</h2>
-                    <input type="file" ref={soundName} id="sound" accept="sound/*" onChange={handleChangeSound} />
-                    <img src={soundFile} />
-                </div>
-           <br />
            <br />
           <button type="submit">Submit Findings</button>
      </form>
@@ -150,8 +121,6 @@ function EnterMyBirdData() {
             <th>Location Seen</th>
             <th>Date Seen</th>
             <th>Field Notes</th>
-            <th>Photo</th>
-            <th>Sound File</th>
             <th>Edit Bird</th>
             <th>Delete Bird</th>
         </tr>
@@ -164,16 +133,6 @@ function EnterMyBirdData() {
               <td>{bird.location}</td>
               <td>{bird.date}</td>
               <td>{bird.description}</td>
-              <td>
-                    <div>
-                       <div>
-                          <br/>
-                          <br/>
-                          <img src={imageFile} width={200} height={200}></img>
-                       </div>
-                    </div>
-              </td>
-              <td> <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio> </td>
               <td> Edit Button Goes here</td>
               <td> Delete button goes here</td>
             </tr>

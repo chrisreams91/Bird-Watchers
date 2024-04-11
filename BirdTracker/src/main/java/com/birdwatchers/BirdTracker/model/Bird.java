@@ -36,11 +36,6 @@ import org.antlr.v4.runtime.misc.NotNull;
         @Size(min = 3, max = 200)
         public String description;
 
-        @Column(name="photo")
-        public String photo;
-
-        @Column(name="sound")
-        public String sound;
 
         public Bird() {
         }
@@ -87,19 +82,4 @@ import org.antlr.v4.runtime.misc.NotNull;
             this.description = description;
         }
 
-        public String getPhoto() {
-            return photo;
-        }
-
-        public void setPhoto(String photo) {
-            this.photo = photo;
-        }
-
-        public String getSound() {
-            return sound;
-        }
-
-        public void setSound(String sound) {
-            this.sound = sound;
-        }
     }
