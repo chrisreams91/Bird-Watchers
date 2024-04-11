@@ -90,7 +90,7 @@ function Register() {
           onChange={(event) => {
             setEmail(event.target.value);
           }}
-          
+
           />
  
         </div>
@@ -103,7 +103,7 @@ function Register() {
             onChange={(event) => {
               setPassword(event.target.value);
             }}
-            
+
             />
           </div>
 

@@ -15,7 +15,7 @@ export default function Navbar() {
                 <a href="/otherbirders">Birders</a>
             </li>
             <li>
-                <a href="/search">Search Community Birds</a>
+                <a href="/search">Search Community Sightings</a>
             </li>
             <li>
                 <a href="/blog">Blog Postings</a>

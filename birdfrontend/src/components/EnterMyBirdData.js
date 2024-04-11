@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect, useRef } from 'react';
-import MP3Player from "./MP3Player";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import styles from '../mybirds.css'
@@ -10,7 +9,7 @@ function EnterMyBirdData() {
 
   const[bird_species,setName]=useState('')
   const[location,setLocation]=useState('')
-  const[date,setDate]=useState('')
+  const[date,setDate]=useState(getCurrentDate())
   const[description, setDescription]=useState('')
   const[birds, setBirds]=useState([])
   const { id } = useParams();
@@ -21,6 +20,13 @@ function EnterMyBirdData() {
   const picName = useRef("");
   const soundName = useRef("");
 
+  function getCurrentDate() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
 
   const [imageFile, setImageFile] = useState({});
   const handleChangeImage = (e) => {
@@ -38,11 +44,6 @@ function EnterMyBirdData() {
 
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-  };
-
-
-  const handleClick=(event)=>{
     event.preventDefault()
     birdName.current.value = "";
     locName.current.value = "";
@@ -107,19 +108,19 @@ function EnterMyBirdData() {
           <h2>Add A New Bird Sighting!</h2>
           <br />
           <label htmlFor="bird_species">Bird Name:</label>
-          <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
+          <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
           <br />
           <br />
           <label htmlFor="location">Location:</label>
-          <input type="text" ref={locName} id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
+          <input type="text" ref={locName} id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} required/>
           <br />
           <br />
           <label htmlFor="date">Date Seen:</label>
-          <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
           <br />
           <br />
            <label htmlFor="description">Field Notes:</label>
-           <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
+           <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)} required></textarea>
            <br />
            <br />
                 <div className="App">
@@ -136,7 +137,7 @@ function EnterMyBirdData() {
                 </div>
            <br />
            <br />
-          <button type="submit" onClick={handleClick}>Submit Findings</button>
+          <button type="submit">Submit Findings</button>
      </form>
    </div>
    <div className="bird-entries">
