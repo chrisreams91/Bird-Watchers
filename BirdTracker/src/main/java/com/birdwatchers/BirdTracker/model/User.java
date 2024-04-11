@@ -2,6 +2,7 @@ package com.birdwatchers.BirdTracker.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Table(name="user")
@@ -17,6 +18,7 @@ public class User {
 
     @Column(name="username")
     @NotBlank
+    @NotNull
     @Size(min = 3, max = 20)
     private String username;
 
@@ -35,11 +37,13 @@ public class User {
 
     @Column(name="password")
     @NotBlank
+    @NotNull
     @Size(min = 5, max = 40)
     private String password;
 
     public User() {
     }
+
 
     public int getId() {
         return id;

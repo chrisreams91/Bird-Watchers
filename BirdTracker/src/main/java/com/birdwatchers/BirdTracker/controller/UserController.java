@@ -37,6 +37,6 @@ public class UserController {
        return userService.getAllUsers();
     }
 
-
+    //need to add getmapping get by id, deletemapping delete by id, and putmapping get by id
 
 }

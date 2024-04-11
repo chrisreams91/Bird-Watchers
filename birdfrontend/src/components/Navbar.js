@@ -20,6 +20,9 @@ export default function Navbar() {
             <li>
                 <a href="/blog">Blog Postings</a>
             </li>
+            <li>
+                <a href="/mediagallery">Media Gallery</a>
+            </li>
         </ul>
     </nav>
     )
