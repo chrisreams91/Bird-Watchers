@@ -3,8 +3,6 @@ import com.birdwatchers.BirdTracker.model.Bird;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import java.util.List;
 
 
@@ -43,9 +41,21 @@ public class BirdServiceImpl implements BirdService {
     }
 
     @Override
-    public Bird updateBird(int id, Bird bird) {
+    public Bird updateBird() {
         return null;
     }
 
+    @Override
+    public Bird updateBird(int id, Bird bird) {
+        birdRepository.findById(id).get();
+        bird.setId(bird.getId());
+        bird.setBird_species(bird.getBird_species());
+        bird.setDate(bird.getDate());
+        bird.setLocation(bird.getLocation());
+        bird.setDescription(bird.getDescription());
+        bird.setPhoto(bird.getPhoto());
+        bird.setSound(bird.getSound());
+        return birdRepository.save(bird);
+    }
 
 }

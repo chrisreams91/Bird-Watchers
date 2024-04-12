@@ -17,5 +17,7 @@ public interface BlogService {
 
     Blog getBlogById(int id);
 
+    Blog updateBlog();
 
+    Blog updateBlog(int id, Blog blog);
 }

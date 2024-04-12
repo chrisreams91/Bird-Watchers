@@ -16,6 +16,8 @@ public interface BirdService {
 
     Bird getBirdById(int id);
 
+    Bird updateBird();
+
     Bird updateBird(int id, Bird bird);
 
 

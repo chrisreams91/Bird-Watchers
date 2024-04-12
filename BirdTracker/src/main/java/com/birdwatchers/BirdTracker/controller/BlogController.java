@@ -1,7 +1,7 @@
 package com.birdwatchers.BirdTracker.controller;
-
 import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.data.BlogService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class BlogController {
 
 
     @PostMapping("/add")
-    public String addNewPost(@RequestBody Blog blog) {
+    public String addNewPost(@RequestBody @Valid Blog blog) {
         blogService.saveBlog(blog);
         return "New post has been added!";
     }
@@ -44,6 +44,12 @@ public class BlogController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/add/{id}")
+    public ResponseEntity<Blog> updateBlog(@PathVariable int id, @RequestBody Blog blog){
+        blog = blogService.updateBlog(id, blog);
+        return ResponseEntity.ok(blog);
     }
 
 

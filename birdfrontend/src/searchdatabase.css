@@ -1,0 +1,43 @@
+
+.container{
+    display: table;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.container table {
+    width: 180%;
+    border-collapse: collapse;
+    background: linear-gradient(to bottom right, #ffffff 0%, #ffff66 100%);
+
+}
+
+.container tr:hover {
+    background-color: #fff;
+}
+
+.container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 2px solid;
+    border-radius: 7px;
+}
+
+.container th {
+    padding: 20px;
+    border: 1px solid #ddd;
+    font-size: 20px;
+}
+
+.container td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+

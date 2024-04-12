@@ -2,6 +2,8 @@ package com.birdwatchers.BirdTracker.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.antlr.v4.runtime.misc.NotNull;
 
     @Table(name="bird")
@@ -12,24 +14,33 @@ import org.antlr.v4.runtime.misc.NotNull;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
-        @NotNull
+
         @Column(name="bird_species")
+        @NotBlank
+        @Size(min = 3, max = 40)
         public String bird_species;
 
-        @NotNull
+
         @Column(name="location")
+        @NotBlank
+        @Size(min = 3, max = 100)
         public String location;
 
-        @NotNull
+
         @Column(name="date")
+        @NotBlank
         public String date;
 
         @Column(name="description")
+        @NotBlank
+        @Size(min = 3, max = 200)
         public String description;
 
         @Column(name="photo")
         public String photo;
-        //edit this and the getters/setters to correctly work with photo (use path???)
+
+        @Column(name="sound")
+        public String sound;
 
         public Bird() {
         }
@@ -84,10 +95,11 @@ import org.antlr.v4.runtime.misc.NotNull;
             this.photo = photo;
         }
 
-
-        public void set(int i, Bird newBird) {
+        public String getSound() {
+            return sound;
         }
 
-        public void addAttribute(String newBird, Bird newBird1) {
+        public void setSound(String sound) {
+            this.sound = sound;
         }
     }

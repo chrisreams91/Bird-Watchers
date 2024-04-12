@@ -1,34 +1,57 @@
 import React from "react";
-import { useState, useEffect } from 'react';
-import MP3Player from "./MP3Player";
+import { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-
+import styles from '../mybirds.css'
 
 
 function EnterMyBirdData() {
 
   const[bird_species,setName]=useState('')
   const[location,setLocation]=useState('')
-  const[date,setDate]=useState('')
+  const[date,setDate]=useState(getCurrentDate())
   const[description, setDescription]=useState('')
   const[birds, setBirds]=useState([])
   const { id } = useParams();
+  const birdName = useRef("");
+  const locName = useRef("");
+  const dateName = useRef("");
+  const descName = useRef("");
+  const picName = useRef("");
+  const soundName = useRef("");
 
+  function getCurrentDate() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
 
-  const [file, setFile] = useState();
-          function handleChange(e) {
-              console.log(e.target.files);
-              setFile(URL.createObjectURL(e.target.files[0]));
-          }
+  const [imageFile, setImageFile] = useState({});
+  const handleChangeImage = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setImageFile(file);
+  }
+
+  const [soundFile, setSoundFile] = useState({});
+  const handleChangeSound = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    setSoundFile(file);
+  }
+
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-  };
-
-  const handleClick=(event)=>{
     event.preventDefault()
-    const newBirdEntry = {bird_species,location,date,description,file}
+    birdName.current.value = "";
+    locName.current.value = "";
+    dateName.current.value = "";
+    descName.current.value = "";
+    picName.current.value = "";
+    soundName.current.value = "";
+    const newBirdEntry = {bird_species,location,date,description,imageFile,soundFile}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
         method:"POST",
@@ -36,17 +59,33 @@ function EnterMyBirdData() {
         body:JSON.stringify(newBirdEntry)
     }).then(()=>{
         console.log("New bird sighting has been added!")
+        setName('');
+        setLocation('');
+        setDate('');
+        setDescription('');
+        setImageFile(null);
+        setSoundFile(null);
     })
+     .catch((error) => {
+        console.error("Error adding new bird sighting:", error);
+     });
   }
 
-    useEffect(() =>{
-        fetch("http://localhost:8080/mybirds/getAll")
-        .then(res=>res.json())
-        .then((result)=>{
-            setBirds(result);
+  useEffect(() => {
+      const fetchBirds = async () => {
+        try {
+          const response = await axios.get("http://localhost:8080/mybirds/getAll");
+          setBirds(response.data);
+        } catch (error) {
+          console.error('Error fetching bird sightings:', error);
         }
-    )
-    },[])
+      };
+
+      fetchBirds();
+      const intervalId = setInterval(fetchBirds, 2000);
+
+      return () => clearInterval(intervalId);
+    }, []);
 
 
 
@@ -62,45 +101,50 @@ function EnterMyBirdData() {
 
 
 
-
   return (
-   <div>
-    <div>
-      <form onSubmit={handleSubmit}>
-        <br />
+   <div className="bird-data-container">
+    <div className="bird-sighting-form">
+      <form id="new-bird-sighting" onSubmit={handleSubmit}>
+          <h2>Add A New Bird Sighting!</h2>
+          <br />
           <label htmlFor="bird_species">Bird Name:</label>
-          <input type="text" id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} />
+          <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
           <br />
           <br />
           <label htmlFor="location">Location:</label>
-          <input type="text" id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} />
+          <input type="text" ref={locName} id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} required/>
           <br />
           <br />
           <label htmlFor="date">Date Seen:</label>
-          <input type="date" id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} />
+          <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
           <br />
           <br />
            <label htmlFor="description">Field Notes:</label>
-           <textarea id="description" name="description" value={description} onChange={(event)=>setDescription(event.target.value)}></textarea>
+           <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)} required></textarea>
            <br />
            <br />
                 <div className="App">
                     <h2>Add Image:</h2>
-                    <input type="file" onChange={handleChange} />
-                    <img src={file} />
+                    <input type="file" ref={picName} id="image" accept="image/*" onChange={handleChangeImage} />
+                    <img src={imageFile} />
                 </div>
            <br />
            <br />
                 <div className="App">
                     <h2>Add Sound:</h2>
+                    <input type="file" ref={soundName} id="sound" accept="sound/*" onChange={handleChangeSound} />
+                    <img src={soundFile} />
                 </div>
            <br />
            <br />
-          <button type="submit" onClick={handleClick}>Submit Findings</button>
+          <button type="submit">Submit Findings</button>
      </form>
    </div>
+   <div className="bird-entries">
        <h2>My Entries</h2>
-    <div>
+    <table>
+      <thead>
+        <tr>
             <th>IDs</th>
             <th>Bird Species</th>
             <th>Location Seen</th>
@@ -110,21 +154,34 @@ function EnterMyBirdData() {
             <th>Sound File</th>
             <th>Edit Bird</th>
             <th>Delete Bird</th>
+        </tr>
+      </thead>
+      <tbody>
           {birds.map((bird) => (
             <tr key={bird.id}>
-              <td>Id: {bird.id}</td>
-              <td>Name: {bird.bird_species}</td>
-              <td>Location: {bird.location}</td>
-              <td>Date: {bird.date}</td>
-              <td>Field Notes: {bird.description}</td>
-              <td>Photo: {bird.photo}</td>
-              <td> <MP3Player/> </td>
-              <button onClick="updateBird()">Update</button>
+              <td>{bird.id}</td>
+              <td>{bird.bird_species}</td>
+              <td>{bird.location}</td>
+              <td>{bird.date}</td>
+              <td>{bird.description}</td>
+              <td>
+                    <div>
+                       <div>
+                          <br/>
+                          <br/>
+                          <img src={imageFile} width={200} height={200}></img>
+                       </div>
+                    </div>
+              </td>
+              <td> <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio> </td>
+              <td> Edit Button Goes here</td>
               <td> Delete button goes here</td>
             </tr>
           ))}
-        </div>
-      </div>
+      </tbody>
+    </table>
+    </div>
+    </div>
   )
 }
 
