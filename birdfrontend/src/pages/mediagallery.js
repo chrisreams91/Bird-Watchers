@@ -10,7 +10,6 @@ function MediaGallery() {
 
     <div>
     <h1>We Invite You To Share Your Exceptional Pictures And Sound Clips From The Field Here!</h1>
-    <h2>*all uploads must be approved before they appear on the page</h2>
     <SoundUpload />
     <PictureUpload />
     </div>
