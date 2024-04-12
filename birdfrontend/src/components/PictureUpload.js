@@ -4,9 +4,24 @@ import styles from "../mediagallery.css";
 import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
 import { storage } from "../firebase";
 import { v4 } from "uuid";
+import { deleteObject } from "firebase/storage";
 
 
 function PictureUpload() {
+
+    const deleteImage = (url) => {
+        if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
+          const imageRef = ref(storage, url);
+          deleteObject(imageRef)
+            .then(() => {
+              console.log("Sound deleted successfully!");
+              setImageUrls((prev) => prev.filter((prevUrl) => prevUrl !== url));
+            })
+            .catch((error) => {
+              console.error("Error deleting sound:", error);
+            });
+        }
+      };
 
     const [imageUpload, setImageUpload] = useState(null);
       const [imageUrls, setImageUrls] = useState([]);
@@ -22,7 +37,7 @@ function PictureUpload() {
         });
       };
 
-    const [fetchedUrls, setFetchedUrls] = useState(false);
+const [fetchedUrls, setFetchedUrls] = useState(false);
 
     useEffect(() => {
       if (!fetchedUrls) {
@@ -48,9 +63,14 @@ function PictureUpload() {
         }}
       />
       <button onClick={uploadFile}> Upload Image</button>
-      {imageUrls.map((url) => {
-        return <img src={url} />;
-      })}
+            {imageUrls.map((url) => {
+              return (
+                <div key={url}>  {/* Added key prop for each image element */}
+                  <img src={url} />
+                  <button onClick={() => deleteImage(url)}>Delete</button>
+                </div>
+              );
+            })}
       </div>
     )
 }

@@ -4,12 +4,27 @@ import styles from "../mediagallery.css";
 import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
 import { storage } from "../firebase";
 import { v4 } from "uuid";
+import { deleteObject } from "firebase/storage";
 
 
 function SoundUpload() {
 
+const deleteSound = (url) => {
+    if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
+      const soundRef = ref(storage, url);
+      deleteObject(soundRef)
+        .then(() => {
+          console.log("Sound deleted successfully!");
+          setSoundUrls((prev) => prev.filter((prevUrl) => prevUrl !== url));
+        })
+        .catch((error) => {
+          console.error("Error deleting sound:", error);
+        });
+    }
+  };
+
     const [soundUpload, setSoundUpload] = useState(null);
-      const [soundUrls, setSoundUrls] = useState([]);
+    const [soundUrls, setSoundUrls] = useState([]);
 
       const soundListRef = ref(storage, "sounds/");
       const uploadFile = () => {
@@ -42,13 +57,16 @@ function SoundUpload() {
                 }}
               />
               <button onClick={uploadFile}> Upload Sound</button>
-              {soundUrls.map((url) => {
-                return (
-                  <audio src={url} controls>
-                    Your browser does not support the audio element.
-                  </audio>
-                );
-              })}
+             {soundUrls.map((url) => {
+               return (
+                 <div key={url}>
+                   <audio src={url} controls>
+                   </audio>
+
+                   <button onClick={() => deleteSound(url)}>Delete</button>
+                 </div>
+               );
+             })}
         </div>
 
     )
