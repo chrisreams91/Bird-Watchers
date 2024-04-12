@@ -65,7 +65,7 @@ const [fetchedUrls, setFetchedUrls] = useState(false);
       <button onClick={uploadFile}> Upload Image</button>
             {imageUrls.map((url) => {
               return (
-                <div key={url}>  {/* Added key prop for each image element */}
+                <div key={url}> 
                   <img src={url} />
                   <button onClick={() => deleteImage(url)}>Delete</button>
                 </div>
