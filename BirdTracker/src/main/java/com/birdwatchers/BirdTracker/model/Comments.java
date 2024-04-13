@@ -50,4 +50,5 @@ public class Comments {
     public void setCommentText(String commentText) {
         this.commentText = commentText;
     }
+
 }
