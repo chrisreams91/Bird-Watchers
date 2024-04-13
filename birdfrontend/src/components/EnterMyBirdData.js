@@ -102,10 +102,10 @@ function EnterMyBirdData() {
 
 
   return (
-   <div className="bird-data-container">
-    <div className="bird-sighting-form">
+   <div>
+    <div className="container">
       <form id="new-bird-sighting" onSubmit={handleSubmit}>
-          <h2>Add A New Bird Sighting!</h2>
+          <h2>Upload BirdEntry</h2>
           <br />
           <label htmlFor="bird_species">Bird Name:</label>
           <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
@@ -124,14 +124,14 @@ function EnterMyBirdData() {
            <br />
            <br />
                 <div className="App">
-                    <h2>Add Image:</h2>
+                    <h2>Add Image</h2>
                     <input type="file" ref={picName} id="image" accept="image/*" onChange={handleChangeImage} />
                     <img src={imageFile} />
                 </div>
            <br />
            <br />
                 <div className="App">
-                    <h2>Add Sound:</h2>
+                    <h2>Add Audio</h2>
                     <input type="file" ref={soundName} id="sound" accept="sound/*" onChange={handleChangeSound} />
                     <img src={soundFile} />
                 </div>
@@ -140,9 +140,10 @@ function EnterMyBirdData() {
           <button type="submit">Submit Findings</button>
      </form>
    </div>
-   <div className="bird-entries">
+   <div>
        <h2>My Entries</h2>
     <table>
+    <div>
       <thead>
         <tr>
             <th>IDs</th>
@@ -156,8 +157,10 @@ function EnterMyBirdData() {
             <th>Delete Bird</th>
         </tr>
       </thead>
+      </div>
       <tbody>
           {birds.map((bird) => (
+          <div className="text">
             <tr key={bird.id}>
               <td>{bird.id}</td>
               <td>{bird.bird_species}</td>
@@ -177,6 +180,7 @@ function EnterMyBirdData() {
               <td> Edit Button Goes here</td>
               <td> Delete button goes here</td>
             </tr>
+            </div>
           ))}
       </tbody>
     </table>
