@@ -66,7 +66,7 @@ const [fetchedUrls, setFetchedUrls] = useState(false);
             {imageUrls.map((url) => {
               return (
                 <div key={url}>
-                  <img src={url} />
+                  <img src={url} length={250} width={250}/>
                   <button onClick={() => deleteImage(url)}>Delete</button>
                 </div>
               );
