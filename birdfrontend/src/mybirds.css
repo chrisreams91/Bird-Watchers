@@ -1,44 +1,48 @@
-.bird-entries table {
-  width: 100%;
-  border-collapse: collapse;
-  background: linear-gradient(to bottom right, #ffffff 0%, #ffff66 100%);
+.entry {
+    background: #669999;
+    font-size:30px;
+    text-align: center;
+    width: 400px;
+    height: 120px;
+    margin-left: 0px;
+    border: 10px solid #476b6b;
+    border-radius: 40px;
+    color: #ffffff;
 }
 
-.bird-entries th,
-.bird-entries td {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
+.myEntry {
+    background: #669999;
+    font-size:20px;
+    text-align: center;
+    width: 400px;
+    height: 80px;
+    margin-left: 10px;
+    border: 10px solid #476b6b;
+    border-radius: 40px;
+    color: #ffffff;
 }
 
-.bird-entries th {
-  text-align: center;
+.entryText {
+  font-size: 18px;
+    border-radius: 25px;
+    border: 6px solid #004d4d;
+    background: #25979c;
+    padding-left: 25px;
+    width: 1490px;
+    text-align: left;
+    height: 280px;
+    color: #ffffff;
+    margin-left: -6px;
 }
 
-.bird-entries {
-  width: 100%;
-  text-align: center;
+.entryButtons {
+    border-radius: 50%;
+    height: 80px;
+    margin-left: 200px;
+    margin-top: -100px;
 }
 
-.bird-data-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 400%;
-  max-width: 1850px;
-  margin-top: 10px;
-  margin: 0 auto;
-}
-
-.bird-sighting-form {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  width: 40%;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  margin-top: 15px;
-}
-
-.bird-sighting-form button[type="submit"] {
-  cursor: pointer;
+.buttonLevel {
+    margin-top: 40px;
 }
 
