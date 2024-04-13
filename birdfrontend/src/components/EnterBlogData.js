@@ -24,9 +24,6 @@ function BlogData() {
   const handleSubmit = (event) => {
     event.preventDefault()
         const currentDate = getCurrentDate();
-        titleName.current.value = "";
-        dateName.current.value = "";
-        textName.current.value = "";
         const newBlogEntry = {title, date: currentDate, blogText}
         console.log(newBlogEntry)
         fetch("http://localhost:8080/blogposts/add",{

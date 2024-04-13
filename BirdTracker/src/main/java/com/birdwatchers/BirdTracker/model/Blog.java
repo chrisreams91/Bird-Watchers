@@ -6,9 +6,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Table(name="blog")
 @Entity
 public class Blog {
+
+    @OneToMany(mappedBy = "blog")
+    private List<Comments> comments = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,5 +69,13 @@ public class Blog {
 
     public void setBlogText(String blogText) {
         this.blogText = blogText;
+    }
+
+    public List<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
     }
 }
