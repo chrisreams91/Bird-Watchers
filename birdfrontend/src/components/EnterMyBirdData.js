@@ -105,7 +105,9 @@ function EnterMyBirdData() {
    <div>
     <div className="container">
       <form id="new-bird-sighting" onSubmit={handleSubmit}>
-          <h2>Upload BirdEntry</h2>
+      <div className="entry">
+          <h2>BirdEntry</h2>
+          </div>
           <br />
           <label htmlFor="bird_species">Bird Name:</label>
           <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
@@ -140,46 +142,53 @@ function EnterMyBirdData() {
           <button type="submit">Submit Findings</button>
      </form>
    </div>
-   <div>
+   <div className="myEntry">
        <h2>My Entries</h2>
     <table>
-    <div>
-      <thead>
-        <tr>
-            <th>IDs</th>
-            <th>Bird Species</th>
-            <th>Location Seen</th>
-            <th>Date Seen</th>
-            <th>Field Notes</th>
-            <th>Photo</th>
-            <th>Sound File</th>
-            <th>Edit Bird</th>
-            <th>Delete Bird</th>
-        </tr>
-      </thead>
-      </div>
       <tbody>
           {birds.map((bird) => (
-          <div className="text">
-            <tr key={bird.id}>
-              <td>{bird.id}</td>
-              <td>{bird.bird_species}</td>
-              <td>{bird.location}</td>
-              <td>{bird.date}</td>
-              <td>{bird.description}</td>
-              <td>
-                    <div>
-                       <div>
-                          <br/>
-                          <br/>
-                          <img src={imageFile} width={200} height={200}></img>
-                       </div>
+          <div className="entryText">
+          <div className="container">
+            <div className="img">
+               <img src={imageFile} width={250} height={250}></img>
+               <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio>
+            </div>
+            <p>
+                <h2 className="title">{bird.bird_species}</h2>
+                    <div className="list">
+                    <div className="column">
+                         <li>ID: {bird.id}</li>
+                         <li>Location: {bird.location}</li>
+                         <li>Date Seen: {bird.date}</li>
+                         <li>Description: {bird.description}</li>
                     </div>
-              </td>
-              <td> <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio> </td>
-              <td> Edit Button Goes here</td>
-              <td> Delete button goes here</td>
-            </tr>
+                    </div>
+                    <div>
+                    <div>
+                    <td>
+                        <button type="button" className="entryButtons">
+                        <div className="buttonLevel">
+                            <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
+                        </div>
+                        </button>
+                        <div>
+                        <td>
+                        <div>
+                        <td>
+                        </td>
+                        </div>
+                        </td>
+                        </div>
+                        <button type="button" className="entryButtons">
+                        <div className="buttonLevel">
+                            <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/delete-1476282-1248958.png?f=webp" width={50} height={50}></img>
+                        </div>
+                        </button>
+                    </td>
+                    </div>
+                    </div>
+            </p>
+            </div>
             </div>
           ))}
       </tbody>
