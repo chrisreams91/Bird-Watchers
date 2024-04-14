@@ -4,8 +4,54 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import styles from '../mybirds.css'
 
+import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
+import { storage } from "../firebase";
+import { v4 } from "uuid";
+import { deleteObject } from "firebase/storage";
+
 
 function EnterMyBirdData() {
+          const deleteImage = (url) => {
+              if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
+                const imageRef = ref(storage, url);
+                deleteObject(imageRef)
+                  .then(() => {
+                    console.log("Sound deleted successfully!");
+                    setImageUrls((prev) => prev.filter((prevUrl) => prevUrl !== url));
+                  })
+                  .catch((error) => {
+                    console.error("Error deleting sound:", error);
+                  });
+              }
+            };
+
+          const [imageUpload, setImageUpload] = useState(null);
+            const [imageUrls, setImageUrls] = useState([]);
+
+            const imagesListRef = ref(storage, "images/");
+            const uploadFile = () => {
+              if (imageUpload == null) return;
+              const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+              uploadBytes(imageRef, imageUpload).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                  setImageUrls((prev) => [...prev, url]);
+                });
+              });
+            };
+
+      const [fetchedUrls, setFetchedUrls] = useState(false);
+
+          useEffect(() => {
+            if (!fetchedUrls) {
+              listAll(imagesListRef).then((response) => {
+                const urls = response.items.map((item) => getDownloadURL(item));
+                Promise.all(urls).then((imageUrls) => {
+                  setImageUrls(imageUrls);
+                  setFetchedUrls(true);
+                });
+              });
+            }
+          }, [fetchedUrls]);
 
   const[bird_species,setName]=useState('')
   const[location,setLocation]=useState('')
@@ -28,12 +74,7 @@ function EnterMyBirdData() {
       return `${year}-${month}-${day}`;
     }
 
-  const [imageFile, setImageFile] = useState({});
-  const handleChangeImage = (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    setImageFile(file);
-  }
+
 
   const [soundFile, setSoundFile] = useState({});
   const handleChangeSound = (e) => {
@@ -41,6 +82,13 @@ function EnterMyBirdData() {
     console.log(file);
     setSoundFile(file);
   }
+
+    const [imageFile, setImageFile] = useState({});
+    const handleChangeImage = (e) => {
+      const file = e.target.files[0];
+      console.log(file);
+      setImageFile(file);
+    }
 
 
   const handleSubmit = (event) => {
@@ -51,7 +99,7 @@ function EnterMyBirdData() {
     descName.current.value = "";
     picName.current.value = "";
     soundName.current.value = "";
-    const newBirdEntry = {bird_species,location,date,description,imageFile,soundFile}
+    const newBirdEntry = {bird_species,location,date,description,soundFile}
     console.log(newBirdEntry)
     fetch("http://localhost:8080/mybirds/add",{
         method:"POST",
@@ -100,6 +148,9 @@ function EnterMyBirdData() {
 
 
 
+
+
+
   return (
    <div>
     <div className="container">
@@ -107,9 +158,10 @@ function EnterMyBirdData() {
       <div className="entry">
           <h2>BirdEntry</h2>
           </div>
+          <div className="innerText">
           <br />
           <label htmlFor="bird_species">Bird Name:</label>
-          <input type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
+          <input className="textBox" type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
           <br />
           <br />
           <label htmlFor="location">Location:</label>
@@ -125,9 +177,14 @@ function EnterMyBirdData() {
            <br />
            <br />
                 <div className="App">
-                    <h2>Add Image</h2>
-                    <input type="file" ref={picName} id="image" accept="image/*" onChange={handleChangeImage} />
-                    <img src={imageFile} />
+        <h2>Choose a Picture</h2>
+        <input
+        type="file"
+        ref={picName}
+        onChange={(event) => {
+          setImageUpload(event.target.files[0]);
+        }}
+      />
                 </div>
            <br />
            <br />
@@ -139,6 +196,7 @@ function EnterMyBirdData() {
            <br />
            <br />
           <button type="submit">Submit Findings</button>
+          </div>
      </form>
    </div>
    <div className="myEntry">
@@ -146,13 +204,18 @@ function EnterMyBirdData() {
     <table>
       <tbody>
           {birds.map((bird) => (
-          <div key={bird.id} className="entryText">
+          <div>
           <div className="entryText">
           <div className="container">
+            {imageUrls.map((url) => {
+            return (
             <div className="img">
-               <img src={imageFile} width={250} height={250}></img>
+               <img src={url} width={250} height={250}></img>
                <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio>
-            </div>
+              </div>
+               )
+               })}
+
             <p>
                 <h2 className="title">{bird.bird_species}</h2>
                     <div className="list">
