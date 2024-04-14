@@ -37,13 +37,13 @@ function BlogData() {
         })
 
   }
-            const loadBlogs = async () => {
-              const result = await axios.get(`http://localhost:8080/blogs/add/${id}`);
-              setBlogs(result.data);
-            };
+        /*const loadBlogs = async () => {
+          const result = await axios.get(`http://localhost:8080/blogposts/add/${id}`);
+          setBlogs(result.data);
+        };*/
 
     const deleteBlogs = async (id) => {
-     await axios.delete(`http://localhost:8080/blog/add/${id}`);
+     await axios.delete(`http://localhost:8080/blogposts/delete/${id}`);
     };
 
    useEffect(() => {
@@ -92,11 +92,11 @@ function BlogData() {
               <td>Title: {blog.title}</td>
               <td>Date: {blog.date}</td>
               <td>Notes: {blog.blogText}</td>
-                                                <button type="button" className="entryButtons" onClick={() => deleteBlogs(blog.id)}>
-                                                <div className="buttonLevel">
-                                                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/delete-1476282-1248958.png?f=webp" width={50} height={50}></img>
-                                                </div>
-                                                </button>
+                <button type="button" className="entryButtons" onClick={() => deleteBlogs(blog.id)}>
+                <div className="buttonLevel">
+                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/delete-1476282-1248958.png?f=webp" width={50} height={50}></img>
+                </div>
+                </button>
             </tr>
           ))}
         </div>
