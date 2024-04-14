@@ -20,9 +20,9 @@ public class Comments {
     @NotNull
     public String date;
 
-    @Column(name="CommentText")
+    @Column(name="comment_text")
     @Size(min = 10, max = 1000)
-    public String commentText;
+    public String comment_text;
 
     public Comments() {
     }
@@ -43,12 +43,11 @@ public class Comments {
         this.date = date;
     }
 
-    public String getCommentText() {
-        return commentText;
+    public String getComment_text() {
+        return comment_text;
     }
 
-    public void setCommentText(String commentText) {
-        this.commentText = commentText;
+    public void setComment_text(String comment_text) {
+        this.comment_text = comment_text;
     }
-
 }
