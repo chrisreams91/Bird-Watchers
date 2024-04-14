@@ -90,13 +90,12 @@ function EnterMyBirdData() {
 
 
     const loadBirds = async () => {
-      const result = await axios.get("http://localhost:8080/mybirds/add/{id}");
+      const result = await axios.get(`http://localhost:8080/mybirds/add/${id}`);
       setBirds(result.data);
     };
 
     const deleteBirds = async (id) => {
-      await axios.delete("http://localhost:8080/mybirds/add/{id}");
-      loadBirds();
+     await axios.delete(`http://localhost:8080/mybirds/add/${id}`);
     };
 
 
@@ -147,6 +146,7 @@ function EnterMyBirdData() {
     <table>
       <tbody>
           {birds.map((bird) => (
+          <div key={bird.id} className="entryText">
           <div className="entryText">
           <div className="container">
             <div className="img">
@@ -179,7 +179,7 @@ function EnterMyBirdData() {
                         </div>
                         </td>
                         </div>
-                        <button type="button" className="entryButtons">
+                        <button type="button" className="entryButtons" onClick={() => deleteBirds(bird.id)}>
                         <div className="buttonLevel">
                             <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/delete-1476282-1248958.png?f=webp" width={50} height={50}></img>
                         </div>
@@ -188,6 +188,7 @@ function EnterMyBirdData() {
                     </div>
                     </div>
             </p>
+            </div>
             </div>
             </div>
           ))}
