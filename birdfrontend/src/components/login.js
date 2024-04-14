@@ -1,6 +1,7 @@
 import {  useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import styles from '../login.css'
 
 
 function Login() {
@@ -46,20 +47,23 @@ function Login() {
       }
 
     return (
-       <div>
+    <div className="loginSection">
+    <div className="loginHeader">
+    <h1>BirdWatchers</h1>
+    </div>
+       <div className="loginText">
             <div class="container">
             <div class="row">
-                <h2>Login</h2>
-             <hr/>
+
              </div>
 
              <div class="row">
              <div class="col-sm-6">
 
             <form>
+        <p>
         <div class="form-group">
-          <label>Email</label>
-          <input type="email"  class="form-control" id="email" placeholder="Enter Name"
+          <input type="email"  className="loginEntry" class="form-control" id="email" placeholder="Enter Name"
 
           value={email}
           onChange={(event) => {
@@ -69,10 +73,10 @@ function Login() {
           />
 
         </div>
+        </p>
 
         <div class="form-group">
-            <label>password</label>
-            <input type="password"  class="form-control" id="password" placeholder="Enter Password"
+            <input type="password"  className="loginEntry" class="form-control" id="password" placeholder="Enter Password"
 
             value={password}
             onChange={(event) => {
@@ -81,13 +85,19 @@ function Login() {
 
             />
           </div>
-                  <button type="submit" class="btn btn-primary" onClick={login} >Login</button>
+          <hr/>
+          <div>
+                  <button type="submit" className="loginButton" class="btn btn-primary" onClick={login} >
+                                  <h2>Login</h2>
+                  </button>
+                  </div>
               </form>
 
             </div>
             </div>
             </div>
 
+     </div>
      </div>
     );
   }

@@ -35,6 +35,19 @@
     margin-left: -6px;
 }
 
+.innerText {
+  font-size: 18px;
+    border-radius: 25px;
+    border: 6px solid #004d4d;
+    background: #25979c;
+    padding-left: 25px;
+    width: 700px;
+    text-align: left;
+    height: 700px;
+    color: #ffffff;
+    margin-left: -6px;
+}
+
 .entryButtons {
     border-radius: 50%;
     height: 80px;
