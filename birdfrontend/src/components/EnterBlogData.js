@@ -12,6 +12,8 @@ function BlogData() {
   const dateName = useRef("");
   const textName = useRef("");
   const [errors, setErrors] = useState({});
+  const commentName = useRef("");
+  const[comment, setComment]=useState('');
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -65,42 +67,88 @@ function BlogData() {
 
   return (
    <div>
-    <div>
+    <div className="loginText">
       <form onSubmit={handleSubmit}>
         <br />
-          <label htmlFor="Title">Title:</label>
-          <input type="text" ref={titleName} id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} required/>
+          <label htmlFor="Title" className="loginEntry">Title</label>
+          <input type="text" className="loginEntry" ref={titleName} id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} required/>
 
           <br />
           <br />
 
-           <label htmlFor="BlogText">Text:</label>
-           <textarea id="blogText" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)} required></textarea>
+           <label htmlFor="BlogText"  className="loginEntry">Blog</label>
+           <textarea id="blogText"  className="loginEntry" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)} required></textarea>
 
            <br />
            <br />
-          <button type="submit">Submit Blog</button>
+          <button type="submit" className="loginButton">Submit Blog</button>
      </form>
    </div>
-       <h2>My Blogs</h2>
-    <div>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Blog</th>
-          {blogs.map((blog) => (
-            <tr key={blog.id}>
-              <td>Title: {blog.title}</td>
-              <td>Date: {blog.date}</td>
-              <td>Notes: {blog.blogText}</td>
-                <button type="button" className="entryButtons" onClick={() => deleteBlogs(blog.id)}>
-                <div className="buttonLevel">
-                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/delete-1476282-1248958.png?f=webp" width={50} height={50}></img>
-                </div>
-                </button>
-            </tr>
-          ))}
-        </div>
-      </div>
+
+         <div className="myEntry">
+             <h2>Blogs</h2>
+          <table>
+            <tbody>
+                {blogs.map((blog) => (
+                <div>
+                <div className="blogText">
+                <div className="container">
+
+                  <div className="img">
+                     <img width={250} height={250}></img>
+                    </div>
+
+                  <p>
+                      <h2 className="title">{blog.title}</h2>
+                          <div className="list">
+                          <div className="column">
+                               <p>{blog.date}</p>
+                               <p>{blog.blogText}</p>
+                               <p>{blog.comment}</p>
+                               <p>
+                               <form onSubmit={handleSubmit}>
+                                       <br />
+                                         <label htmlFor="Comment" className="loginEntry">Comment</label>
+                                         <input type="text" className="loginEntry" ref={commentName} id="comment" name="Comment" value={comment} onChange={(event)=>setComment(event.target.value)} required/>
+                                            <button type="submit" className="loginButton">Submit</button>
+                                         <br />
+                                         </form>
+                               </p>
+                          </div>
+                          </div>
+                          <div>
+                          <div>
+                          <td>
+                              <button type="button" className="entryButtons">
+                              <div className="buttonLevel">
+                                  <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
+                              </div>
+                              </button>
+                              <div>
+                              <td>
+                              <div>
+                              <td>
+                              </td>
+                              </div>
+                              </td>
+                              </div>
+                              <button type="button" className="entryButtons" onClick={() => deleteBlogs(blog.id)}>
+                              <div className="buttonLevel">
+                                  <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/delete-1476282-1248958.png?f=webp" width={50} height={50}></img>
+                              </div>
+                              </button>
+                          </td>
+                          </div>
+                          </div>
+                  </p>
+                  </div>
+                  </div>
+                  </div>
+                ))}
+            </tbody>
+          </table>
+          </div>
+          </div>
   )
 }
 
