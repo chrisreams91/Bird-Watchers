@@ -51,7 +51,7 @@ public class CommentsServiceImpl implements CommentsService{
         commentsRepository.findById(id).get();
         comments.setId(comments.getId());
         comments.setDate(comments.getDate());
-        comments.setCommentText(comments.getCommentText());
+        comments.setComment_text(comments.getComment_text());
         return commentsRepository.save(comments);
     }
 

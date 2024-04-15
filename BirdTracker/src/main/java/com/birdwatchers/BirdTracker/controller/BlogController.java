@@ -37,7 +37,7 @@ public class BlogController {
         return ResponseEntity.ok(blog);
     }
 
-    @DeleteMapping("/add/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteBlog(@PathVariable int id){
         boolean deleted = false;
         deleted = blogService.deleteBlog(id);
