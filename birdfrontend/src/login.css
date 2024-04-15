@@ -1,5 +1,4 @@
 .loginEntry {
-    background: #fffff;
     font-size:20px;
     text-align: left;
     width: 415px;
@@ -7,7 +6,19 @@
     margin-left: 10px;
     border: 0px solid #476b6b;
     border-radius: 10px;
+}
+
+.birdText {
+  font-size: 18px;
+    border-radius: 25px;
+    border: 6px solid #004d4d;
+    background: #25979c;
+    padding-left: 25px;
+    width: 800px;
+    text-align: left;
+    height: 680px;
     color: #ffffff;
+    margin-left: -10px;
 }
 
 .loginText {

@@ -37,9 +37,6 @@
 
 .innerText {
   font-size: 18px;
-    border-radius: 25px;
-    border: 6px solid #004d4d;
-    background: #25979c;
     padding-left: 25px;
     width: 700px;
     text-align: left;
@@ -59,3 +56,15 @@
     margin-top: 40px;
 }
 
+.blogText {
+  font-size: 18px;
+    border-radius: 25px;
+    border: 6px solid #004d4d;
+    background: #25979c;
+    padding-left: 25px;
+    width: 1490px;
+    text-align: left;
+    line-height: 24px;
+    color: #ffffff;
+    margin-left: -6px;
+}

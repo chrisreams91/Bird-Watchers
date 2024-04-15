@@ -153,12 +153,13 @@ function EnterMyBirdData() {
 
   return (
    <div>
+         <div className="entry">
+             <h2>BirdEntry</h2>
+             </div>
     <div className="container">
+    <div className="birdText">
+              <div className="innerText">
       <form id="new-bird-sighting" onSubmit={handleSubmit}>
-      <div className="entry">
-          <h2>BirdEntry</h2>
-          </div>
-          <div className="innerText">
           <br />
           <label htmlFor="bird_species">Bird Name:</label>
           <input className="textBox" type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
@@ -196,8 +197,9 @@ function EnterMyBirdData() {
            <br />
            <br />
           <button type="submit">Submit Findings</button>
-          </div>
      </form>
+     </div>
+     </div>
    </div>
    <div className="myEntry">
        <h2>My Entries</h2>
