@@ -174,7 +174,79 @@ function EnterMyBirdData() {
                     </div>
               </td>
               <td> <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio> </td>
-              <td> Edit Button Goes here</td>
+
+               <title>Update Bird</title>
+
+              <body>
+
+
+                    <div className="bird-sighting-update-form">
+                      <form id="update-bird-sighting" onSubmit={handleSubmit}>
+                      <label for="species">Species:</label>
+                      <input type="text" id="species" name="species" required/><br/><br/>
+
+                      <label for="date">Date:</label>
+                      <input type="date" id="date" name="date" required/><br/><br/>
+
+                      <label for="location">Location:</label>
+                      <input type="text" id="location" name="location" required/><br/><br/>
+
+                      <label for="description">Description:</label><br/>
+                      <textarea id="description" name="description" rows="4" cols="50" required/><textarea/><br/><br/>
+
+
+
+
+                      <input type="hidden" id="birdId" name="birdId"/><br/><br/>
+                      <button type="submit">Submit Findings</button>
+                      </form>
+                      <button type="button" onclick="updateBird()">Update</button>
+
+
+
+
+
+                  <script>
+                      // Function to update bird details
+                      function updateBird() {
+                          // Fetch form data
+                          {birds.map((bird) => (
+                                     <tr key={bird.id}>
+                                       <td>{bird.id}</td>
+                                       <td>{bird.bird_species}</td>
+                                       <td>{bird.location}</td>
+                                       <td>{bird.date}</td>
+                                       <td>{bird.description}</td>
+                                        </tr>
+                          // Create FormData object to send data as multipart/form-data
+                          const formData = new FormData();
+                          formData.append('bird_species', species);
+                          formData.append('date', date);
+                          formData.append('location', location);
+                          formData.append('description', description);
+                          formData.append('photo', photo);
+                          formData.append('sound', sound);
+
+                          // Send update request to backend
+                          fetch(`/updateBird/${birdId}`, {
+                              method: 'POST',
+                              body: formData
+                          })
+                          .then(response => response.json())
+                          .then(data => {
+                              // Handle response
+                              console.log(data);
+                              // Optionally, you can redirect or show a success message here
+                          })
+                          .catch(error => {
+                              console.error('Error:', error);
+                              // Handle errors
+                          });
+                      }
+                  </script>
+              </body>
+
+              <button> Edit </button>
               <td> Delete button goes here</td>
             </tr>
           ))}
