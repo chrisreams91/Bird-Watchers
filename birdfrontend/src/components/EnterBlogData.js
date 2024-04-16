@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
+import { Link, useNavigate, BrowserRouter } from 'react-router-dom';
+import { Routes,Route } from "react-router-dom";
 
 function BlogData() {
 
@@ -14,6 +16,15 @@ function BlogData() {
   const [errors, setErrors] = useState({});
   const commentName = useRef("");
   const[comment, setComment]=useState('');
+  const[data, setData] = useState([]);
+
+  useEffect(()=> {
+    axios.get('http://localhost:3000/blog')
+    .then(res => setData(res.data))
+    .catch(err => console.log(err))
+  }, [])
+
+
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -48,6 +59,15 @@ function BlogData() {
      await axios.delete(`http://localhost:8080/blogposts/delete/${id}`);
     };
 
+    const updateBlogs = item => {
+      axios.put(`http://localhost:8080/blogposts/add/${item.id}`, item)
+        .then(res => {
+          this.setState({items: res.data});
+          this.props.history.push('/items');
+        })
+        .catch(err => console.log(err));
+    }
+
    useEffect(() => {
      const fetchBlogs = async () => {
        try {
@@ -62,6 +82,8 @@ function BlogData() {
      const intervalId = setInterval(fetchBlogs, 2000);
      return () => clearInterval(intervalId);
    }, []);
+
+
 
 
 
@@ -90,7 +112,7 @@ function BlogData() {
           <table>
             <tbody>
                 {blogs.map((blog) => (
-                <div>
+                <div key={blog.id}>
                 <div className="blogText">
                 <div className="container">
 
@@ -105,25 +127,27 @@ function BlogData() {
                                <p>{blog.date}</p>
                                <p>{blog.blogText}</p>
                                <p>{blog.comment}</p>
-                               <p>
-                               <form onSubmit={handleSubmit}>
+
+
                                        <br />
                                          <label htmlFor="Comment" className="loginEntry">Comment</label>
                                          <input type="text" className="loginEntry" ref={commentName} id="comment" name="Comment" value={comment} onChange={(event)=>setComment(event.target.value)} required/>
                                             <button type="submit" className="loginButton">Submit</button>
                                          <br />
-                                         </form>
-                               </p>
+
+
                           </div>
                           </div>
                           <div>
                           <div>
                           <td>
+                          <Link to={`/update/{blog.id}`}>
                               <button type="button" className="entryButtons">
                               <div className="buttonLevel">
                                   <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                               </div>
                               </button>
+                              </Link>
                               <div>
                               <td>
                               <div>
@@ -150,6 +174,7 @@ function BlogData() {
           </div>
           </div>
   )
+
 }
 
 export default BlogData;
