@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
-import { Link, useNavigate, BrowserRouter } from 'react-router-dom';
-import { Routes,Route } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function BlogData() {
 
@@ -59,14 +58,7 @@ function BlogData() {
      await axios.delete(`http://localhost:8080/blogposts/delete/${id}`);
     };
 
-    const updateBlogs = item => {
-      axios.put(`http://localhost:8080/blogposts/add/${item.id}`, item)
-        .then(res => {
-          this.setState({items: res.data});
-          this.props.history.push('/items');
-        })
-        .catch(err => console.log(err));
-    }
+
 
    useEffect(() => {
      const fetchBlogs = async () => {
@@ -124,7 +116,6 @@ function BlogData() {
                       <h2 className="title">{blog.title}</h2>
                           <div className="list">
                           <div className="column">
-                               <p>{blog.date}</p>
                                <p>{blog.blogText}</p>
                                <p>{blog.comment}</p>
 
@@ -141,13 +132,15 @@ function BlogData() {
                           <div>
                           <div>
                           <td>
-                          <Link to={`/update/{blog.id}`}>
+
                               <button type="button" className="entryButtons">
+                              <Link to={`/update/{blog.id}`}>
                               <div className="buttonLevel">
                                   <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                               </div>
-                              </button>
                               </Link>
+                              </button>
+
                               <div>
                               <td>
                               <div>

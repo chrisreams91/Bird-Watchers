@@ -129,17 +129,17 @@ function App() {
     return (
     <div>
 
-        {component}
+
     <div className="App">
      <BrowserRouter>
      <Navbar/>
+     {component}
           <Routes>
               <Route path="/home" element= { <Home/>} />
               <Route path="/register" element= { <Register/>} />
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
               <Route path="/update/:id" element={<Update />} />
-              <Route path="/blog" element={<Blog />} />
          </Routes>
      </BrowserRouter>
     </div>

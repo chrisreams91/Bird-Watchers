@@ -38,24 +38,25 @@ function Update() {
     }
     return (
            <div>
+           <div className="loginText">
            <form onSubmit={handleSubmit}>
-            <div className="loginText">
+
 
                 <br />
                   <label htmlFor="Title" className="loginEntry">Title</label>
-                  <input type="text" className="loginEntry" ref={titleName} id="title" name="Title" value={values.title} onChange={e => setValues({...values, name: e.target.value})} required/>
+                  <input type="text" className="loginEntry" ref={titleName} id="title" name="Title" value={values.title} onChange={e => setValues({...values, title: e.target.value})} required/>
 
                   <br />
                   <br />
 
                    <label htmlFor="BlogText"  className="loginEntry">Blog</label>
-                   <textarea id="blogText"  className="loginEntry" ref={textName} name="BlogText" value={values.blog} onChange={(event)=>setBlogText(event.target.value)} required></textarea>
+                   <textarea id="blogText"  className="loginEntry" ref={textName} name="BlogText" value={values.blog} onChange={e => setValues({...values, blog: e.target.value})} required></textarea>
 
                    <br />
                    <br />
-                  <button className="loginButton">Update Blog</button>
-            </div>
+                  <button type="submit" className="loginButton">Update Blog</button>
             </form>
+            </div>
            </div>
     )
 }
