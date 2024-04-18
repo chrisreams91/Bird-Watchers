@@ -47,8 +47,8 @@ public class User implements UserDetails {
     @Size(min = 5, max = 40)
     private String password;
 
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
+//    @Enumerated(value = EnumType.STRING)
+//    private Role role;
 
     public int getId() {
         return id;
@@ -110,10 +110,16 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return List.of(new SimpleGrantedAuthority(role.name()));
+//    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
+        return null;
+    } //new thing replacing above
 
     public String getPassword() {
         return password;
@@ -123,11 +129,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
 }

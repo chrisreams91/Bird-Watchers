@@ -24,7 +24,7 @@ function Login() {
             navigate('/home');
         } catch (error) {
             setErrorMessage(error.response?.data?.message || 'Login failed');
-            alert("Please enter valid credentials");
+            alert("Please enter valid credentials or register for a new account");
         }
     };
 

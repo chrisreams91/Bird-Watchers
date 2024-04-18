@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                 req->req.requestMatchers("/login/**","/register/**")
                         .permitAll()
-                        .requestMatchers("/admin_only/**").hasAnyAuthority("ADMIN")
+                        //.requestMatchers("/admin_only/**").hasAnyAuthority("ADMIN")
                         .anyRequest()
                         .authenticated()
         ).userDetailsService(userDetailsServiceImpl)
@@ -83,7 +83,7 @@ public class SecurityConfig {
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config); 
+        source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
 
