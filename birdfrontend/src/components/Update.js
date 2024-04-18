@@ -54,7 +54,7 @@ function Update() {
 
                    <br />
                    <br />
-                  <button type="submit" className="loginButton">Update Blog</button>
+                  <button className="loginButton">Update Blog</button>
             </form>
             </div>
            </div>

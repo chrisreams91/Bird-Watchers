@@ -135,11 +135,11 @@ function App() {
      <Navbar/>
      {component}
           <Routes>
-              <Route path="/home" element= { <Home/>} />
-              <Route path="/register" element= { <Register/>} />
-              <Route path="/" element={<Login />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/update/:id" element={<Update />} />
+              <Route path='/home' element= { <Home/>} />
+              <Route path='/register' element= { <Register/>} />
+              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/update/:id' element={<Update />} />
          </Routes>
      </BrowserRouter>
     </div>

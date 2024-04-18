@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function BlogData() {
 
@@ -16,6 +16,7 @@ function BlogData() {
   const commentName = useRef("");
   const[comment, setComment]=useState('');
   const[data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(()=> {
     axios.get('http://localhost:3000/blog')
@@ -134,7 +135,7 @@ function BlogData() {
                           <td>
 
                               <button type="button" className="entryButtons">
-                              <Link to={`/update/{blog.id}`}>
+                              <Link to={`/update/${blog.id}`}>
                               <div className="buttonLevel">
                                   <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                               </div>
