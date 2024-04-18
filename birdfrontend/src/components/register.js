@@ -3,7 +3,18 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  
+
+    const axiosWithAuth = () => {
+      //const token = localStorage.getItem("jwtToken");
+      return axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          "Content-Type": "application/json",
+          //"Authorization": `Bearer ${token}`
+        }
+      });
+    };
+
     const [username, setUsername] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -25,31 +36,33 @@ function Register() {
          emailname.current.value = "";
          passwordname.current.value = "";
         try {
-          await axios.post("http://localhost:8080/user/save", {
-          username: username,
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          password: password,
-          });
-          alert("User Registered Successfully!");
-           navigate('/home');
-        } catch (err) {
-          alert(err);
-        }
-      }
-  
+                const token = "your_bearer_token";
+                const axiosInstance = axiosWithAuth(token);
+                await axiosInstance.post("/register", {
+                    username,
+                    firstname,
+                    lastname,
+                    email,
+                    password
+                });
+                alert("User Registered Successfully!");
+                navigate('/home');
+            } catch (err) {
+                alert("Failed to register user: " + err.message);
+            }
+        };
+
     return (
     <div>
     <div class="container mt-4" >
     <div class="card">
             <h1>User Registration</h1>
-    
+
     <form>
         <div class="form-group">
           <label>User name</label>
           <input type="text" ref={usernamename} class="form-control" id="username" placeholder="Enter Username"
-          
+
           value={username}
           onChange={(event) => {
             setUsername(event.target.value);
@@ -85,20 +98,20 @@ function Register() {
         <div class="form-group">
           <label>Email</label>
           <input type="email" ref={emailname} class="form-control" id="email" placeholder="Enter Email"
-          
+
           value={email}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
 
           />
- 
+
         </div>
 
         <div class="form-group">
             <label>password</label>
             <input type="password" ref={passwordname} class="form-control" id="password" placeholder="Enter password"
-            
+
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
@@ -115,5 +128,5 @@ function Register() {
      </div>
     );
   }
-  
+
   export default Register;
