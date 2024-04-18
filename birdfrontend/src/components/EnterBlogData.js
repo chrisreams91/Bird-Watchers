@@ -48,10 +48,10 @@ function BlogData() {
 
   const deleteBlogs = async (id) => {
       try {
-        const token = localStorage.getItem('jwtToken'); // Retrieve JWT token from local storage
+        const token = localStorage.getItem('jwtToken');
         await axios.delete(`http://localhost:8080/blogposts/delete/${id}`, {
           headers: {
-            Authorization: `Bearer ${token}` // Include JWT token in Authorization header
+            Authorization: `Bearer ${token}`
           }
         });
         console.log(`Blog with id ${id} has been deleted`);
@@ -63,14 +63,14 @@ function BlogData() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const token = localStorage.getItem('jwtToken'); // Retrieve JWT token from local storage
+        const token = localStorage.getItem('jwtToken');
         const response = await fetch('http://localhost:8080/blogposts/getAll', {
           headers: {
-            Authorization: `Bearer ${token}` // Include JWT token in Authorization header
+            Authorization: `Bearer ${token}`
           }
         });
         if (!response.ok) {
-          throw new Error('Unauthorized'); // Throw an error if response is not ok
+          throw new Error('Unauthorized');
         }
         const data = await response.json();
         setBlogs(data);
