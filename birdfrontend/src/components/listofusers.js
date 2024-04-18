@@ -10,18 +10,23 @@ function ListOfUsers() {
 
   const[users, setUsers]=useState([]);
 
-useEffect(() => {
-     const getUsers = async () => {
-       try {
-         const response = await fetch('http://localhost:8080/user/getAll');
-         const data = await response.json();
-         setUsers(data);
-       } catch (error) {
-         console.error('Error fetching users:', error);
-       }
-     };
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const token = localStorage.getItem('jwtToken');
+        const response = await fetch("http://localhost:8080/user/getAll", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
     getUsers();
-   }, []);
+  }, []);
 
     return (
 

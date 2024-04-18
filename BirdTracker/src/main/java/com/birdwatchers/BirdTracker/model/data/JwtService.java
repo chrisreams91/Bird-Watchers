@@ -17,12 +17,19 @@ public class JwtService {
 
     private final String SECRET_KEY = "cb6f22bb8dc45f75825a38e15641849ed5744f95f239f0c43b54ebebfe4edcd5";
 
+    private final TokenRepository tokenRepository;
+
+    public JwtService(TokenRepository tokenRepository) {
+        this.tokenRepository = tokenRepository;
+    }
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
     public boolean isValid(String token, UserDetails user) {
         String username = extractUsername(token);
+
         return username.equals(user.getUsername()) && !isTokenExpired(token);
     }
 
