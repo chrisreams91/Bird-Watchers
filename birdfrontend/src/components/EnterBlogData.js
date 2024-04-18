@@ -23,41 +23,61 @@ function BlogData() {
       return `${year}-${month}-${day}`;
     }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-        const currentDate = getCurrentDate();
-        const newBlogEntry = {title, date: currentDate, blogText}
-        console.log(newBlogEntry)
-        fetch("http://localhost:8080/blogposts/add",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(newBlogEntry)
-        }).then(()=>{
-            console.log("New blog has been added!");
-            setTitle('');
-            setBlogText('');
-        })
-
-  }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const token = localStorage.getItem('jwtToken');
+      const currentDate = getCurrentDate();
+      const newBlogEntry = { title, date: currentDate, blogText };
+      await axios.post("http://localhost:8080/blogposts/add", newBlogEntry, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      console.log("New blog has been added!");
+      setTitle('');
+      setBlogText('');
+    } catch (error) {
+      console.error('Error adding new blog:', error);
+    }
+  };
         /*const loadBlogs = async () => {
           const result = await axios.get(`http://localhost:8080/blogposts/add/${id}`);
           setBlogs(result.data);
         };*/
 
-    const deleteBlogs = async (id) => {
-     await axios.delete(`http://localhost:8080/blogposts/delete/${id}`);
+  const deleteBlogs = async (id) => {
+      try {
+        const token = localStorage.getItem('jwtToken'); // Retrieve JWT token from local storage
+        await axios.delete(`http://localhost:8080/blogposts/delete/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}` // Include JWT token in Authorization header
+          }
+        });
+        console.log(`Blog with id ${id} has been deleted`);
+      } catch (error) {
+        console.error('Error deleting blog:', error);
+      }
     };
 
-   useEffect(() => {
-     const fetchBlogs = async () => {
-       try {
-         const response = await fetch('http://localhost:8080/blogposts/getAll');
-         const data = await response.json();
-         setBlogs(data);
-       } catch (error) {
-         console.error('Error fetching blogs:', error);
-       }
-     };
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const token = localStorage.getItem('jwtToken'); // Retrieve JWT token from local storage
+        const response = await fetch('http://localhost:8080/blogposts/getAll', {
+          headers: {
+            Authorization: `Bearer ${token}` // Include JWT token in Authorization header
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Unauthorized'); // Throw an error if response is not ok
+        }
+        const data = await response.json();
+        setBlogs(data);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      }
+    };
      fetchBlogs();
      const intervalId = setInterval(fetchBlogs, 2000);
      return () => clearInterval(intervalId);

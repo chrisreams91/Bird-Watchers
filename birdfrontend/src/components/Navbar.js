@@ -1,7 +1,24 @@
+import React from 'react';
+import axios from 'axios';
+
 export default function Navbar() {
+
+    const handleLogout = async () => {
+    try {
+        await axios.delete('http://localhost:8080/logout');
+        localStorage.removeItem('jwtToken');
+        window.location.href = '/login';
+        } catch (error) {
+            console.error("Error upon logout");
+        }
+    };
+
     return ( <nav className="nav">
-        <a href="/" className="site-title">Bird Tracker</a>
+        <a href="/home" className="site-title">Bird Tracker</a>
         <ul>
+            <li>
+                <a href="/login">Login</a>
+            </li>
             <li>
                 <a href="/register">Register Here!</a>
             </li>
@@ -23,6 +40,7 @@ export default function Navbar() {
             <li>
                 <a href="/mediagallery">Media Gallery</a>
             </li>
+            <li><button onClick={handleLogout}>Logout</button></li>
         </ul>
     </nav>
     )

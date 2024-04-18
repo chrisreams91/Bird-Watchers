@@ -33,6 +33,7 @@ import { BrowserRouter,Routes,Route } from "react-router-dom";
 import MediaGallery from "./pages/mediagallery";
 
 function App() {
+
     let component
     switch (window.location.pathname) {
 //    case "/":
