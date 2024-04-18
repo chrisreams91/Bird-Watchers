@@ -46,7 +46,7 @@ function Register() {
                     password
                 });
                 alert("User Registered Successfully!");
-                navigate('/home');
+                navigate('/login');
             } catch (err) {
                 alert("Failed to register user: " + err.message);
             }
