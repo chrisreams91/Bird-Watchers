@@ -5,12 +5,10 @@ import { useNavigate } from 'react-router-dom';
 function Register() {
 
     const axiosWithAuth = () => {
-      //const token = localStorage.getItem("jwtToken");
       return axios.create({
         baseURL: "http://localhost:8080",
         headers: {
           "Content-Type": "application/json",
-          //"Authorization": `Bearer ${token}`
         }
       });
     };
