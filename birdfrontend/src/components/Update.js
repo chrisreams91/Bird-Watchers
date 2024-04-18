@@ -6,36 +6,56 @@ import { Link, useNavigate, BrowserRouter } from 'react-router-dom';
 import { Routes,Route } from "react-router-dom";
 function Update() {
 
-      const[title,setTitle]=useState('');
-      const[blogText, setBlogText]=useState('');
-      const[blogs, setBlogs]=useState([]);
-      const titleName = useRef("");
-      const dateName = useRef("");
-      const textName = useRef("");
-      const [errors, setErrors] = useState({});
-      const commentName = useRef("");
-      const[comment, setComment]=useState('');
-    const {id} = useParams();
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const [values, setValues] = useState({
         id: id,
         title: '',
         blog: ''
     })
-    useEffect(() => {
-        axios.get('http://localhost:3000/blog'+id)
-        .then(res => {
-            setValues({...values, title: res.data.title, blog: res.data.blog})})
-        .catch(err => console.log(err))
-    })
-    const navigate = useNavigate();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios.put('http://localhost:3000/blog'+id, values)
-        .then(res => {
-            navigate('/blog')
-        })
-        .catch(err => console.log(err))
+
+      const [isLoading, setIsLoading] = useState(false); // Track loading state
+      const [error, setError] = useState(null); // Store error message
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true); // Set loading state to true
+      setError(null); // Clear any previous errors
+
+      try {
+        const response = await axios.get(`http://localhost:8080/blogposts/${id}`); // Corrected URL
+        setValues({ ...values, title: response.data.title, blog: response.data.blog });
+      } catch (err) {
+        console.error('Error fetching blog post:', err);
+        setError('An error occurred while fetching the blog post. Please try again later.');
+      } finally {
+        setIsLoading(false); // Set loading state to false after fetching or error
+      }
+    };
+
+    fetchData();
+  }, [id]); // Re-fetch data if `id` changes
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await axios.put(`http://localhost:8080/blogposts/${id}`, values);
+      navigate('/blog'); // Navigate to blog list on success
+    } catch (err) {
+      console.error('Error updating blog post:', err);
+      setError('An error occurred while updating the blog post. Please try again later.');
     }
+  };
+
+
+
     return (
            <div>
            <div className="loginText">
@@ -43,14 +63,14 @@ function Update() {
 
 
                 <br />
-                  <label htmlFor="Title" className="loginEntry">Title</label>
-                  <input type="text" className="loginEntry" ref={titleName} id="title" name="Title" value={values.title} onChange={e => setValues({...values, title: e.target.value})} required/>
+                  <label htmlFor="title" className="loginEntry">Title</label>
+                  <input type="text" className="loginEntry" id="title" name="Title" value={values.title} onChange={e => setValues({...values, title: e.target.value})} required/>
 
                   <br />
                   <br />
 
-                   <label htmlFor="BlogText"  className="loginEntry">Blog</label>
-                   <textarea id="blogText"  className="loginEntry" ref={textName} name="BlogText" value={values.blog} onChange={e => setValues({...values, blog: e.target.value})} required></textarea>
+                   <label htmlFor="blogText"  className="loginEntry">Blog</label>
+                   <textarea id="blogText"  className="loginEntry" name="BlogText" value={values.blog} onChange={e => setValues({...values, blog: e.target.value})} required></textarea>
 
                    <br />
                    <br />

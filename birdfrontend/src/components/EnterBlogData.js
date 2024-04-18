@@ -19,9 +19,11 @@ function BlogData() {
   const navigate = useNavigate();
 
   useEffect(()=> {
-    axios.get('http://localhost:3000/blog')
+  const updateBlogs = async (id) => {
+    axios.get(`http://localhost:8080/blogposts/add/${id}`)
     .then(res => setData(res.data))
     .catch(err => console.log(err))
+    }
   }, [])
 
 
@@ -85,13 +87,13 @@ function BlogData() {
     <div className="loginText">
       <form onSubmit={handleSubmit}>
         <br />
-          <label htmlFor="Title" className="loginEntry">Title</label>
+          <label htmlFor="title" className="loginEntry">Title</label>
           <input type="text" className="loginEntry" ref={titleName} id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} required/>
 
           <br />
           <br />
 
-           <label htmlFor="BlogText"  className="loginEntry">Blog</label>
+           <label htmlFor="blogText"  className="loginEntry">Blog</label>
            <textarea id="blogText"  className="loginEntry" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)} required></textarea>
 
            <br />

@@ -140,6 +140,7 @@ function App() {
               <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
+
          </Routes>
      </BrowserRouter>
     </div>
