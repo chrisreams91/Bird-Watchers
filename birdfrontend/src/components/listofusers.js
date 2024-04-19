@@ -2,10 +2,6 @@ import React from "react";
 import { useState, useEffect, useRef } from 'react';
 
 
-
-
-
-
 function ListOfUsers() {
 
   const[users, setUsers]=useState([]);
@@ -32,12 +28,16 @@ function ListOfUsers() {
 
         <div>
             <th>Check Out What Your Fellow Birders Have Seen!</th>
-
-          {users.map((user) => (
+            {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.username}</td>
+                  <td>
+                  <a href={`/myBirds/${user.id}`}>
+                  {user.username}
+                  </a>
+                  </td>
+
             </tr>
-          ))}
+            ))}
         </div>
 
     )
