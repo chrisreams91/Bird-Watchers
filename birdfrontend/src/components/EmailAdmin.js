@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { send } from 'emailjs-com';
 
 function Email() {
+  const formRef = useRef(null);
   const [toSend, setToSend] = useState({
     from_name: '',
     message: '',
@@ -18,6 +19,7 @@ function Email() {
       .then((response) => {
         console.log('Email sent successfully:', response);
         setsendStatus('success')
+        setToSend({...toSend, from_name: '', message: '', reply_to: 'marie5joiner@gmail.com'})
       })
       .catch((error) => {
         console.error('Error sending email:', error);
@@ -31,7 +33,7 @@ function Email() {
 
   return (
     <div className="App">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} ref={formRef}>
         <input
           type="text"
           name="from_name"
@@ -47,7 +49,7 @@ function Email() {
           onChange={handleChange}
         />
         <input
-          type="text"
+          type="password"
           name="reply_to"
           placeholder="Your Email"
           value="marie5joiner@gmail.com"
