@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
+import { Link, useNavigate } from 'react-router-dom';
 
 function BlogData() {
 
@@ -14,6 +15,18 @@ function BlogData() {
   const [errors, setErrors] = useState({});
   const commentName = useRef("");
   const[comment, setComment]=useState('');
+  const[data, setData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(()=> {
+  const updateBlogs = async (id) => {
+    axios.get(`http://localhost:8080/blogposts/add/${id}`)
+    .then(res => setData(res.data))
+    .catch(err => console.log(err))
+    }
+  }, [])
+
+
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -60,6 +73,7 @@ function BlogData() {
       }
     };
 
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -78,10 +92,13 @@ function BlogData() {
         console.error('Error fetching blogs:', error);
       }
     };
+
      fetchBlogs();
      const intervalId = setInterval(fetchBlogs, 2000);
      return () => clearInterval(intervalId);
    }, []);
+
+
 
 
 
@@ -90,13 +107,13 @@ function BlogData() {
     <div className="loginText">
       <form onSubmit={handleSubmit}>
         <br />
-          <label htmlFor="Title" className="loginEntry">Title</label>
+          <label htmlFor="title" className="loginEntry">Title</label>
           <input type="text" className="loginEntry" ref={titleName} id="title" name="Title" value={title} onChange={(event)=>setTitle(event.target.value)} required/>
 
           <br />
           <br />
 
-           <label htmlFor="BlogText"  className="loginEntry">Blog</label>
+           <label htmlFor="blogText"  className="loginEntry">Blog</label>
            <textarea id="blogText"  className="loginEntry" ref={textName} name="BlogText" value={blogText} onChange={(event)=>setBlogText(event.target.value)} required></textarea>
 
            <br />
@@ -110,7 +127,7 @@ function BlogData() {
           <table>
             <tbody>
                 {blogs.map((blog) => (
-                <div>
+                <div key={blog.id}>
                 <div className="blogText">
                 <div className="container">
 
@@ -122,28 +139,31 @@ function BlogData() {
                       <h2 className="title">{blog.title}</h2>
                           <div className="list">
                           <div className="column">
-                               <p>{blog.date}</p>
                                <p>{blog.blogText}</p>
                                <p>{blog.comment}</p>
-                               <p>
-                               <form onSubmit={handleSubmit}>
+
+
                                        <br />
                                          <label htmlFor="Comment" className="loginEntry">Comment</label>
                                          <input type="text" className="loginEntry" ref={commentName} id="comment" name="Comment" value={comment} onChange={(event)=>setComment(event.target.value)} required/>
                                             <button type="submit" className="loginButton">Submit</button>
                                          <br />
-                                         </form>
-                               </p>
+
+
                           </div>
                           </div>
                           <div>
                           <div>
                           <td>
+
                               <button type="button" className="entryButtons">
+                              <Link to={`/update/${blog.id}`}>
                               <div className="buttonLevel">
                                   <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                               </div>
+                              </Link>
                               </button>
+
                               <div>
                               <td>
                               <div>
@@ -170,6 +190,7 @@ function BlogData() {
           </div>
           </div>
   )
+
 }
 
 export default BlogData;

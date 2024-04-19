@@ -29,9 +29,11 @@ import NorthAmerica7 from "./pages/NorthAmerica7";
 import NorthAmerica8 from "./pages/NorthAmerica8";
 import NorthAmerica9 from "./pages/NorthAmerica9";
 import NorthAmerica10 from "./pages/NorthAmerica10";
-import { BrowserRouter,Routes,Route } from "react-router-dom";
+import { Routes,Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import MediaGallery from "./pages/mediagallery";
-
+import Update from "./components/Update.js"
+import Blog from "./components/EnterBlogData.js"
 function App() {
 
     let component
@@ -127,15 +129,19 @@ function App() {
     }
     return (
     <div>
-        <Navbar/>
-        {component}
-    <div>
+
+
+    <div className="App">
      <BrowserRouter>
+     <Navbar/>
+     {component}
           <Routes>
-              <Route path="/home" element= { <Home/>} />
-              <Route path="/register" element= { <Register/>} />
-              <Route path="/" element={<Login />} />
-              <Route path="/login" element={<Login />} />
+              <Route path='/home' element= { <Home/>} />
+              <Route path='/register' element= { <Register/>} />
+              <Route path='/' element={<Login />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/update/:id' element={<Update />} />
+
          </Routes>
      </BrowserRouter>
     </div>
