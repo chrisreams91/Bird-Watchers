@@ -91,49 +91,56 @@ function EnterMyBirdData() {
     }
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+const handleSubmit = async (event) => {
+    event.preventDefault();
     birdName.current.value = "";
     locName.current.value = "";
     dateName.current.value = "";
     descName.current.value = "";
     picName.current.value = "";
     soundName.current.value = "";
-    const newBirdEntry = {bird_species,location,date,description,soundFile}
-    console.log(newBirdEntry)
-    fetch("http://localhost:8080/mybirds/add",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(newBirdEntry)
-    }).then(()=>{
-        console.log("New bird sighting has been added!")
-        setName('');
-        setLocation('');
-        setDate('');
-        setDescription('');
-        setImageFile(null);
-        setSoundFile(null);
-    })
-     .catch((error) => {
-        console.error("Error adding new bird sighting:", error);
-     });
+    const newBirdEntry = { bird_species, location, date, description, soundFile };
+    try {
+      const token = localStorage.getItem('jwtToken');
+      await fetch("http://localhost:8080/mybirds/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(newBirdEntry)
+      });
+      console.log("New bird sighting has been added!");
+      setName('');
+      setLocation('');
+      setDate('');
+      setDescription('');
+      setImageUpload(null);
+      setSoundFile(null);
+    } catch (error) {
+      console.error("Error adding new bird sighting:", error);
+    }
   }
 
-  useEffect(() => {
-      const fetchBirds = async () => {
-        try {
-          const response = await axios.get("http://localhost:8080/mybirds/getAll");
-          setBirds(response.data);
-        } catch (error) {
-          console.error('Error fetching bird sightings:', error);
-        }
-      };
+useEffect(() => {
+    const fetchBirds = async () => {
+      try {
+        const token = localStorage.getItem('jwtToken');
+        const response = await axios.get("http://localhost:8080/mybirds/getAll", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setBirds(response.data);
+      } catch (error) {
+        console.error('Error fetching bird sightings:', error);
+      }
+    };
 
-      fetchBirds();
-      const intervalId = setInterval(fetchBirds, 2000);
-
-      return () => clearInterval(intervalId);
-    }, []);
+    fetchBirds();
+    const intervalId = setInterval(fetchBirds, 2000);
+    return () => clearInterval(intervalId);
+  }, []);
 
 
 
@@ -142,9 +149,18 @@ function EnterMyBirdData() {
       setBirds(result.data);
     };
 
-    const deleteBirds = async (id) => {
-     await axios.delete(`http://localhost:8080/mybirds/add/${id}`);
-    };
+ const deleteBirds = async (id) => {
+     try {
+       const token = localStorage.getItem('jwtToken');
+       await axios.delete(`http://localhost:8080/mybirds/add/${id}`, {
+         headers: {
+           Authorization: `Bearer ${token}`
+         }
+       });
+     } catch (error) {
+       console.error('Error deleting bird:', error);
+     }
+   };
 
 
 
@@ -178,7 +194,7 @@ function EnterMyBirdData() {
            <br />
            <br />
                 <div className="App">
-        <h2>Choose a Picture</h2>
+        /<h2>Choose a Picture</h2>
         <input
         type="file"
         ref={picName}
@@ -231,6 +247,7 @@ function EnterMyBirdData() {
                     <div>
                     <div>
                     <td>
+
                         <button type="button" className="entryButtons">
                         <div className="buttonLevel">
                             <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>

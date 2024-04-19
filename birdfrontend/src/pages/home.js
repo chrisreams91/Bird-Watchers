@@ -3,6 +3,7 @@ import ImageSlider from "../components/ImageSlider";
 import "../styles.css";
 
 
+
 const Home = () => {
 
     const slides = [

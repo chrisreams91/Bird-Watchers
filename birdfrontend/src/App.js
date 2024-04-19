@@ -35,6 +35,7 @@ import MediaGallery from "./pages/mediagallery";
 import Update from "./components/Update.js"
 import Blog from "./components/EnterBlogData.js"
 function App() {
+
     let component
     switch (window.location.pathname) {
 //    case "/":

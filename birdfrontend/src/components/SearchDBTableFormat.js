@@ -13,15 +13,27 @@ function SearchDBTableFormat() {
   const[birds, setBirds]=useState([])
   const [search, setSearch] = useState('')
     console.log(search)
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() =>{
-        fetch("http://localhost:8080/mybirds/getAll")
-        .then(res=>res.json())
-        .then((result)=>{
-            setBirds(result);
-        }
-    )
-    },[])
+   useEffect(() => {
+       // Retrieve JWT token from local storage
+       const token = localStorage.getItem('jwtToken');
+
+       fetch("http://localhost:8080/mybirds/getAll", {
+         headers: {
+           'Authorization': `Bearer ${token}` // Include JWT token in Authorization header
+         }
+       })
+         .then(res => res.json())
+         .then(result => {
+           setBirds(result);
+           setLoading(false); // Set loading to false when data is received
+         })
+         .catch(error => {
+           console.error('Error fetching data:', error);
+           setLoading(false); // Set loading to false in case of error
+         });
+     }, []);
 
   return (
    <div>

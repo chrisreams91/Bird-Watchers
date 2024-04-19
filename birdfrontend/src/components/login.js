@@ -1,105 +1,80 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import styles from '../login.css'
 
-
 function Login() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
-
-    async function login(event) {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
         try {
-          await axios.post("http://localhost:8080/user/login", {
-            email: email,
-            password: password,
-            }).then((res) =>
-            {
-             console.log(res.data);
+            const response = await axios.post('http://localhost:8080/login', {
+                username,
+                password
+            });
+            const jwtToken = response.data.token;
+            localStorage.setItem('jwtToken', jwtToken);
 
-             if (res.data.message === "Email Does Not Exist. Please Register For An Account.")
-             {
-               alert("Email Does Not Exist. Please Register For An Account.");
-             }
-             else if(res.data.message === "Login Success")
-             {
-
-                navigate('/home');
-             }
-              else
-             {
-                alert("Please Enter Valid Credentials.");
-             }
-          }, fail => {
-           console.error(fail);
-  });
+            navigate('/home');
+        } catch (error) {
+            setErrorMessage(error.response?.data?.message || 'Login failed');
+            alert("Please enter valid credentials or register for a new account");
         }
-
-
-         catch (err) {
-          alert(err);
-        }
-
-      }
+    };
 
     return (
-    <div className="loginSection">
-    <div className="loginHeader">
-    <h1>BirdWatchers</h1>
-    </div>
-       <div className="loginText">
-            <div class="container">
-            <div class="row">
-
-             </div>
-
-             <div class="row">
-             <div class="col-sm-6">
-
-            <form>
-        <p>
-        <div class="form-group">
-          <input type="email"  className="loginEntry" class="form-control" id="email" placeholder="Enter Name"
-
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-
-          />
-
+        <div className="loginSection">
+            <div className="loginHeader">
+                <h1>BirdWatchers</h1>
+            </div>
+            <div className="loginText">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <form onSubmit={handleSubmit}>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        className="loginEntry form-control"
+                                        id="username"
+                                        placeholder="Enter Username"
+                                        value={username}
+                                        onChange={(event) => {
+                                            setUsername(event.target.value);
+                                        }}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="password"
+                                        className="loginEntry form-control"
+                                        id="password"
+                                        placeholder="Enter Password"
+                                        value={password}
+                                        onChange={(event) => {
+                                            setPassword(event.target.value);
+                                        }}
+                                    />
+                                </div>
+                                <hr />
+                                <div>
+                                    <button type="submit" className="loginButton btn btn-primary">
+                                        <h2>Login</h2>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </p>
-
-        <div class="form-group">
-            <input type="password"  className="loginEntry" class="form-control" id="password" placeholder="Enter Password"
-
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-
-            />
-          </div>
-          <hr/>
-          <div>
-                  <button type="submit" className="loginButton" class="btn btn-primary" onClick={login} >
-                                  <h2>Login</h2>
-                  </button>
-                  </div>
-              </form>
-
-            </div>
-            </div>
-            </div>
-
-     </div>
-     </div>
     );
-  }
+}
 
-  export default Login;
+export default Login;
