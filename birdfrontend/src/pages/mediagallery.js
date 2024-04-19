@@ -2,10 +2,16 @@ import React, { useState,useEffect } from "react";
 import SoundUpload from "../components/SoundUpload";
 import PictureUpload from "../components/PictureUpload";
 import Email from "../components/EmailAdmin";
+import { Navigate } from 'react-router-dom';
 
 
+function MediaGallery({ children }) {
 
-function MediaGallery() {
+    const loggedIn = localStorage.getItem('jwtToken');
+
+    if (!loggedIn) {
+        return <Navigate to="/login" replace />
+    }
 
     return (
     <>

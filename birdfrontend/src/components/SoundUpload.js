@@ -65,7 +65,6 @@ const deleteSound = (url) => {
                    <audio src={url} controls>
                    </audio>
 
-                   <button onClick={() => deleteSound(url)}>Delete</button>
                  </div>
                );
              })}
