@@ -193,25 +193,7 @@ useEffect(() => {
            <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)} required></textarea>
            <br />
            <br />
-                <div className="App">
-        /<h2>Choose a Picture</h2>
-        <input
-        type="file"
-        ref={picName}
-        onChange={(event) => {
-          setImageUpload(event.target.files[0]);
-        }}
-      />
-                </div>
-           <br />
-           <br />
-                <div className="App">
-                    <h2>Add Audio</h2>
-                    <input type="file" ref={soundName} id="sound" accept="sound/*" onChange={handleChangeSound} />
-                    <img src={soundFile} />
-                </div>
-           <br />
-           <br />
+
           <button type="submit">Submit Findings</button>
      </form>
      </div>
