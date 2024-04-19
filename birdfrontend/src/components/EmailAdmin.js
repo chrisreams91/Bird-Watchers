@@ -32,6 +32,7 @@ function Email() {
   };
 
   return (
+  <div>
     <div className="App">
       <form onSubmit={onSubmit} ref={formRef}>
         <input
@@ -60,6 +61,14 @@ function Email() {
       {sendStatus === 'success' && <p>Email sent successfully!</p>}
       {sendStatus === 'error' && <p>Error sending email. Please try again.</p>}
     </div>
+    <div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    </div>
+   </div>
   );
 }
 

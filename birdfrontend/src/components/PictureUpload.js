@@ -63,14 +63,16 @@ const [fetchedUrls, setFetchedUrls] = useState(false);
         }}
       />
       <button onClick={uploadFile}> Upload Image</button>
+            <ol>
             {imageUrls.map((url) => {
               return (
-                <div key={url}>
+                <li key={url}>
                   <img src={url} length={250} width={250}/>
                   <button onClick={() => deleteImage(url)}>Delete</button>
-                </div>
+                </li>
               );
             })}
+            </ol>
       </div>
     )
 }
