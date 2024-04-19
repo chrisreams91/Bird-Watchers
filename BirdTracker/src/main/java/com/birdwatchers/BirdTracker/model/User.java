@@ -21,6 +21,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user_id",referencedColumnName = "user_id")
+    private List<Bird> bird;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user_id",referencedColumnName = "user_id")
+    private List<Blog> blog;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user_id",referencedColumnName = "user_id")
+    private List<Comments> comments;
 
     @Column(name="username")
     @NotBlank
@@ -136,4 +147,29 @@ public class User implements UserDetails {
 //    public void setRole(Role role) {
 //        this.role = role;
 //    }
+
+
+    public List<Blog> getBlog() {
+        return blog;
+    }
+
+    public void setBlog(List<Blog> blog) {
+        this.blog = blog;
+    }
+
+    public List<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comments> comments) {
+        this.comments = comments;
+    }
+
+    public List<Bird> getBird() {
+        return bird;
+    }
+
+    public void setBird(List<Bird> bird) {
+        this.bird = bird;
+    }
 }

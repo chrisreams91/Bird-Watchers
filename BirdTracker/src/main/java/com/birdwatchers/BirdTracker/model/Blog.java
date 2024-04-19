@@ -13,12 +13,14 @@ import java.util.List;
 @Entity
 public class Blog {
 
-    @OneToMany(mappedBy = "blog")
-    private List<Comments> comments = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_blog_id",referencedColumnName = "id")
+    private List<Comments> comments;
 
     @Column(name="Title")
     @NotBlank

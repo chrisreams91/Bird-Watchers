@@ -9,14 +9,14 @@ import jakarta.validation.constraints.Size;
 @Entity
 public class Comments {
 
-    @ManyToOne
-    private Blog blog;
+//    @ManyToOne
+//    private Blog blog;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="date")
+    @Column(name="dates")
     @NotNull
     public String date;
 
