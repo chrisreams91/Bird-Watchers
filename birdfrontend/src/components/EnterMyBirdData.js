@@ -252,7 +252,7 @@ const handleSubmit = async (event) => {
                 <h2 className="title">{bird.bird_species}</h2>
                     <div className="list">
                     <div className="column">
-                         <li>ID: {bird.id}</li>
+
                          <li>Location: {bird.location}</li>
                          <li>Date Seen: {bird.date}</li>
                          <li>Description: {bird.description}</li>

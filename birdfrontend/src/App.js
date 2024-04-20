@@ -6,6 +6,7 @@ import EnterMyBirdData from "./components/EnterMyBirdData";
 import Hotspots from "./pages/hotspots";
 import MyBirds from "./pages/mybirds";
 import OtherBirders from "./pages/otherbirders";
+import OtherBirderData from "./components/OtherBirderData";
 import SearchDatabase from "./pages/search";
 import BlogPosting from "./pages/blog";
 import Home from "./pages/home";
@@ -142,7 +143,7 @@ function App() {
               <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
-              <Route path="/myBirds/entries/:username" element={<EnterMyBirdData/>} />
+              <Route path="/myBirds/entries/:username" element={<OtherBirderData/>} />
          </Routes>
      </BrowserRouter>
     </div>
