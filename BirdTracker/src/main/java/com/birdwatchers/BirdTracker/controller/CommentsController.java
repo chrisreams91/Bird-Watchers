@@ -40,7 +40,7 @@ public class CommentsController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteBlog(@PathVariable int id){
+    public ResponseEntity<Object> deleteComments(@PathVariable int id){
         boolean deleted = false;
         deleted = commentsService.deleteComments(id);
         Map<String, Boolean> response = new HashMap<>();

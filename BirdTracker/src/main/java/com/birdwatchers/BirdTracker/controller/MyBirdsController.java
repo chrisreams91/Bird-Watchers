@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,6 +58,19 @@ public class MyBirdsController {
     public ResponseEntity<Bird> updateBird(@PathVariable int id, @RequestBody Bird bird){
         bird = birdService.updateBird(id, bird);
         return ResponseEntity.ok(bird);
+    }
+
+    @GetMapping("/entries")
+    public ResponseEntity<List<Bird>> getBirdsForCurrentUser(Authentication authentication) {
+        String username = authentication.getName();
+        List<Bird> birds = birdService.findByUsername(username);
+        return ResponseEntity.ok(birds);
+    }
+
+    @GetMapping("/entries/{username}")
+    public ResponseEntity<List<Bird>> getBirdsByUser(@PathVariable String username) {
+        List<Bird> birds = birdService.getByUsername(username);
+        return ResponseEntity.ok(birds);
     }
 
 }

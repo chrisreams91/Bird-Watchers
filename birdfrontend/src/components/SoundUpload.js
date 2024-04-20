@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from 'axios'
 import styles from "../mediagallery.css";
 import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
@@ -8,6 +8,8 @@ import { deleteObject } from "firebase/storage";
 
 
 function SoundUpload() {
+
+
 
 const deleteSound = (url) => {
     if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
@@ -33,6 +35,7 @@ const deleteSound = (url) => {
         uploadBytes(soundRef, soundUpload).then((snapshot) => {
           getDownloadURL(snapshot.ref).then((url) => {
             setSoundUrls((prev) => [...prev, url]);
+            setSoundUpload(null);
           });
         });
       };
@@ -57,16 +60,17 @@ const deleteSound = (url) => {
                 }}
               />
               <button onClick={uploadFile}> Upload Sound</button>
+              <ol>
              {soundUrls.map((url) => {
                return (
-                 <div key={url}>
+                 <li key={url}>
                    <audio src={url} controls>
                    </audio>
 
-                   <button onClick={() => deleteSound(url)}>Delete</button>
-                 </div>
+                 </li>
                );
              })}
+             </ol>
         </div>
 
     )

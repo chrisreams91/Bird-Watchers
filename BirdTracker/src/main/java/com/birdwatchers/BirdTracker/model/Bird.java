@@ -42,6 +42,9 @@ import org.antlr.v4.runtime.misc.NotNull;
         @Column(name="sound")
         public String sound;
 
+        @Column(name="username")
+        public String username;
+
         public Bird() {
         }
 
@@ -101,5 +104,13 @@ import org.antlr.v4.runtime.misc.NotNull;
 
         public void setSound(String sound) {
             this.sound = sound;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
     }

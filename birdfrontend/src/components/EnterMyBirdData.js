@@ -3,15 +3,16 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import styles from '../mybirds.css'
-
 import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
 import { storage } from "../firebase";
 import { v4 } from "uuid";
 import { deleteObject } from "firebase/storage";
+import { jwtDecode } from 'jwt-decode'
+
 
 
 function EnterMyBirdData() {
-          const deleteImage = (url) => {
+          {/*const deleteImage = (url) => {
               if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
                 const imageRef = ref(storage, url);
                 deleteObject(imageRef)
@@ -23,12 +24,12 @@ function EnterMyBirdData() {
                     console.error("Error deleting sound:", error);
                   });
               }
-            };
+            };*/}
 
           const [imageUpload, setImageUpload] = useState(null);
             const [imageUrls, setImageUrls] = useState([]);
 
-            const imagesListRef = ref(storage, "images/");
+            {/*const imagesListRef = ref(storage, "images/");
             const uploadFile = () => {
               if (imageUpload == null) return;
               const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
@@ -37,11 +38,11 @@ function EnterMyBirdData() {
                   setImageUrls((prev) => [...prev, url]);
                 });
               });
-            };
+            };*/}
 
       const [fetchedUrls, setFetchedUrls] = useState(false);
 
-          useEffect(() => {
+          {/*useEffect(() => {
             if (!fetchedUrls) {
               listAll(imagesListRef).then((response) => {
                 const urls = response.items.map((item) => getDownloadURL(item));
@@ -51,7 +52,7 @@ function EnterMyBirdData() {
                 });
               });
             }
-          }, [fetchedUrls]);
+          }, [fetchedUrls]);*/}
 
   const[bird_species,setName]=useState('')
   const[location,setLocation]=useState('')
@@ -63,8 +64,9 @@ function EnterMyBirdData() {
   const locName = useRef("");
   const dateName = useRef("");
   const descName = useRef("");
-  const picName = useRef("");
-  const soundName = useRef("");
+  {/*const picName = useRef("");
+  const soundName = useRef("");*/}
+  const { username } = useParams();
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -90,6 +92,10 @@ function EnterMyBirdData() {
       setImageFile(file);
     }
 
+    const getUsernameFromToken = (token) => {
+      const decoded = jwtDecode(token);
+      return decoded.sub;
+    };
 
 const handleSubmit = async (event) => {
     event.preventDefault();
@@ -97,9 +103,13 @@ const handleSubmit = async (event) => {
     locName.current.value = "";
     dateName.current.value = "";
     descName.current.value = "";
-    picName.current.value = "";
-    soundName.current.value = "";
-    const newBirdEntry = { bird_species, location, date, description, soundFile };
+    {/*picName.current.value = "";
+    soundName.current.value = "";*/}
+    const token = localStorage.getItem('jwtToken');
+    const decodedToken = getUsernameFromToken(token);
+    const username = getUsernameFromToken(token);
+    const newBirdEntry = { bird_species, location, date, description, username};
+    console.log("New Bird Entry", newBirdEntry);
     try {
       const token = localStorage.getItem('jwtToken');
       await fetch("http://localhost:8080/mybirds/add", {
@@ -115,33 +125,41 @@ const handleSubmit = async (event) => {
       setLocation('');
       setDate('');
       setDescription('');
-      setImageUpload(null);
-      setSoundFile(null);
+      {/*setImageUpload(null);
+      setSoundFile(null);*/}
     } catch (error) {
       console.error("Error adding new bird sighting:", error);
     }
   }
 
-useEffect(() => {
-    const fetchBirds = async () => {
-      try {
-        const token = localStorage.getItem('jwtToken');
-        const response = await axios.get("http://localhost:8080/mybirds/getAll", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setBirds(response.data);
-      } catch (error) {
-        console.error('Error fetching bird sightings:', error);
-      }
-    };
+   useEffect(() => {
+     const fetchBirds = async () => {
+       try {
+         const token = localStorage.getItem('jwtToken');
+         let response;
+          if (username) {
+           response = await axios.get(`http://localhost:8080/mybirds/entries/${username}`, {
+           headers: {
+             Authorization: `Bearer ${token}`
+           }
+          });
+         } else {
+         response = await axios.get("http://localhost:8080/mybirds/entries", {
+             headers: {
+                 Authorization: `Bearer ${token}`
+               }
+             });
+         }
+         setBirds(response.data);
+       } catch (error) {
+         console.error('Error fetching bird sightings:', error);
+       }
+     };
 
     fetchBirds();
     const intervalId = setInterval(fetchBirds, 2000);
     return () => clearInterval(intervalId);
   }, []);
-
 
 
     const loadBirds = async () => {
@@ -163,10 +181,6 @@ useEffect(() => {
    };
 
 
-
-
-
-
   return (
    <div>
          <div className="entry">
@@ -177,24 +191,34 @@ useEffect(() => {
               <div className="innerText">
       <form id="new-bird-sighting" onSubmit={handleSubmit}>
           <br />
+          <br />
+          <br />
           <label htmlFor="bird_species">Bird Name:</label>
           <input className="textBox" type="text" ref={birdName} id="bird_species" name="bird_species" value={bird_species} onChange={(event)=>setName(event.target.value)} required/>
+          <br />
+          <br />
           <br />
           <br />
           <label htmlFor="location">Location:</label>
           <input type="text" ref={locName} id="location" name="location" value={location} onChange={(event)=>setLocation(event.target.value)} required/>
           <br />
           <br />
+          <br />
+          <br />
           <label htmlFor="date">Date Seen:</label>
           <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
+          <br />
+          <br />
           <br />
           <br />
            <label htmlFor="description">Field Notes:</label>
            <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)} required></textarea>
            <br />
            <br />
+           <br />
+           <br />
                 <div className="App">
-        /<h2>Choose a Picture</h2>
+        {/*<h2>Choose a Picture</h2>
         <input
         type="file"
         ref={picName}
@@ -208,7 +232,7 @@ useEffect(() => {
                 <div className="App">
                     <h2>Add Audio</h2>
                     <input type="file" ref={soundName} id="sound" accept="sound/*" onChange={handleChangeSound} />
-                    <img src={soundFile} />
+                    <img src={soundFile} />*/}
                 </div>
            <br />
            <br />
@@ -229,16 +253,27 @@ useEffect(() => {
             return (
             <div className="img">
                <img src={url} width={250} height={250}></img>
-               <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio>
+               {/*<audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio>*/}
               </div>
                )
                })}
-
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             <p>
                 <h2 className="title">{bird.bird_species}</h2>
                     <div className="list">
                     <div className="column">
-                         <li>ID: {bird.id}</li>
+
                          <li>Location: {bird.location}</li>
                          <li>Date Seen: {bird.date}</li>
                          <li>Description: {bird.description}</li>
