@@ -29,22 +29,7 @@ function ListOfUsers() {
     getUsers();
   }, []);
 
-     useEffect(() => {
-       const fetchBirds = async () => {
-         try {
-           const token = localStorage.getItem('jwtToken');
-           const response = await axios.get(`http://localhost:8080/mybirds/entries/${username}`, {
-             headers: {
-               Authorization: `Bearer ${token}`
-             }
-           });
-           setBirds(response.data);
-         } catch (error) {
-           console.error('Error fetching bird sightings:', error);
-         }
-       };
-       fetchBirds();
-     }, [username]);
+
 
     return (
 

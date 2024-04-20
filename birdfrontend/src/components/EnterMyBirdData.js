@@ -181,10 +181,6 @@ const handleSubmit = async (event) => {
    };
 
 
-
-
-
-
   return (
    <div>
          <div className="entry">
