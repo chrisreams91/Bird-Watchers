@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./components/login";
 import Register from "./components/register";
 import Navbar from "./components/Navbar";
+import EnterMyBirdData from "./components/EnterMyBirdData";
 import Hotspots from "./pages/hotspots";
 import MyBirds from "./pages/mybirds";
 import OtherBirders from "./pages/otherbirders";
@@ -141,7 +142,7 @@ function App() {
               <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
-
+              <Route path="/myBirds/entries/:username" element={<EnterMyBirdData/>} />
          </Routes>
      </BrowserRouter>
     </div>

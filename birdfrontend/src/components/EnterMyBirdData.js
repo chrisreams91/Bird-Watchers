@@ -66,6 +66,7 @@ function EnterMyBirdData() {
   const descName = useRef("");
   const picName = useRef("");
   const soundName = useRef("");
+  const { username } = useParams();
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -131,26 +132,34 @@ const handleSubmit = async (event) => {
     }
   }
 
-useEffect(() => {
-    const fetchBirds = async () => {
-      try {
-        const token = localStorage.getItem('jwtToken');
-        const response = await axios.get("http://localhost:8080/mybirds/entries", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setBirds(response.data);
-      } catch (error) {
-        console.error('Error fetching bird sightings:', error);
-      }
-    };
+   useEffect(() => {
+     const fetchBirds = async () => {
+       try {
+         const token = localStorage.getItem('jwtToken');
+         let response;
+          if (username) {
+           response = await axios.get(`http://localhost:8080/mybirds/entries/${username}`, {
+           headers: {
+             Authorization: `Bearer ${token}`
+           }
+          });
+         } else {
+         response = await axios.get("http://localhost:8080/mybirds/entries", {
+             headers: {
+                 Authorization: `Bearer ${token}`
+               }
+             });
+         }
+         setBirds(response.data);
+       } catch (error) {
+         console.error('Error fetching bird sightings:', error);
+       }
+     };
 
     fetchBirds();
     const intervalId = setInterval(fetchBirds, 2000);
     return () => clearInterval(intervalId);
   }, []);
-
 
 
     const loadBirds = async () => {

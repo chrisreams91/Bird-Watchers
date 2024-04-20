@@ -71,4 +71,10 @@ public class BirdServiceImpl implements BirdService {
         return birdRepository.findByUsername(username);
     }
 
+
+    @Override
+    public List<Bird> getByUsername(String username) {
+        return birdRepository.findByUsername(username);
+    }
+
 }

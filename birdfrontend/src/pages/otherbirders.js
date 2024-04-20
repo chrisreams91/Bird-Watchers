@@ -4,7 +4,6 @@ import ListOfUsers from '../components/listofusers'
 const OtherBirders = () => {
 	return (
 		<div>
-			<h1>OtherBirders</h1>
             <ListOfUsers />
 		</div>
 	);

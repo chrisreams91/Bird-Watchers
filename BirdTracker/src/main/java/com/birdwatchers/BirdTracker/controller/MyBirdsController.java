@@ -67,4 +67,10 @@ public class MyBirdsController {
         return ResponseEntity.ok(birds);
     }
 
+    @GetMapping("/entries/{username}")
+    public ResponseEntity<List<Bird>> getBirdsByUser(@PathVariable String username) {
+        List<Bird> birds = birdService.getByUsername(username);
+        return ResponseEntity.ok(birds);
+    }
+
 }
