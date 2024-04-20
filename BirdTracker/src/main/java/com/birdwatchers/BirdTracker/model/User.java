@@ -22,15 +22,15 @@ public class User implements UserDetails {
     private int id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_user_id",referencedColumnName = "user_id")
+    @JoinColumn(name = "username",referencedColumnName = "username")
     private List<Bird> bird;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_user_id",referencedColumnName = "user_id")
+    @JoinColumn(name = "username",referencedColumnName = "username")
     private List<Blog> blog;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_user_id",referencedColumnName = "user_id")
+    @JoinColumn(name = "username",referencedColumnName = "username")
     private List<Comments> comments;
 
     @Column(name="username")
@@ -38,6 +38,7 @@ public class User implements UserDetails {
     @NotNull
     @Size(min = 3, max = 20)
     private String username;
+
 
     @Column(name="firstname")
     @NotBlank

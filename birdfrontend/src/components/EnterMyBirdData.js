@@ -3,11 +3,12 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import styles from '../mybirds.css'
-
 import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
 import { storage } from "../firebase";
 import { v4 } from "uuid";
 import { deleteObject } from "firebase/storage";
+import { jwtDecode } from 'jwt-decode'
+
 
 
 function EnterMyBirdData() {
@@ -90,6 +91,10 @@ function EnterMyBirdData() {
       setImageFile(file);
     }
 
+    const getUsernameFromToken = (token) => {
+      const decoded = jwtDecode(token);
+      return decoded.sub;
+    };
 
 const handleSubmit = async (event) => {
     event.preventDefault();
@@ -99,7 +104,11 @@ const handleSubmit = async (event) => {
     descName.current.value = "";
     picName.current.value = "";
     soundName.current.value = "";
-    const newBirdEntry = { bird_species, location, date, description, soundFile };
+    const token = localStorage.getItem('jwtToken');
+    const decodedToken = getUsernameFromToken(token);
+    const username = getUsernameFromToken(token);
+    const newBirdEntry = { bird_species, location, date, description, soundFile, username};
+    console.log("New Bird Entry", newBirdEntry);
     try {
       const token = localStorage.getItem('jwtToken');
       await fetch("http://localhost:8080/mybirds/add", {
@@ -126,7 +135,7 @@ useEffect(() => {
     const fetchBirds = async () => {
       try {
         const token = localStorage.getItem('jwtToken');
-        const response = await axios.get("http://localhost:8080/mybirds/getAll", {
+        const response = await axios.get("http://localhost:8080/mybirds/entries", {
           headers: {
             Authorization: `Bearer ${token}`
           }

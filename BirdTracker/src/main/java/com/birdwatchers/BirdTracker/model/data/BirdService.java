@@ -20,5 +20,7 @@ public interface BirdService {
 
     Bird updateBird(int id, Bird bird);
 
+    public List<Bird> findByUsername();
 
+    List<Bird> findByUsername(String username);
 }
