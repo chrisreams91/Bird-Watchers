@@ -36,6 +36,9 @@ public class Blog {
     @Size(min = 5, max = 4000)
     public String blogText;
 
+    @Column(name="username")
+    public String username;
+
 
     public Blog() {
 
@@ -79,5 +82,13 @@ public class Blog {
 
     public void setComments(List<Comments> comments) {
         this.comments = comments;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

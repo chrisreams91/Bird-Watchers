@@ -20,4 +20,11 @@ public interface BlogService {
     Blog updateBlog();
 
     Blog updateBlog(int id, Blog blog);
+
+    public List<Blog> findByUsername();
+
+    List<Blog> findByUsername(String username);
+
+
+    List<Blog> getByUsername(String username);
 }

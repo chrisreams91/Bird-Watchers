@@ -1,9 +1,11 @@
 package com.birdwatchers.BirdTracker.controller;
+import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.data.BlogService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -52,5 +54,17 @@ public class BlogController {
         return ResponseEntity.ok(blog);
     }
 
+    @GetMapping("/entries")
+    public ResponseEntity<List<Blog>> getBlogsForCurrentUser(Authentication authentication) {
+        String username = authentication.getName();
+        List<Blog> blogs = blogService.findByUsername(username);
+        return ResponseEntity.ok(blogs);
+    }
+
+    @GetMapping("/entries/{username}")
+    public ResponseEntity<List<Blog>> getBlogsByUser(@PathVariable String username) {
+        List<Blog> blogs = blogService.getByUsername(username);
+        return ResponseEntity.ok(blogs);
+    }
 
 }
