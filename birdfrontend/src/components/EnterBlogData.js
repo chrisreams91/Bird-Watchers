@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode'
+import { Link, useNavigate } from 'react-router-dom';
 
 function BlogData() {
 
@@ -18,7 +17,7 @@ function BlogData() {
   const[comment, setComment]=useState('');
   const[data, setData] = useState([]);
   const navigate = useNavigate();
-  const { username } = useParams();
+  const [editId, setEditID] = useState(-1);
 
   useEffect(()=> {
   const updateBlogs = async (id) => {
@@ -29,10 +28,12 @@ function BlogData() {
   }, [])
 
 
+
     const getUsernameFromToken = (token) => {
           const decoded = jwtDecode(token);
           return decoded.sub;
         };
+
 
 
   function getCurrentDate() {
@@ -45,16 +46,10 @@ function BlogData() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('jwtToken');
-    const decodedToken = getUsernameFromToken(token);
-    const username = getUsernameFromToken(token);
-    const currentDate = getCurrentDate();
-    const newBlogEntry = { title, date: currentDate, blogText, username };
-    console.log("New Blog Entry", newBlogEntry);
     try {
       const token = localStorage.getItem('jwtToken');
-
-
+      const currentDate = getCurrentDate();
+      const newBlogEntry = { title, date: currentDate, blogText };
       await axios.post("http://localhost:8080/blogposts/add", newBlogEntry, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -113,8 +108,6 @@ function BlogData() {
 
 
 
-
-
   return (
    <div>
     <div className="loginText">
@@ -154,13 +147,13 @@ function BlogData() {
                           <div className="column">
                                <p>{blog.blogText}</p>
                                <p>{blog.comment}</p>
-                               <p>{blog.username}</p>
 
-                                   <br />
-                                     <label htmlFor="Comment" className="loginEntry">Comment</label>
-                                     <input type="text" className="loginEntry" ref={commentName} id="comment" name="Comment" value={comment} onChange={(event)=>setComment(event.target.value)} required/>
-                                        <button type="submit" className="loginButton">Submit</button>
-                                     <br />
+
+                                       <br />
+                                         <label htmlFor="Comment" className="loginEntry">Comment</label>
+                                         <input type="text" className="loginEntry" ref={commentName} id="comment" name="Comment" value={comment} onChange={(event)=>setComment(event.target.value)} required/>
+                                            <button type="submit" className="loginButton">Submit</button>
+                                         <br />
 
 
                           </div>
@@ -203,6 +196,7 @@ function BlogData() {
           </div>
           </div>
   )
+
 
 }
 
