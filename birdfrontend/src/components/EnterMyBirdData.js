@@ -10,7 +10,6 @@ import { deleteObject } from "firebase/storage";
 import { jwtDecode } from 'jwt-decode'
 
 
-
 function EnterMyBirdData() {
           {/*const deleteImage = (url) => {
               if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
@@ -67,6 +66,16 @@ function EnterMyBirdData() {
   {/*const picName = useRef("");
   const soundName = useRef("");*/}
   const { username } = useParams();
+  const[data, setData] = useState([]);
+
+useEffect(()=> {
+  const updateBirds = async (id) => {
+    axios.get(`http://localhost:8080/mybirds/add/${id}`)
+    .then(res => setData(res.data))
+    .catch(err => console.log(err))
+    }
+  }, [])
+
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -284,9 +293,11 @@ const handleSubmit = async (event) => {
                     <td>
 
                         <button type="button" className="entryButtons">
+                        <Link to={`/updatebirds/${bird.id}`}>
                         <div className="buttonLevel">
-                            <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
+                        <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                         </div>
+                        </Link>
                         </button>
                         <div>
                         <td>

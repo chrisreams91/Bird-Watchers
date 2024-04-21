@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="donation tab and button made" />
+    <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="donation tab and button made">
+      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/UpdateBirds.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/BirdTracker.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/BirdTracker.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/BirdTracker.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/BirdTracker.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/birdfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/EnterMyBirdData.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/components/EnterMyBirdData.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,6 +69,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LoganT91&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/chrisreams91/Bird-Watchers.git&quot;,
+    &quot;accountId&quot;: &quot;2ca8adad-9512-410b-a3c7-4ace8f08217d&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -72,7 +91,7 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2dNsyUGxKdrsscu1D2GkdJX0Tac" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -88,10 +107,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "logan",
+    "git-widget-placeholder": "Logan",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/HP/Desktop/LaunchCode/Bird-Watchers/birdfrontend",
+    "last_opened_file_path": "C:/Users/HP/Desktop/LaunchCode/Bird-Watchers2",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -161,15 +180,9 @@
         <item itemvalue="Application.BirdTrackerApplication" />
         <item itemvalue="Gradle.BirdTracker [bootRun]" />
         <item itemvalue="Application.BirdTrackerApplication" />
+        <item itemvalue="Gradle.BirdTracker [bootRun]" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-17.0.9-corretto-17.0.9-f644763e9732-ebaef533" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
