@@ -20,4 +20,11 @@ public interface CommentsService {
     Comments updateComments();
 
     Comments updateComments(int id, Comments comments);
+
+    public List<Comments> findByUsername();
+
+    List<Comments> findByUsername(String username);
+
+
+    List<Comments> getByUsername(String username);
 }

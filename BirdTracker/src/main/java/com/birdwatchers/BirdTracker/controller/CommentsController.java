@@ -1,12 +1,11 @@
 package com.birdwatchers.BirdTracker.controller;
 
-
-import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.Comments;
 import com.birdwatchers.BirdTracker.model.data.CommentsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -54,4 +53,16 @@ public class CommentsController {
         return ResponseEntity.ok(comments);
     }
 
+    @GetMapping("/entries")
+    public ResponseEntity<List<Comments>> getCommentsForCurrentUser(Authentication authentication) {
+        String username = authentication.getName();
+        List<Comments> comments = commentsService.findByUsername(username);
+        return ResponseEntity.ok(comments);
+    }
+
+    @GetMapping("/entries/{username}")
+    public ResponseEntity<List<Comments>> getCommentsByUser(@PathVariable String username) {
+        List<Comments> comments = commentsService.getByUsername(username);
+        return ResponseEntity.ok(comments);
+    }
 }

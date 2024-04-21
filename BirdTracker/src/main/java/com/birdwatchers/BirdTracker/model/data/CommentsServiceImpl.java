@@ -52,7 +52,24 @@ public class CommentsServiceImpl implements CommentsService{
         comments.setId(comments.getId());
         comments.setDate(comments.getDate());
         comments.setComment_text(comments.getComment_text());
+        comments.setUsername(comments.getUsername());
         return commentsRepository.save(comments);
+    }
+
+    @Override
+    public List<Comments> findByUsername() {
+        return null;
+    }
+
+    @Override
+    public List<Comments> findByUsername(String username) {
+        return commentsRepository.findByUsername(username);
+    }
+
+
+    @Override
+    public List<Comments> getByUsername(String username) {
+        return commentsRepository.findByUsername(username);
     }
 
 }
