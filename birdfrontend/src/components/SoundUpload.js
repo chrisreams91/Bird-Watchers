@@ -67,7 +67,7 @@ const deleteSound = (url) => {
                  <li key={url}>
                    <audio src={url} controls>
                    </audio>
-                    <button onClick={() => deleteSound(url)}>Delete</button>
+                    {/*<button onClick={() => deleteSound(url)}>Delete</button>*/}
                  </li>
                );
              })}
