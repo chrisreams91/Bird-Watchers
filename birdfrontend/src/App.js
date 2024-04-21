@@ -34,8 +34,9 @@ import NorthAmerica10 from "./pages/NorthAmerica10";
 import { Routes,Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import MediaGallery from "./pages/mediagallery";
-import Update from "./components/Update.js"
-import Blog from "./components/EnterBlogData.js"
+import Update from "./components/Update.js";
+import Blog from "./components/EnterBlogData.js";
+import UpdateBirds from "./components/UpdateBirds.js";
 function App() {
 
     let component
@@ -143,6 +144,7 @@ function App() {
               <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
+              <Route path='/updatebirds/:id' element={<UpdateBirds />} />
               <Route path="/myBirds/entries/:username" element={<OtherBirderData/>} />
          </Routes>
      </BrowserRouter>

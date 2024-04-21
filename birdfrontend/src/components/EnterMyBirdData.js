@@ -9,7 +9,6 @@ import { storage } from "../firebase";
 import { v4 } from "uuid";
 import { deleteObject } from "firebase/storage";
 
-
 function EnterMyBirdData() {
           const deleteImage = (url) => {
               if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
@@ -63,8 +62,7 @@ function EnterMyBirdData() {
   const locName = useRef("");
   const dateName = useRef("");
   const descName = useRef("");
-  const picName = useRef("");
-  const soundName = useRef("");
+
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -231,9 +229,11 @@ useEffect(() => {
                     <td>
 
                         <button type="button" className="entryButtons">
+                        <Link to={`/updatebirds/${bird.id}`}>
                         <div className="buttonLevel">
-                            <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
+                        <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                         </div>
+                        </Link>
                         </button>
                         <div>
                         <td>
