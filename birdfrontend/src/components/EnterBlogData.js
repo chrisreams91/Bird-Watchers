@@ -17,6 +17,7 @@ function BlogData() {
   const[comment, setComment]=useState('');
   const[data, setData] = useState([]);
   const navigate = useNavigate();
+  const [editId, setEditID] = useState(-1);
 
   useEffect(()=> {
   const updateBlogs = async (id) => {
@@ -97,8 +98,6 @@ function BlogData() {
      const intervalId = setInterval(fetchBlogs, 2000);
      return () => clearInterval(intervalId);
    }, []);
-
-
 
 
 
@@ -190,6 +189,7 @@ function BlogData() {
           </div>
           </div>
   )
+
 
 }
 
