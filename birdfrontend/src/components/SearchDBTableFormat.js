@@ -16,22 +16,20 @@ function SearchDBTableFormat() {
   const [loading, setLoading] = useState(true);
 
    useEffect(() => {
-       // Retrieve JWT token from local storage
        const token = localStorage.getItem('jwtToken');
-
        fetch("http://localhost:8080/mybirds/getAll", {
          headers: {
-           'Authorization': `Bearer ${token}` // Include JWT token in Authorization header
+           'Authorization': `Bearer ${token}`
          }
        })
          .then(res => res.json())
          .then(result => {
            setBirds(result);
-           setLoading(false); // Set loading to false when data is received
+           setLoading(false);
          })
          .catch(error => {
            console.error('Error fetching data:', error);
-           setLoading(false); // Set loading to false in case of error
+           setLoading(false);
          });
      }, []);
 
@@ -60,10 +58,22 @@ function SearchDBTableFormat() {
         <tbody>
          {birds.filter(bird =>
              search.trim() === '' ||
-             bird.bird_species.toLowerCase().includes(search.toLowerCase().trim()) ||
-             bird.location.toLowerCase().includes(search.toLowerCase().trim()) ||
-             bird.date.toLowerCase().includes(search.toLowerCase().trim()) ||
-             bird.description.toLowerCase().includes(search.toLowerCase().trim())
+                (bird.bird_species &&
+                    bird.bird_species
+                      .toLowerCase()
+                      .includes(search.toLowerCase().trim())) ||
+                  (bird.location &&
+                    bird.location
+                      .toLowerCase()
+                      .includes(search.toLowerCase().trim())) ||
+                  (bird.date &&
+                    bird.date
+                      .toLowerCase()
+                      .includes(search.toLowerCase().trim())) ||
+                  (bird.description &&
+                    bird.description
+                      .toLowerCase()
+                      .includes(search.toLowerCase().trim()))
            ).map(bird => (
             <tr key={bird.id}>
               <td>{bird.bird_species}</td>

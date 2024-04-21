@@ -3,9 +3,11 @@ package com.birdwatchers.BirdTracker.model.data;
 import com.birdwatchers.BirdTracker.model.Blog;
 import com.birdwatchers.BirdTracker.model.Comments;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentsServiceImpl implements CommentsService{
@@ -47,13 +49,21 @@ public class CommentsServiceImpl implements CommentsService{
     }
 
     @Override
-    public Comments updateComments(int id, Comments comments) {
-        commentsRepository.findById(id).get();
-        comments.setId(comments.getId());
-        comments.setDate(comments.getDate());
-        comments.setComment_text(comments.getComment_text());
-        comments.setUsername(comments.getUsername());
-        return commentsRepository.save(comments);
+    public Comments updateComments(int id, Comments updatedComments) {
+        Optional<Comments> optionalComments = commentsRepository.findById(id);
+        if (optionalComments.isPresent()) {
+            Comments existingComments = optionalComments.get();
+            existingComments.setDate(updatedComments.getDate());
+            existingComments.setComment_text(updatedComments.getComment_text());
+            existingComments.setUsername(updatedComments.getUsername());
+            return commentsRepository.save(existingComments);
+        } else {
+            try {
+                throw new ChangeSetPersister.NotFoundException();
+            } catch (ChangeSetPersister.NotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override

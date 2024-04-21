@@ -58,12 +58,21 @@ const [fetchedUrls, setFetchedUrls] = useState(false);
         <h2>Choose a Picture</h2>
         <input
         type="file"
+        accept="image/*"
         onChange={(event) => {
           setImageUpload(event.target.files[0]);
         }}
       />
       <button onClick={uploadFile}> Upload Image</button>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
             <ol>
+            <br/>
+            <br/>
+            <br/>
+
             {imageUrls.map((url) => {
               return (
                 <li key={url}>

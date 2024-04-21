@@ -5,9 +5,11 @@ package com.birdwatchers.BirdTracker.model.data;
 import com.birdwatchers.BirdTracker.model.Bird;
 import com.birdwatchers.BirdTracker.model.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -52,14 +54,22 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog updateBlog(int id, Blog blog) {
-        blogRepository.findById(id).get();
-        blog.setId(blog.getId());
-        blog.setTitle(blog.getTitle());
-        blog.setDate(blog.getDate());
-        blog.setBlogText(blog.getBlogText());
-        blog.setUsername(blog.getUsername());
-        return blogRepository.save(blog);
+    public Blog updateBlog(int id, Blog updatedBlog) {
+        Optional<Blog> optionalBlog = blogRepository.findById(id);
+        if (optionalBlog.isPresent()) {
+            Blog existingBlog = optionalBlog.get();
+            existingBlog.setTitle(updatedBlog.getTitle());
+            existingBlog.setDate(updatedBlog.getDate());
+            existingBlog.setBlogText(updatedBlog.getBlogText());
+            existingBlog.setUsername(updatedBlog.getUsername());
+            return blogRepository.save(existingBlog);
+        } else {
+            try {
+                throw new ChangeSetPersister.NotFoundException();
+            } catch (ChangeSetPersister.NotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override

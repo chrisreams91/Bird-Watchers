@@ -55,6 +55,7 @@ const deleteSound = (url) => {
             <h2>Choose a Sound File</h2>
                 <input
                 type="file"
+                accept="audio/*"
                 onChange={(event) => {
                   setSoundUpload(event.target.files[0]);
                 }}
@@ -66,7 +67,7 @@ const deleteSound = (url) => {
                  <li key={url}>
                    <audio src={url} controls>
                    </audio>
-
+                    {/*<button onClick={() => deleteSound(url)}>Delete</button>*/}
                  </li>
                );
              })}
