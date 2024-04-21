@@ -13,12 +13,14 @@ import java.util.List;
 @Entity
 public class Blog {
 
-    @OneToMany(mappedBy = "blog")
-    private List<Comments> comments = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_blog_id",referencedColumnName = "id")
+    private List<Comments> comments;
 
     @Column(name="Title")
     @NotBlank
@@ -33,6 +35,9 @@ public class Blog {
     @NotBlank
     @Size(min = 5, max = 4000)
     public String blogText;
+
+    @Column(name="username")
+    public String username;
 
 
     public Blog() {
@@ -77,5 +82,13 @@ public class Blog {
 
     public void setComments(List<Comments> comments) {
         this.comments = comments;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

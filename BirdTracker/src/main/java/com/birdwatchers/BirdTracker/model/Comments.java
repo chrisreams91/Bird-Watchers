@@ -9,20 +9,23 @@ import jakarta.validation.constraints.Size;
 @Entity
 public class Comments {
 
-    @ManyToOne
-    private Blog blog;
+//    @ManyToOne
+//    private Blog blog;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="date")
+    @Column(name="dates")
     @NotNull
     public String date;
 
     @Column(name="comment_text")
     @Size(min = 10, max = 1000)
     public String comment_text;
+
+    @Column(name="username")
+    public String username;
 
     public Comments() {
     }
@@ -49,5 +52,13 @@ public class Comments {
 
     public void setComment_text(String comment_text) {
         this.comment_text = comment_text;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

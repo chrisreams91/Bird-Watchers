@@ -16,7 +16,12 @@ function Update() {
     })
 
     useEffect(()=> {
-        axios.get(`http://localhost:8080/blogposts/add/${id}`+id)
+        const token = localStorage.getItem('jwtToken');
+        axios.get(`http://localhost:8080/blogposts/add/${id}`+id, {
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+        })
         .then(res => {
             setValues({...values, title: res.data.title, blogText: res.data.blogText})
         })
@@ -25,8 +30,7 @@ function Update() {
 
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         axios.put(`http://localhost:8080/blogposts/add/${id}`+id, values)
         .then(res => {
             navigate('/');

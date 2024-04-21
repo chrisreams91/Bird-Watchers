@@ -1,6 +1,5 @@
 package com.birdwatchers.BirdTracker.model.data;
 import com.birdwatchers.BirdTracker.model.Bird;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,6 +10,9 @@ public class BirdServiceImpl implements BirdService {
 
     @Autowired
     private BirdRepository birdRepository;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @Override
     public Bird saveBird(Bird bird) {
@@ -55,7 +57,24 @@ public class BirdServiceImpl implements BirdService {
         bird.setDescription(bird.getDescription());
         bird.setPhoto(bird.getPhoto());
         bird.setSound(bird.getSound());
+        bird.setUsername(bird.getUsername());
         return birdRepository.save(bird);
+    }
+
+    @Override
+    public List<Bird> findByUsername() {
+        return null;
+    }
+
+    @Override
+    public List<Bird> findByUsername(String username) {
+        return birdRepository.findByUsername(username);
+    }
+
+
+    @Override
+    public List<Bird> getByUsername(String username) {
+        return birdRepository.findByUsername(username);
     }
 
 }
