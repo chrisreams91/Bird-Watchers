@@ -3,59 +3,16 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import styles from '../mybirds.css'
-
 import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
 import { storage } from "../firebase";
 import { v4 } from "uuid";
 import { deleteObject } from "firebase/storage";
-
 import { jwtDecode } from 'jwt-decode';
 
 
 
 
 function EnterMyBirdData() {
-          const deleteImage = (url) => {
-              if (window.confirm("Are you sure you want to delete this sound? This action cannot be undone!")) {
-                const imageRef = ref(storage, url);
-                deleteObject(imageRef)
-                  .then(() => {
-                    console.log("Sound deleted successfully!");
-                    setImageUrls((prev) => prev.filter((prevUrl) => prevUrl !== url));
-                  })
-                  .catch((error) => {
-                    console.error("Error deleting sound:", error);
-                  });
-              }
-            };
-
-          const [imageUpload, setImageUpload] = useState(null);
-            const [imageUrls, setImageUrls] = useState([]);
-
-            const imagesListRef = ref(storage, "images/");
-            const uploadFile = () => {
-              if (imageUpload == null) return;
-              const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-              uploadBytes(imageRef, imageUpload).then((snapshot) => {
-                getDownloadURL(snapshot.ref).then((url) => {
-                  setImageUrls((prev) => [...prev, url]);
-                });
-              });
-            };
-
-      const [fetchedUrls, setFetchedUrls] = useState(false);
-
-          useEffect(() => {
-            if (!fetchedUrls) {
-              listAll(imagesListRef).then((response) => {
-                const urls = response.items.map((item) => getDownloadURL(item));
-                Promise.all(urls).then((imageUrls) => {
-                  setImageUrls(imageUrls);
-                  setFetchedUrls(true);
-                });
-              });
-            }
-          }, [fetchedUrls]);
 
   const[bird_species,setName]=useState('')
   const[location,setLocation]=useState('')
@@ -67,14 +24,9 @@ function EnterMyBirdData() {
   const locName = useRef("");
   const dateName = useRef("");
   const descName = useRef("");
-
-  {/*const picName = useRef("");
-  const soundName = useRef("");*/}
   const { username } = useParams();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
-
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -84,65 +36,61 @@ function EnterMyBirdData() {
       return `${year}-${month}-${day}`;
     }
 
-const clearFormFields = () => {
-  setName('');
-  setLocation('');
-  setDate(getCurrentDate());
-  setDescription('');
-};
-
-  {/*const [soundFile, setSoundFile] = useState({});
-  const handleChangeSound = (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-    setSoundFile(file);
-  }
-
-    const [imageFile, setImageFile] = useState({});
-    const handleChangeImage = (e) => {
-      const file = e.target.files[0];
-      console.log(file);
-      setImageFile(file);
-    }*/}
-
-
-const handleSubmit = async (event) => {
-    event.preventDefault();
-    birdName.current.value = "";
-    locName.current.value = "";
-    dateName.current.value = "";
-    descName.current.value = "";
-    picName.current.value = "";
-    soundName.current.value = "";
-    const newBirdEntry = { bird_species, location, date, description, soundFile };
-    try {
-      const token = localStorage.getItem('jwtToken');
-      await fetch("http://localhost:8080/mybirds/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(newBirdEntry)
-      });
-      console.log("New bird sighting has been added!");
+    const clearFormFields = () => {
       setName('');
       setLocation('');
-      setDate('');
+      setDate(getCurrentDate());
       setDescription('');
-      setImageUpload(null);
-      setSoundFile(null);
-    } catch (error) {
-      console.error("Error adding new bird sighting:", error);
-    }
-  }
+    };
 
 
-   useEffect(() => {
+        const getUsernameFromToken = (token) => {
+          const decoded = jwtDecode(token);
+          return decoded.sub;
+        };
+
+   const handleSubmit = async (event) => {
+       event.preventDefault();
+       birdName.current.value = "";
+       locName.current.value = "";
+       dateName.current.value = "";
+
+       const token = localStorage.getItem('jwtToken');
+       const decodedToken = getUsernameFromToken(token);
+       const username = getUsernameFromToken(token);
+       const newBirdEntry = { bird_species, location, date, description, username};
+       console.log("New Bird Entry", newBirdEntry);
+       try {
+         const token = localStorage.getItem('jwtToken');
+         await fetch("http://localhost:8080/mybirds/add", {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             Authorization: `Bearer ${token}`
+           },
+           body: JSON.stringify(newBirdEntry)
+         });
+         console.log("New bird sighting has been added!");
+         setName('');
+         setLocation('');
+         setDate('');
+         setDescription('');
+
+       } catch (error) {
+         console.error("Error adding new bird sighting:", error);
+       }
+     }
+
+
+
+
+
+
+
+ useEffect(() => {
      const fetchBirds = async () => {
        try {
          const token = localStorage.getItem('jwtToken');
-         console.log(token)
          let response;
           if (username) {
            response = await axios.get(`http://localhost:8080/mybirds/entries/${username}`, {
@@ -163,55 +111,17 @@ const handleSubmit = async (event) => {
        }
      };
 
-useEffect(() => {
-    const fetchBirds = async () => {
-      try {
-        const token = localStorage.getItem('jwtToken');
-        const response = await axios.get("http://localhost:8080/mybirds/getAll", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        setBirds(response.data);
-      } catch (error) {
-        console.error('Error fetching bird sightings:', error);
-      }
-    };
-
     fetchBirds();
     const intervalId = setInterval(fetchBirds, 2000);
     return () => clearInterval(intervalId);
   }, []);
 
 
-const loadBirds = async () => {
-  try {
-    setLoading(true);
-    const token = localStorage.getItem('jwtToken');
-    console.log(token);
-    if (!token) {
-      throw new Error('No JWT token found');
-    }
-    const response = await axios.get(`http://localhost:8080/mybirds/add/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    setBirds(response.data);
-  } catch (error) {
-    console.error(error);
-    setError(error.message);
-  } finally {
-    setLoading(false);
-  }
-};
+        const loadBirds = async () => {
+          const result = await axios.get(`http://localhost:8080/mybirds/add/${id}`);
+          setBirds(result.data);
+        };
 
-
-
-    const loadBirds = async () => {
-      const result = await axios.get(`http://localhost:8080/mybirds/add/${id}`);
-      setBirds(result.data);
-    };
 
  const deleteBirds = async (id) => {
      try {
@@ -267,24 +177,29 @@ const loadBirds = async () => {
        <h2>My Entries</h2>
     <table>
       <tbody>
+      <br/>
+      <br/>
+
           {birds.map((bird) => (
           <div>
           <div className="entryText">
           <div className="container">
-            {imageUrls.map((url) => {
-            return (
-            <div className="img">
-               <img src={url} width={250} height={250}></img>
-               <audio controls> <source src="your_audio_file.mp3" type="audio/mpeg"/> </audio>
-              </div>
-               )
-               })}
-
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <p>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
                 <h2 className="title">{bird.bird_species}</h2>
                     <div className="list">
                     <div className="column">
-                         <li>ID: {bird.id}</li>
                          <li>Location: {bird.location}</li>
                          <li>Date Seen: {bird.date}</li>
                          <li>Description: {bird.description}</li>
@@ -293,21 +208,14 @@ const loadBirds = async () => {
                     <div>
                     <div>
                     <td>
-
-                        <a href={`/mybirds/add/${bird.id}`} className="entryButtons">
-
-
                         <button type="button" className="entryButtons">
-                        <Link to={`/updatebirds/${bird.id}`}>
+                            <a href={`/mybirds/add/${bird.id}`} className="entryButtons">
+                            <div className="buttonLevel">
+                                <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
+                            </div>
+                              </a>
+                            </button>
 
-                        <div className="buttonLevel">
-                        <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
-                        </div>
-
-
-                        </a>
-                        </Link>
-                        </button>
                         <div>
                         <td>
                         <div>
@@ -335,5 +243,6 @@ const loadBirds = async () => {
     </div>
   )
 }
+
 
 export default EnterMyBirdData;

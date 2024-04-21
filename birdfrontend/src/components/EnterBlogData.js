@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 function BlogData() {
 
@@ -44,24 +45,27 @@ function BlogData() {
       return `${year}-${month}-${day}`;
     }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const token = localStorage.getItem('jwtToken');
-      const currentDate = getCurrentDate();
-      const newBlogEntry = { title, date: currentDate, blogText };
-      await axios.post("http://localhost:8080/blogposts/add", newBlogEntry, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      console.log("New blog has been added!");
-      setTitle('');
-      setBlogText('');
-    } catch (error) {
-      console.error('Error adding new blog:', error);
-    }
-  };
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try {
+    const token = localStorage.getItem('jwtToken');
+    const decodedToken = jwtDecode(token);
+    const currentDate = getCurrentDate();
+    const newBlogEntry = { title, date: currentDate, blogText, username: decodedToken.sub };
+    console.log(decodedToken);
+    console.log(newBlogEntry);
+    await axios.post("http://localhost:8080/blogposts/add", newBlogEntry, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log("New blog has been added!");
+    setTitle('');
+    setBlogText('');
+  } catch (error) {
+    console.error('Error adding new blog:', error);
+  }
+};
         /*const loadBlogs = async () => {
           const result = await axios.get(`http://localhost:8080/blogposts/add/${id}`);
           setBlogs(result.data);
@@ -147,6 +151,7 @@ function BlogData() {
                           <div className="column">
                                <p>{blog.blogText}</p>
                                <p>{blog.comment}</p>
+                               <p>{blog.username}</p>
 
 
                                        <br />

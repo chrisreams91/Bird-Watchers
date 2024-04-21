@@ -1,4 +1,4 @@
-import React from 'react';
+{/*import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
@@ -90,4 +90,4 @@ function UpdateBirds() {
     )
 }
 
-export default UpdateBirds;
+export default UpdateBirds;*/}
