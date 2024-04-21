@@ -7,7 +7,7 @@ import {ref,uploadBytes,getDownloadURL,listAll,list,} from "firebase/storage";
 import { storage } from "../firebase";
 import { v4 } from "uuid";
 import { deleteObject } from "firebase/storage";
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
 
 
@@ -67,6 +67,10 @@ function EnterMyBirdData() {
   {/*const picName = useRef("");
   const soundName = useRef("");*/}
   const { username } = useParams();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+
 
   function getCurrentDate() {
       const currentDate = new Date();
@@ -76,9 +80,14 @@ function EnterMyBirdData() {
       return `${year}-${month}-${day}`;
     }
 
+const clearFormFields = () => {
+  setName('');
+  setLocation('');
+  setDate(getCurrentDate());
+  setDescription('');
+};
 
-
-  const [soundFile, setSoundFile] = useState({});
+  {/*const [soundFile, setSoundFile] = useState({});
   const handleChangeSound = (e) => {
     const file = e.target.files[0];
     console.log(file);
@@ -90,7 +99,7 @@ function EnterMyBirdData() {
       const file = e.target.files[0];
       console.log(file);
       setImageFile(file);
-    }
+    }*/}
 
     const getUsernameFromToken = (token) => {
       const decoded = jwtDecode(token);
@@ -136,6 +145,7 @@ const handleSubmit = async (event) => {
      const fetchBirds = async () => {
        try {
          const token = localStorage.getItem('jwtToken');
+         console.log(token)
          let response;
           if (username) {
            response = await axios.get(`http://localhost:8080/mybirds/entries/${username}`, {
@@ -161,11 +171,27 @@ const handleSubmit = async (event) => {
     return () => clearInterval(intervalId);
   }, []);
 
-
-    const loadBirds = async () => {
-      const result = await axios.get(`http://localhost:8080/mybirds/add/${id}`);
-      setBirds(result.data);
-    };
+const loadBirds = async () => {
+  try {
+    setLoading(true);
+    const token = localStorage.getItem('jwtToken');
+    console.log(token);
+    if (!token) {
+      throw new Error('No JWT token found');
+    }
+    const response = await axios.get(`http://localhost:8080/mybirds/add/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    setBirds(response.data);
+  } catch (error) {
+    console.error(error);
+    setError(error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
  const deleteBirds = async (id) => {
      try {
@@ -282,12 +308,12 @@ const handleSubmit = async (event) => {
                     <div>
                     <div>
                     <td>
-
-                        <button type="button" className="entryButtons">
+                        <a href={`/mybirds/add/${bird.id}`} className="entryButtons">
                         <div className="buttonLevel">
                             <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                         </div>
-                        </button>
+
+                        </a>
                         <div>
                         <td>
                         <div>

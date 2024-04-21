@@ -7,6 +7,7 @@ import Hotspots from "./pages/hotspots";
 import MyBirds from "./pages/mybirds";
 import OtherBirders from "./pages/otherbirders";
 import OtherBirderData from "./components/OtherBirderData";
+import UpdateBird from "./components/updateBird";
 import SearchDatabase from "./pages/search";
 import BlogPosting from "./pages/blog";
 import Home from "./pages/home";
@@ -144,6 +145,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
               <Route path="/myBirds/entries/:username" element={<OtherBirderData/>} />
+              <Route path="/myBirds/add/:id" element={<UpdateBird/>} />
          </Routes>
      </BrowserRouter>
     </div>

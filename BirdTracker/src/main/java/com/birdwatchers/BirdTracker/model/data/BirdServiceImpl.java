@@ -1,8 +1,10 @@
 package com.birdwatchers.BirdTracker.model.data;
 import com.birdwatchers.BirdTracker.model.Bird;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -48,17 +50,26 @@ public class BirdServiceImpl implements BirdService {
     }
 
     @Override
-    public Bird updateBird(int id, Bird bird) {
-        birdRepository.findById(id).get();
-        bird.setId(bird.getId());
-        bird.setBird_species(bird.getBird_species());
-        bird.setDate(bird.getDate());
-        bird.setLocation(bird.getLocation());
-        bird.setDescription(bird.getDescription());
-        bird.setPhoto(bird.getPhoto());
-        bird.setSound(bird.getSound());
-        bird.setUsername(bird.getUsername());
-        return birdRepository.save(bird);
+    public Bird updateBird(int id, Bird updatedBird) {
+        Optional<Bird> optionalBird = birdRepository.findById(id);
+        if (optionalBird.isPresent()) {
+            Bird existingBird = optionalBird.get();
+            existingBird.setBird_species(updatedBird.getBird_species());
+            existingBird.setDate(updatedBird.getDate());
+            existingBird.setLocation(updatedBird.getLocation());
+            existingBird.setDescription(updatedBird.getDescription());
+            existingBird.setPhoto(updatedBird.getPhoto());
+            existingBird.setSound(updatedBird.getSound());
+            existingBird.setUsername(updatedBird.getUsername());
+
+            return birdRepository.save(existingBird);
+        } else {
+            try {
+                throw new ChangeSetPersister.NotFoundException();
+            } catch (ChangeSetPersister.NotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
