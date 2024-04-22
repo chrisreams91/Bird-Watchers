@@ -46,11 +46,7 @@ const Comments = ({currentUserId}) => {
         setActiveComment(null);
     })
     }
-//    useEffect(() => {
-//        getCommentsApi().then(data => {
-//            setBackendComments(data);
-//        })
-//    }, []);
+
     return (
         <div className="comments">
             <h3 className="comments-title">Comments</h3>
