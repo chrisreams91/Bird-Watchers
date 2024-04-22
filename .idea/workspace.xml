@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="donation tab and button made">
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/UpdateBirds.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/BirdTracker.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/BirdTracker.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/BirdTracker.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/BirdTracker.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/birdfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/EnterMyBirdData.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/components/EnterMyBirdData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/Update.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/components/Update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/UpdateBirds.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
