@@ -175,13 +175,13 @@ const handleSubmit = async (event) => {
                           <div>
                           <td>
 
-                              <button type="button" className="entryButtons">
-                              <Link to={`/update/${blog.id}`}>
-                              <div className="buttonLevel">
-                                  <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
-                              </div>
-                              </Link>
-                              </button>
+                               <button type="button" className="entryButtons">
+                               <a href={`/update/${blog.id}`} className="entryButtons">
+                               <div className="buttonLevel">
+                               <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
+                               </div>
+                               </a>
+                               </button>
 
                               <div>
                               <td>
