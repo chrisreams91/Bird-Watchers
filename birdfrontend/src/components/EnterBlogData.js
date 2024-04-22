@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import Comments from "./Comments.js"
 
 function BlogData() {
 
@@ -140,7 +141,7 @@ const handleSubmit = async (event) => {
                 <div key={blog.id}>
                 <div className="blogText">
                 <div className="container">
-
+                   <br />
                   <div className="img">
                      <img width={250} height={250}></img>
                     </div>
@@ -155,9 +156,10 @@ const handleSubmit = async (event) => {
 
 
                                        <br />
-                                         <label htmlFor="Comment" className="loginEntry">Comment</label>
-                                         <input type="text" className="loginEntry" ref={commentName} id="comment" name="Comment" value={comment} onChange={(event)=>setComment(event.target.value)} required/>
-                                            <button type="submit" className="loginButton">Submit</button>
+                                       <br />
+                                       <div>
+                                       <Comments currentUserId="1"/>
+                                       </div>
                                          <br />
 
 
