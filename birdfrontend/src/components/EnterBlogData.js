@@ -128,6 +128,11 @@ const handleSubmit = async (event) => {
 
            <br />
            <br />
+
+           <label htmlFor="date">Date Seen:</label>
+                     <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
+                     <br />
+                     <br />
           <button type="submit" className="loginButton">Submit Blog</button>
      </form>
    </div>
@@ -151,6 +156,7 @@ const handleSubmit = async (event) => {
                           <div className="column">
                                <p>{blog.blogText}</p>
                                <p>{blog.comment}</p>
+                               <p>{blog.date}</p>
                                <p>{blog.username}</p>
 
 

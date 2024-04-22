@@ -6,12 +6,21 @@ import { jwtDecode } from 'jwt-decode';
 
 function Update() {
 
+    const[date,setDate]=useState(getCurrentDate());
     const[title,setTitle]=useState('');
-      const[blogText, setBlogText]=useState('');
-      const[blogs, setBlogs]=useState([]);
-      const titleName = useRef("");
-      const textName = useRef("");
+    const[blogText, setBlogText]=useState('');
+    const[blogs, setBlogs]=useState([]);
+    const titleName = useRef("");
+    const textName = useRef("");
+    const dateName = useRef("");
 
+     function getCurrentDate() {
+                const currentDate = new Date();
+                const year = currentDate.getFullYear();
+                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                const day = String(currentDate.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+              }
 
         const [username, setUsername] = useState('');
           useEffect(() => {
@@ -25,7 +34,8 @@ function Update() {
 
         const [blogData, setBlogData] = useState({
             title: '',
-            blogText: ''
+            blogText: '',
+            date: ''
           });
 
            const {id} = useParams();
@@ -67,8 +77,11 @@ function Update() {
 
     return (
            <div>
+           <div className="entry">
+                        <h2>Update Blog</h2>
+                        </div>
            <div className="loginText">
-           <form onSubmit={handleSubmit}>
+           <form id="update-blog-post" onSubmit={handleSubmit}>
 
 
                 <br />
@@ -83,6 +96,12 @@ function Update() {
 
                    <br />
                    <br />
+
+                    <label htmlFor="date">Date:</label>
+                              <input type="date" ref={dateName} id="date" name="date" value={blogData.date}
+                                                                                               onChange={handleInputChange} required/>
+                              <br />
+                              <br />
                   <button className="loginButton">Update Blog</button>
             </form>
             </div>
