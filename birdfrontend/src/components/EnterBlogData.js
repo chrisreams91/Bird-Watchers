@@ -129,6 +129,11 @@ const handleSubmit = async (event) => {
 
            <br />
            <br />
+
+           <label htmlFor="date">Date Seen:</label>
+                     <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
+                     <br />
+                     <br />
           <button type="submit" className="loginButton">Submit Blog</button>
      </form>
    </div>
@@ -152,6 +157,7 @@ const handleSubmit = async (event) => {
                           <div className="column">
                                <p>{blog.blogText}</p>
                                <p>{blog.comment}</p>
+                               <p>{blog.date}</p>
                                <p>{blog.username}</p>
 
 
@@ -169,13 +175,13 @@ const handleSubmit = async (event) => {
                           <div>
                           <td>
 
-                              <button type="button" className="entryButtons">
-                              <Link to={`/update/${blog.id}`}>
-                              <div className="buttonLevel">
-                                  <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
-                              </div>
-                              </Link>
-                              </button>
+                               <button type="button" className="entryButtons">
+                               <a href={`/update/${blog.id}`} className="entryButtons">
+                               <div className="buttonLevel">
+                               <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
+                               </div>
+                               </a>
+                               </button>
 
                               <div>
                               <td>
