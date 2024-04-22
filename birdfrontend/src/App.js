@@ -1,3 +1,4 @@
+import Comments from "./components/Comments"
 import React from "react";
 import Login from "./components/login";
 import Register from "./components/register";
