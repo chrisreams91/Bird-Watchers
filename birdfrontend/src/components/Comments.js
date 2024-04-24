@@ -6,10 +6,14 @@ import { getComments as getCommentsApi,
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import styles from '../comments.css';
+import axios from "axios";
+import { jwtDecode } from 'jwt-decode';
 
 const Comments = ({currentUserId}) => {
     const [backendComments, setBackendComments] = useState([])
     const [activeComment, setActiveComment] = useState(null);
+    const [userComment, setUserComment] = useState("");
+    const[data, setData] = useState([]);
     const rootComments = backendComments.filter(
     (backendComment) => backendComment.parentId === null
     );
@@ -17,7 +21,35 @@ const Comments = ({currentUserId}) => {
         return backendComments.filter((backendComment) => backendComment.parentId === commentId).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
     };
 
-    const addComment = (text, parentId) => {
+    const getUsernameFromToken = (token) => {
+          const decoded = jwtDecode(token);
+          return decoded.sub;
+        };
+      useEffect(() => {
+        const fetchComments = async () => {
+          try {
+            const token = localStorage.getItem('jwtToken');
+            const response = await fetch('http://localhost:8080/comments/getAll', {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            });
+            if (!response.ok) {
+              throw new Error('Unauthorized');
+            }
+            const data = await response.json();
+            setUserComment(data);
+          } catch (error) {
+            console.error('Error fetching blogs:', error);
+          }
+        };
+
+         fetchComments();
+         const intervalId = setInterval(fetchComments, 2000);
+         return () => clearInterval(intervalId);
+       }, []);
+
+    const addComment = async (text, parentId) => {
         console.log("addComment", text, parentId);
         createCommentApi(text, parentId).then(comment => {
             setBackendComments([comment, ...backendComments]);
@@ -46,6 +78,30 @@ const Comments = ({currentUserId}) => {
         setActiveComment(null);
     })
     }
+
+      useEffect(() => {
+        const fetchComments = async () => {
+          try {
+            const token = localStorage.getItem('jwtToken');
+            const response = await fetch('http://localhost:8080/comments/getAll', {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            });
+            if (!response.ok) {
+              throw new Error('Unauthorized');
+            }
+            const data = await response.json();
+            setActiveComment(data);
+          } catch (error) {
+            console.error('Error fetching blogs:', error);
+          }
+        };
+
+         fetchComments();
+         const intervalId = setInterval(fetchComments, 2000);
+         return () => clearInterval(intervalId);
+       }, []);
 
     return (
         <div className="comments">
