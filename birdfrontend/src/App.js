@@ -146,7 +146,6 @@ function App() {
               <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
-
               <Route path="/myBirds/entries/:username" element={<OtherBirderData/>} />
               <Route path="/myBirds/add/:id" element={<UpdateBird/>} />
          </Routes>
