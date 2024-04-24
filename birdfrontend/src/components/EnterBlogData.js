@@ -20,6 +20,22 @@ function BlogData() {
   const[data, setData] = useState([]);
   const navigate = useNavigate();
   const [editId, setEditID] = useState(-1);
+  const [textError, setTextError] = useState("");
+
+
+    const validateForm = () => {
+                if (title.length < 4 || title.length > 50) {
+                    setTextError("Blog title must be between 4 and 50 characters");
+                    return false;
+                }
+                if (blogText.length < 5 || blogText.length > 4000) {
+                    setTextError("Text entry must be between 5 and 4000 characters");
+                    return false;
+                }
+                setTextError("");
+                return true;
+            };
+
 
   useEffect(()=> {
   const updateBlogs = async (id) => {
@@ -48,6 +64,7 @@ function BlogData() {
 
 const handleSubmit = async (event) => {
   event.preventDefault();
+  if (!validateForm()) return;
   try {
     const token = localStorage.getItem('jwtToken');
     const decodedToken = jwtDecode(token);
@@ -130,10 +147,11 @@ const handleSubmit = async (event) => {
            <br />
            <br />
 
-           <label htmlFor="date">Date Seen:</label>
+           <label htmlFor="date">Date:</label>
                      <input type="date" ref={dateName} id="date" name="date" value={date} onChange={(event)=>setDate(event.target.value)} required/>
                      <br />
                      <br />
+           {textError && <div className="text-danger">{textError}</div>}
           <button type="submit" className="loginButton">Submit Blog</button>
      </form>
    </div>

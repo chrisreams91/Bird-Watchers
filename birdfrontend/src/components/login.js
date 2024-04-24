@@ -48,7 +48,7 @@ function Login() {
                                         onChange={(event) => {
                                             setUsername(event.target.value);
                                         }}
-                                    />
+                                    required />
                                 </div>
                                 <div className="form-group">
                                     <input
@@ -60,7 +60,7 @@ function Login() {
                                         onChange={(event) => {
                                             setPassword(event.target.value);
                                         }}
-                                    />
+                                    required />
                                 </div>
                                 <hr />
                                 <div>
