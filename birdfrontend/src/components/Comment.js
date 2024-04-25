@@ -2,49 +2,49 @@ import Comments from "./Comments.js";
 import styles from '../comments.css';
 import CommentForm from "./CommentForm.js"
 
-const Comment = ({ comment, replies, currentUserId , deleteComment, activeComment, addComment, updateComment, setActiveComment, parentId = null}) => {
+const Comment = ({ comments, replies, currentUserId , deleteComment, activeComment, addComment, updateComment, setActiveComment, parentId = null}) => {
     const fiveMinutes = 300000;
-    const timePassed = new Date() - new Date(comment.createdAt) > fiveMinutes;
+    const timePassed = new Date() - new Date(comments.createdAt) > fiveMinutes;
     const canReply = Boolean(currentUserId);
-    const canEdit = currentUserId === comment.userId && !timePassed;
-    const canDelete = currentUserId === comment.userId && !timePassed;
-    const createdAt = new Date(comment.createdAt).toLocaleDateString();
+    const canEdit = currentUserId === comments.userId && !timePassed;
+    const canDelete = currentUserId === comments.userId && !timePassed;
+    const createdAt = new Date(comments.createdAt).toLocaleDateString();
     const isReplying =
     activeComment &&
     activeComment.type === "editing" &&
-    activeComment.id === comment.id;
+    activeComment.id === comments.id;
     const isEditing =
     activeComment &&
     activeComment.type === "editing" &&
-    activeComment.id === comment.id;
-    const replyId = parentId ? parentId : comment.id;
+    activeComment.id === comments.id;
+    const replyId = parentId ? parentId : comments.id;
     return (
-        <div key ={comment.id} className="comment">
+        <div key ={comments.id} className="comment">
             <div className="comment-image-container">
                 <img src="/user-icon.png"/>
             </div>
             <div className="comment-right-part">
                 <div className="comment-content">
-                    <div className="comment-author">{comment.username}</div>
+                    <div className="comment-author">{comments.username}</div>
                     <div>{createdAt}</div>
                 </div>
-                {!isEditing && <div className="comment-text">{comment.body}</div>}
+                {!isEditing && <div className="comment-text">{comments.body}</div>}
                 {isEditing && (
                     <CommentForm
                     submitLabel="Update"
                     hasCancelButton
-                    initialText={comment.body}
-                    handleSubmit={(text) => updateComment(text, comment.id)}
+                    initialText={comments.body}
+                    handleSubmit={(comment_text) => updateComment(comment_text, comments.id)}
                     handleCancel={() => setActiveComment(null)}
                     />
                 )}
                 <div className="comment-actions">
                     {canReply && (
-                    <div className="comment-action" onClick={() => setActiveComment({ id: comment.id, type: "replying" })}>Reply</div>)}
+                    <div className="comment-action" onClick={() => setActiveComment({ id: comments.id, type: "replying" })}>Reply</div>)}
                     {canEdit && (
-                    <div className="comment-action" onClick={() => setActiveComment({ id: comment.id, type: "editing"})}>Edit</div>)}
+                    <div className="comment-action" onClick={() => setActiveComment({ id: comments.id, type: "editing"})}>Edit</div>)}
                     {canDelete && (
-                    <div className="comment-action" onClick={() => deleteComment(comment.id)}>Delete</div>)}
+                    <div className="comment-action" onClick={() => deleteComment(comments.id)}>Delete</div>)}
                 </div>
                 {isReplying && (
                     <CommentForm
@@ -56,13 +56,13 @@ const Comment = ({ comment, replies, currentUserId , deleteComment, activeCommen
                     <div className="replies">
                     {replies.map((reply) => (
                         <Comment
-                        comment={reply}
+                        comments={reply}
                         key={reply.id}
                         replies={[]}
                         currentUserId={currentUserId}
                         deleteComment={deleteComment}
                         addComment={addComment}
-                        parentId={comment.id}
+                        parentId={comments.id}
                         updateComment={updateComment}
                         />
                     ))}

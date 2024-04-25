@@ -9,7 +9,7 @@ import styles from '../comments.css';
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
 
-const Comments = ({currentUserId}) => {
+const Comments = ({ commentsUrl, currentUserId }) => {
     const [backendComments, setBackendComments] = useState([])
     const [activeComment, setActiveComment] = useState(null);
     const [userComment, setUserComment] = useState("");
@@ -49,9 +49,8 @@ const Comments = ({currentUserId}) => {
          return () => clearInterval(intervalId);
        }, []);
 
-    const addComment = async (text, parentId) => {
-        console.log("addComment", text, parentId);
-        createCommentApi(text, parentId).then(comment => {
+    const addComment = async (comment_text, parentId) => {
+        createCommentApi(comment_text, parentId).then(comment => {
             setBackendComments([comment, ...backendComments]);
             setActiveComment(null);
         })
@@ -66,11 +65,11 @@ const Comments = ({currentUserId}) => {
         }
     };
 
-    const updateComment = (text, commentId) => {
-    updateCommentApi(text, commentId).then(() => {
+    const updateComment = (comment_text, commentId) => {
+    updateCommentApi(comment_text, commentId).then(() => {
         const updatedBackEndComments = backendComments.map((backendComment) => {
             if (backendComment.id === commentId) {
-                return { ...backendComment, body: text };
+                return { ...backendComment, body: comment_text };
             }
             return backendComment;
         });
@@ -79,29 +78,6 @@ const Comments = ({currentUserId}) => {
     })
     }
 
-      useEffect(() => {
-        const fetchComments = async () => {
-          try {
-            const token = localStorage.getItem('jwtToken');
-            const response = await fetch('http://localhost:8080/comments/getAll', {
-              headers: {
-                Authorization: `Bearer ${token}`
-              }
-            });
-            if (!response.ok) {
-              throw new Error('Unauthorized');
-            }
-            const data = await response.json();
-            setActiveComment(data);
-          } catch (error) {
-            console.error('Error fetching blogs:', error);
-          }
-        };
-
-         fetchComments();
-         const intervalId = setInterval(fetchComments, 2000);
-         return () => clearInterval(intervalId);
-       }, []);
 
     return (
         <div className="comments">
@@ -112,7 +88,7 @@ const Comments = ({currentUserId}) => {
                 {rootComments.map((rootComment) => (
                     <Comment
                     key={rootComment.id}
-                    comment={rootComment}
+                    comments={rootComment}
                     replies={getReplies(rootComment.id)}
                     currentUserId={currentUserId}
                     deleteComment={deleteComment}
