@@ -24,10 +24,33 @@ function Register() {
     const emailname = useRef("");
     const passwordname = useRef("");
     const navigate = useNavigate();
+     const [error, setError] = useState("");
+
+        const validateForm = () => {
+                if (username.length < 3 || username.length > 20) {
+                    setError("Username must be between 3 and 20 characters");
+                    return false;
+                }
+                if (firstname.length < 2 || firstname.length > 50) {
+                    setError("First name must be between 2 and 50 characters");
+                    return false;
+                }
+                if (lastname.length < 2 || lastname.length > 50) {
+                    setError("Last name must be between 2 and 50 characters");
+                    return false;
+                }
+                if (password.length < 5 || password.length > 40) {
+                    setError("Password must be between 5 and 40 characters");
+                    return false;
+                }
+                setError("");
+                return true;
+            };
 
 
     async function save(event) {
         event.preventDefault();
+        if (!validateForm()) return;
          usernamename.current.value = "";
          firstnamename.current.value = "";
          lastnamename.current.value = "";
@@ -65,7 +88,7 @@ function Register() {
           onChange={(event) => {
             setUsername(event.target.value);
           }}
-          />
+          required />
 
         </div>
 
@@ -77,7 +100,7 @@ function Register() {
           onChange={(event) => {
             setFirstname(event.target.value);
           }}
-          />
+          required />
 
         </div>
 
@@ -89,7 +112,7 @@ function Register() {
           onChange={(event) => {
             setLastname(event.target.value);
           }}
-          />
+          required />
 
         </div>
 
@@ -102,7 +125,7 @@ function Register() {
             setEmail(event.target.value);
           }}
 
-          />
+          required />
 
         </div>
 
@@ -117,7 +140,7 @@ function Register() {
 
             />
           </div>
-
+          {error && <div className="text-danger">{error}</div>}
         <button type="submit" class="btn btn-primary mt-4" onClick={save} >Save</button>
 
       </form>

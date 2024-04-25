@@ -53,6 +53,7 @@ function SearchDBTableFormat() {
             <th>Location Seen</th>
             <th>Date Seen</th>
             <th>Field Notes</th>
+            <th>Username</th>
           </tr>
         </thead>
         <tbody>
@@ -70,16 +71,21 @@ function SearchDBTableFormat() {
                     bird.date
                       .toLowerCase()
                       .includes(search.toLowerCase().trim())) ||
-                  (bird.description &&
-                    bird.description
-                      .toLowerCase()
-                      .includes(search.toLowerCase().trim()))
+                    (bird.description &&
+                      bird.description
+                        .toLowerCase()
+                        .includes(search.toLowerCase().trim())) ||
+                    (bird.username &&
+                      bird.username
+                        .toLowerCase()
+                        .includes(search.toLowerCase().trim()))
            ).map(bird => (
             <tr key={bird.id}>
               <td>{bird.bird_species}</td>
               <td>{bird.location}</td>
               <td>{bird.date}</td>
               <td>{bird.description}</td>
+              <td>{bird.username}</td>
             </tr>
           ))}
         </tbody>

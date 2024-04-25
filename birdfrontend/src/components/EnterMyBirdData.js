@@ -28,6 +28,26 @@ function EnterMyBirdData() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const [textError, setTextError] = useState("");
+
+
+    const validateForm = () => {
+                if (bird_species.length < 3 || bird_species.length > 40) {
+                    setTextError("Species name must be between 3 and 40 characters");
+                    return false;
+                }
+                if (location.length < 3 || location.length > 100) {
+                    setTextError("Location must be between 3 and 100 characters");
+                    return false;
+                }
+                if (description.length < 3 || description.length > 200) {
+                    setTextError("Field notes must be between 3 and 200 characters");
+                    return false;
+                }
+                setTextError("");
+                return true;
+            };
+
   function getCurrentDate() {
       const currentDate = new Date();
       const year = currentDate.getFullYear();
@@ -51,6 +71,7 @@ function EnterMyBirdData() {
 
    const handleSubmit = async (event) => {
        event.preventDefault();
+       if (!validateForm()) return;
        birdName.current.value = "";
        locName.current.value = "";
        dateName.current.value = "";
@@ -167,7 +188,7 @@ function EnterMyBirdData() {
            <textarea id="description" ref={descName} name="description" value={description} onChange={(event)=>setDescription(event.target.value)} required></textarea>
            <br />
            <br />
-
+            {textError && <div className="text-danger">{textError}</div>}
           <button type="submit">Submit Findings</button>
      </form>
      </div>
