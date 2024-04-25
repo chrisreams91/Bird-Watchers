@@ -11,7 +11,7 @@ const Comment = ({ comments, replies, currentUserId , deleteComment, activeComme
     const createdAt = new Date(comments.createdAt).toLocaleDateString();
     const isReplying =
     activeComment &&
-    activeComment.type === "editing" &&
+    activeComment.type === "replying" &&
     activeComment.id === comments.id;
     const isEditing =
     activeComment &&
@@ -49,7 +49,8 @@ const Comment = ({ comments, replies, currentUserId , deleteComment, activeComme
                 {isReplying && (
                     <CommentForm
                     submitLabel="Reply"
-                    handleSubmit={(text) => addComment(text, replyId)}
+                    hasCancelButton
+                    handleSubmit={(comment_text) => addComment(comment_text, replyId)}
                     />
                 )}
                 {replies.length > 0 && (

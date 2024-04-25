@@ -18,7 +18,7 @@ const Comments = ({ commentsUrl, currentUserId }) => {
     (backendComment) => backendComment.parentId === null
     );
     const getReplies = commentId => {
-        return backendComments.filter((backendComment) => backendComment.parentId === commentId).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        return backendComments.filter((backendComment) => backendComment.blog_id === commentId).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
     };
 
     const getUsernameFromToken = (token) => {
