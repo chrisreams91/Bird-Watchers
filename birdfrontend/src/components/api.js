@@ -3,11 +3,22 @@ import { jwtDecode } from 'jwt-decode';
 
 
    const token = localStorage.getItem('jwtToken')
-   const decodedToken = jwtDecode(token);
+   let decodedToken = null;
+   if (token) {
+       try {
+           decodedToken = jwtDecode(token);
+       } catch (error) {
+           console.error('Error decoding token:', error);
+       }
+   }
+
    const getUsernameFromToken = (token) => {
-          const decoded = jwtDecode(token);
-          return decoded.sub;
-        };
+       if (token) {
+           const decoded = jwtDecode(token);
+           return decoded.sub;
+       }
+       return null;
+   };
    const date = new Date().toISOString();
 
 
