@@ -146,10 +146,7 @@ function App() {
               <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
-<<<<<<< HEAD
               <Route path='/comments/add' element={<Comments />} />
-=======
->>>>>>> 603c24607efa6c642251f7e83959ea5d1578b186
               <Route path="/myBirds/entries/:username" element={<OtherBirderData/>} />
               <Route path="/myBirds/add/:id" element={<UpdateBird/>} />
          </Routes>
