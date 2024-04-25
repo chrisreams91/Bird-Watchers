@@ -2,6 +2,7 @@ import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
 
 
+
    const token = localStorage.getItem('jwtToken')
    let decodedToken = null;
    if (token) {
@@ -19,14 +20,21 @@ import { jwtDecode } from 'jwt-decode';
        }
        return null;
    };
-   const date = new Date().toISOString();
 
 
+      function getCurrentDate() {
+          const currentDate = new Date();
+          const year = currentDate.getFullYear();
+          const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const day = String(currentDate.getDate()).padStart(2, '0');
+          return `${year}-${month}-${day}`;
+        }
 
 
 export const createComment = async (comment_text, parentId = null) => {
           try {
-            const newComments = { comment_text, parentId, username: decodedToken.sub };
+            const currentDate = getCurrentDate();
+            const newComments = { comment_text, parentId, username: decodedToken.sub, date: currentDate };
             console.log(decodedToken);
             console.log(newComments);
             await axios.post("http://localhost:8080/comments/add", newComments, {
@@ -43,7 +51,7 @@ export const createComment = async (comment_text, parentId = null) => {
         body: comment_text, parentId,
         userId: "1",
         username: decodedToken.sub,
-        createdAt: date,
+        date: getCurrentDate()
     };
 };
 
