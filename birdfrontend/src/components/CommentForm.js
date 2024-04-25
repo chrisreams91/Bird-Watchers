@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import styles from '../comments.css';
 
 const CommentForm = ({ handleSubmit, submitLabel, hasCancelButton = false, initialText = '', handleCancel }) => {
-    const [text, setText] = useState(initialText);
-    const isTextareaDisabled = text.length === 0;
+    const [comment_text, setCommentText] = useState(initialText);
+    const isTextareaDisabled = comment_text.length === 0;
     const onSubmit = event => {
         event.preventDefault();
-        handleSubmit(text);
-        setText("");
+        handleSubmit(comment_text);
+        setCommentText("");
     };
     return (
     <form onSubmit={onSubmit}>
-        <textarea className="comment-form-textarea" value={text} onChange={(e) => setText(e.target.value)}></textarea>
+        <textarea className="comment-form-textarea" value={comment_text} onChange={(e) => setCommentText(e.target.value)}></textarea>
         <button className="comment-form-button" disabled={isTextareaDisabled}>
         {submitLabel}
         </button>

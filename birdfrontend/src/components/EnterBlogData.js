@@ -129,7 +129,6 @@ const handleSubmit = async (event) => {
    }, []);
 
 
-
   return (
    <div>
     <div className="loginText">
@@ -170,13 +169,12 @@ const handleSubmit = async (event) => {
                     </div>
 
                   <p>
-                      <h2 className="title">{blog.title}</h2>
+                      <h2 className="title">{blog.username}</h2>
                           <div className="list">
                           <div className="column">
+                               <p>{blog.title}</p>
                                <p>{blog.blogText}</p>
-                               <p>{blog.comment}</p>
                                <p>{blog.date}</p>
-                               <p>{blog.username}</p>
 
 
                                        <br />
