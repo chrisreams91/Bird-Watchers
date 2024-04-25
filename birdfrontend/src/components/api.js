@@ -1,5 +1,6 @@
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
+import BlogData from "./EnterBlogData";
 
 
 
@@ -31,10 +32,10 @@ import { jwtDecode } from 'jwt-decode';
         }
 
 
-export const createComment = async (comment_text, parentId = null) => {
+export const createComment = async (comment_text, parentId = null, fk_blog_id) => {
           try {
             const currentDate = getCurrentDate();
-            const newComments = { comment_text, parentId, username: decodedToken.sub, date: currentDate };
+            const newComments = { comment_text, parentId, fk_blog_id, username: decodedToken.sub, date: currentDate };
             console.log(decodedToken);
             console.log(newComments);
             await axios.post("http://localhost:8080/comments/add", newComments, {
@@ -51,7 +52,8 @@ export const createComment = async (comment_text, parentId = null) => {
         body: comment_text, parentId,
         userId: "1",
         username: decodedToken.sub,
-        date: getCurrentDate()
+        date: getCurrentDate(),
+        fk_blog_id
     };
 };
 
