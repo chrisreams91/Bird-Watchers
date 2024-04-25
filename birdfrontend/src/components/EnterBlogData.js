@@ -189,30 +189,24 @@ const handleSubmit = async (event) => {
                           </div>
                           <div>
                           <div>
-                          <td>
 
+                               <a href={`/update/${blog.id}`}>
                                <button type="button" className="entryButtons">
-                               <a href={`/update/${blog.id}`} className="entryButtons">
                                <div className="buttonLevel">
                                <img src="https://static.thenounproject.com/png/2473159-200.png" width={50} height={50}></img>
                                </div>
-                               </a>
                                </button>
-
-                              <div>
-                              <td>
-                              <div>
-                              <td>
-                              </td>
-                              </div>
-                              </td>
-                              </div>
+                               </a>
+                                < br/>
+                                < br/>
+                                < br/>
+                                < br/>
                               <button type="button" className="entryButtons" onClick={() => deleteBlogs(blog.id)}>
                               <div className="buttonLevel">
                                   <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/delete-1476282-1248958.png?f=webp" width={50} height={50}></img>
                               </div>
                               </button>
-                          </td>
+
                           </div>
                           </div>
                   </p>
