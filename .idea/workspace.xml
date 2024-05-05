@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="donation tab and button made">
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/DonationsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/Donations.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/DonationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/DonationServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/DonationsRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/DonationRequestData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/EnterDonationsData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/UpdateDonations.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/pages/donationRequests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/birdfrontend/src/pages/donations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/birdfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/components/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/birdfrontend/src/pages/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/pages/home.js" afterDir="false" />
-    </list>
+    <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="Donation page updated, users able to enter donation requests for pages they want to be able to donate to from the front page." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -222,14 +206,23 @@
       <option name="project" value="LOCAL" />
       <updated>1711070793082</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Donation page updated, users able to enter donation requests for pages they want to be able to donate to from the front page.">
+      <option name="closed" value="true" />
+      <created>1714936924532</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714936924532</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="test push" />
     <MESSAGE value="donation tab and button made" />
-    <option name="LAST_COMMIT_MESSAGE" value="donation tab and button made" />
+    <MESSAGE value="Donation page updated, users able to enter donation requests for pages they want to be able to donate to from the front page." />
+    <option name="LAST_COMMIT_MESSAGE" value="Donation page updated, users able to enter donation requests for pages they want to be able to donate to from the front page." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Bird_Watchers$C__Users_marie_Bird_Watchers_BirdTracker_build_gradle.ic" NAME="$PROJECT_DIR$/BirdTracker/build.gradle Coverage Results" MODIFIED="1710451506338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
