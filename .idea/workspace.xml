@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ddb6bdc-28df-48c2-9e95-55b7cee00c60" name="Changes" comment="donation tab and button made">
+      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/controller/DonationsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/Donations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/DonationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/DonationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/DonationsRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/DonationRequestData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/EnterDonationsData.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/birdfrontend/src/components/UpdateDonations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/birdfrontend/src/pages/donationRequests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/birdfrontend/src/pages/donations.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/EnterBlogData.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/components/EnterBlogData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/Update.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/components/Update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BirdTracker/src/main/java/com/birdwatchers/BirdTracker/model/data/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/birdfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/birdfrontend/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/components/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/birdfrontend/src/pages/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/birdfrontend/src/pages/home.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,13 +67,14 @@
       <list>
         <option value="Class" />
         <option value="Interface" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Logan" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -115,6 +128,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.birdwatchers.BirdTracker.controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\marie\Bird-Watchers\BirdTracker\" />
     </key>

@@ -38,6 +38,9 @@ export default function Navbar() {
                 <a href="/blog">Blog Postings</a>
             </li>
             <li>
+                <a href="/donations">Make a Donation Request</a>
+            </li>
+            <li>
                 <a href="/mediagallery">Media Gallery</a>
             </li>
             <li><button onClick={handleLogout}>Logout</button></li>

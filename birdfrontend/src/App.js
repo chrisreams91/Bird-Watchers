@@ -38,6 +38,12 @@ import { BrowserRouter } from "react-router-dom";
 import MediaGallery from "./pages/mediagallery";
 import Update from "./components/Update.js";
 import Blog from "./components/EnterBlogData.js";
+import Donations from "./components/EnterDonationsData.js";
+import DonationsPosting from "./pages/donations";
+import UpdateDonations from "./components/UpdateDonations.js";
+import DonationRequests from "./pages/donationRequests";
+import DonationRequestData from "./components/DonationRequestData.js";
+
 
 function App() {
 
@@ -67,6 +73,12 @@ function App() {
     case "/blog":
         component = <BlogPosting />
         break
+    case "/donations":
+        component = <DonationsPosting />
+        break
+//    case "/donationrequests":
+//        component = <DonationRequests />
+//        break
     case "/hotspots/Europe":
         component = <Europe />
         break
@@ -146,9 +158,10 @@ function App() {
               <Route path='/' element={<Login />} />
               <Route path='/login' element={<Login />} />
               <Route path='/update/:id' element={<Update />} />
-
               <Route path="/myBirds/entries/:username" element={<OtherBirderData/>} />
               <Route path="/myBirds/add/:id" element={<UpdateBird/>} />
+              <Route path="/updatedonations/:id" element= {<UpdateDonations />} />
+//              <Route path="/donations/entries/:username" element={<DonationRequests/>} />
          </Routes>
      </BrowserRouter>
     </div>
